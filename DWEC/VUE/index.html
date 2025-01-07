@@ -7,10 +7,18 @@
 </head>
 <body>
     <div id="app">
-        <h3>{{ title }}</h3>
-        {{message}}
-        <p v-if="showAge">{{ age }}</p>
-        <p v-else>Por seguridad no se muestra la edad</p>
+        <input type="text" v-model="inContent">
+        <button v-on:click="pressedButton">Button</button>
+        <h1>{{ inContent }}</h1>
+        <ol>
+            <li v-for="(person, i) in people" v-on:click="eraseButton(i)">
+                Name: {{ person.name }} |
+                Age: {{ person.age }} |
+                Gender: {{ person.gender }}
+            </li>
+        </ol>
+
+
     </div> 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="index.js"></script>
