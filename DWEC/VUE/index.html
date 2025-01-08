@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Prueba</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="inContent">
+        <button v-on:click="pressedButton">Button</button>
+        <h1>{{ inContent }}</h1>
+        <ol>
+            <li v-for="(person, i) in people" v-on:click="eraseButton(i)">
+                Name: {{ person.name }} |
+                Age: {{ person.age }} |
+                Gender: {{ person.gender }}
+            </li>
+        </ol>
+
+
+    </div> 
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
