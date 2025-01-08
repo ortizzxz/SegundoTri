@@ -1,9 +1,25 @@
 <script setup>
-    import NoteCounter from './components/NoteCounter.vue'
+  import { ref, onMounted } from "vue";
+  import NoteCounter from "./components/NoteCounter.vue";
+  import { registerTask } from "./utilities/TaskUtilites.js";
+
+  const inputValue = ref("");
+
+  const handleKeydown = (e) => {
+    if (e.key === 'Enter') {
+      let a = registerTask(inputValue.value);
+      console.log(a);
+    }
+  };
+
+  onMounted(() => {
+    document.addEventListener("keydown", handleKeydown);
+  });
+
 </script>
 
 <template>
-  <input type="text" name="note" id="note" placeholder="I'd like to..." />
+  <input type="text" name="note" id="note" placeholder="I'd like to..." v-model="inputValue"/>
   <NoteCounter></NoteCounter>
 </template>
 
