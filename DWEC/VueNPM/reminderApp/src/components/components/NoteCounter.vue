@@ -1,19 +1,38 @@
-<!-- NoteCounter.vue -->
 <script setup>
-import { defineProps } from 'vue'
+  import { defineProps, computed, defineEmits } from 'vue'
 
-// Definir el prop para recibir el número de tareas completadas
-const props = defineProps({
-  completedTasks: Number
-})
+  const props = defineProps({
+    completedTasks: Number,
+    totalTasks: Number
+  })
+
+  const emit = defineEmits(['delete-completed', 'delete-all']);
+
+  const pluralS = computed(() => props.completedTasks === 1 ? '' : 's')
+
+  function deleteCompletedTasks() {
+    emit('delete-completed');
+  }
+
+  function deleteAllTasks(){
+    emit('delete-all');
+  }
 </script>
 
 <template>
   <div>
-      {{  props.completedTasks  }} Tarea/s pendientes de un total de {{ 0 }} | <a>Borrar Tareas Completadas</a>
+    <p>
+      {{ props.completedTasks }} tarea{{ pluralS }} completada{{ pluralS }} de un total de {{ props.totalTasks }} | 
+    <a @click="deleteCompletedTasks">Borrar Tareas Completadas</a> |
+    <a @click="deleteAllTasks"> Borrar todas las Tareas</a>
+    </p>
   </div>
 </template>
 
 <style scoped>
-/* Aquí puedes agregar estilos para el contador */
+  a:hover {
+    cursor: pointer;
+    padding: 0.5rem 0.5rem 0.2rem 0.5rem;
+    border-radius: 1rem;
+  }
 </style>

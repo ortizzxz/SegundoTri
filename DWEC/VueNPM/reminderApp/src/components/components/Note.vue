@@ -1,15 +1,48 @@
-<!-- Note.vue -->
 <script setup>
-import { defineProps } from 'vue'
+ import { defineProps, computed } from 'vue';
 
-const props = defineProps({
-  note: Object
-})
+  const props = defineProps({
+    note: Object
+  })
 
-function changeCompletition() {
-  props.note.completed = !props.note.completed
-  props.note.updateDate = new Date().toISOString()
-}
+  function changeCompletition() {
+    props.note.completed = !props.note.completed
+    props.note.updateDate = Date.now();
+  }
+
+  const timeElapsed = computed(() => getTimeElapsed(props.note.updateDate))
+
+  function perceiveClick(targetValue, note){
+    console.log(note.priority = targetValue);
+  }
+
+  function getTimeElapsed(updateDate) {
+    const now = Date.now();
+    const updated = new Date(updateDate).getTime();
+    const diff = now - updated;
+
+    const minutes = Math.floor(diff / 60000);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (days > 0) return `hace ${days} día${days > 1 ? 's' : ''}`;
+    if (hours > 0) return `hace ${hours} hora${hours > 1 ? 's' : ''}`;
+    if (minutes > 0) return `hace ${minutes} minuto${minutes > 1 ? 's' : ''}`;
+    return 'hace un momento';
+  }
+
+
+  const emit = defineEmits(['update']);
+
+  function changeCompletion() {
+    const updatedNote = {
+      ...props.note,
+      completed: !props.note.completed,
+      updateDate: Date.now()
+    };
+    emit('update', updatedNote);
+  }
+
 </script>
 
 <template>
@@ -24,18 +57,20 @@ function changeCompletition() {
         Prioridad:
         <span 
           v-for="priority in ['Low', 'Normal', 'High']" 
+          @click="perceiveClick(priority, props.note)"
           :key="priority"
           :class="{
             'bg-high': props.note.priority === 'High' && priority === 'High',
             'bg-low': props.note.priority === 'Low' && priority === 'Low',
             'bg-normal': props.note.priority === 'Normal' && priority === 'Normal',
             'unselected-priority': props.note.priority !== priority
-          }">
+          }"
+          >
           {{ priority }}
         </span>
       </p>
       <p id="lastUpdate">
-        Actualizado hace x minutos
+        Actualizado {{timeElapsed}} 
       </p>
     </div>
   </div>
@@ -77,7 +112,7 @@ span {
 }
 
 .bg-low {
-  background-color: #375A7F;
+  background-color: #4a6e61;
 }
 
 .completed {
