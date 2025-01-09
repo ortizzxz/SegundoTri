@@ -8,6 +8,8 @@ const props = defineProps({
 })
 
 const sortOrder = ref('recent') 
+const emit = defineEmits(['delete-note']);
+
 
 const sortedNotes = computed(() => {
   return [...props.notes].sort((a, b) => {
@@ -22,13 +24,17 @@ const sortedNotes = computed(() => {
 function handleSort(order) {
   sortOrder.value = order;
 }
+function deleteSingleTask(pos){
+  emit('delete-note', pos);
+}
+
 </script>
 
 <template>
   <div>
     <NoteOrder @sort="handleSort" />
     <div id="mainContainer">
-      <Note v-for="(note, index) in sortedNotes" :key="index" :note="note" id="note" />
+      <Note v-for="(note, index) in sortedNotes" :key="index" :note="note" id="note" @delete-note="deleteSingleTask(index)"/>
     </div>
   </div>
 </template>

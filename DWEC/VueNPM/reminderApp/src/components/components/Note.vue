@@ -5,10 +5,17 @@
     note: Object
   })
 
+  const emit = defineEmits(['delete-note']);
+
+  function deleteSingleTask() {
+    emit('delete-note');
+  }
+
   function changeCompletition() {
     props.note.completed = !props.note.completed
     props.note.updateDate = Date.now();
   }
+
 
   const timeElapsed = computed(() => getTimeElapsed(props.note.updateDate))
 
@@ -31,26 +38,19 @@
     return 'hace un momento';
   }
 
-
-  const emit = defineEmits(['update']);
-
-  function changeCompletion() {
-    const updatedNote = {
-      ...props.note,
-      completed: !props.note.completed,
-      updateDate: Date.now()
-    };
-    emit('update', updatedNote);
-  }
-
 </script>
 
 <template>
   <div>
-    <h1 :class="{'highlight-title': props.note.completed}" @click="changeCompletition">
-      <span class="checkball" :class="{'completed': props.note.completed}"></span>
-      {{ props.note.description }}
-    </h1>
+    <div id="header">
+      <div>
+          <h1 :class="{'highlight-title': props.note.completed}" @click="changeCompletition">
+            <span class="checkball" :class="{'completed': props.note.completed}"></span>
+            {{ props.note.description }}
+          </h1>
+      </div>
+        <span class="deleteButton" @click="deleteSingleTask"></span>
+    </div>
 
     <div id="secondaryData">
       <p>
@@ -79,6 +79,7 @@
 <style scoped>
 h1, p {
   text-align: left;
+  word-wrap: break-word;
 }
 
 h1 {
@@ -138,11 +139,27 @@ li {
   transition: background-color 0.3s ease;
 }
 
+.deleteButton{
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background-color: red;
+  border: 1px solid white;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
+}
+
 .checkball.completed {
   background-color: #00BC8C; 
 }
 
 #secondaryData{
   display: flex;
+}
+
+#header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>

@@ -40,6 +40,9 @@
     function deleteAllTasks() {
         notes.value = [];
     }
+    function deleteSingleTask(pos){
+        notes.value.splice(pos, 1);
+    }
 
     const completedTasks = computed(() => countCompletedTasks(notes.value));
     const totalTasks = computed(() => notes.value.length);
@@ -49,7 +52,7 @@
     <NoteContainerHeader></NoteContainerHeader>
     <NoteWriter @add-note="addNote"></NoteWriter>
     <NoteCounter :completedTasks="completedTasks" :totalTasks="totalTasks" @delete-completed="deleteCompletedTasks" @delete-all="deleteAllTasks"></NoteCounter>
-    <NotesList :notes="notes"></NotesList>
+    <NotesList :notes="notes" @delete-note="deleteSingleTask"></NotesList>
     <Footer></Footer>
   </template>
   
