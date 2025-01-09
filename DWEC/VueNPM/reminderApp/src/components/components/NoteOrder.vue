@@ -1,4 +1,3 @@
-<!-- NoteFilter.vue -->
 <script setup>
 import { defineEmits } from 'vue';
 
@@ -15,8 +14,8 @@ function sortByOldest() {
 
 <template>
   <p>
-    <a @click="sortByRecent">Filtrar por más recientes</a> || 
-    <a @click="sortByOldest">Filtrar por más antiguas</a>
+    <a @click="sortByRecent">Ordenar por más recientes</a> || 
+    <a @click="sortByOldest">Ordenar por más antiguas</a>
   </p>
 </template>
 

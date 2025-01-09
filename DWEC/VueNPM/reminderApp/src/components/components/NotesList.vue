@@ -1,4 +1,3 @@
-<!-- NotesList.vue -->
 <script setup>
 import { defineProps, computed, ref } from 'vue'
 import Note from './Note.vue'
