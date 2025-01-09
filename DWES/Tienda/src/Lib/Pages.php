@@ -12,8 +12,8 @@ class Pages {
 
         $directorioSuperior = dirname(__DIR__, 1);
 
-        require_once $directorioSuperior . '/views/Layout/header.php';
-        require_once $directorioSuperior . '/views/' . $pageName . '.php';  
-        require_once $directorioSuperior . '/views/Layout/footer.php';
+        require_once "$directorioSuperior/Views/Layout/header.php";  
+        require_once "$directorioSuperior/Views/$pageName.php";  
+        require_once "$directorioSuperior/Views/Layout/footer.php";  
     }
 }
