@@ -114,7 +114,6 @@ Computed properties comes in handy to access elements - but not to change them (
 So what does it do? - easy:
 It triggers a callback whenever a piece of reactive state changes - WHAT? easy:
 
-```
     <script setup>
         import { ref, watch } from 'vue'
 
@@ -146,7 +145,7 @@ It triggers a callback whenever a piece of reactive state changes - WHAT? easy:
         </p>
         <p>{{ answer }}</p>
     </template>
-```
+
 
 This one could be a little shady so notice because of async and stuff but the logic is quite simple - im watching a question and the async(newQuestion). So what happens is that once my newQuestion inclues a '?' im gonna trigger an API petition (this is where it becomes shady), but for instance I use it on my code like this:
 
@@ -169,4 +168,20 @@ Vue components require explicit props declaration so that Vue knows what externa
 I mean, thats the concept so what else should i explain lol
 
 #### emit
+Important: We are talking about Declared Emitted Events and not only Emitting and Listening to Events
+A component can explicitly declare the events it will emit using the defineEmits() macro
+
+    <script setup>
+        defineEmits(['inFocus', 'submit'])
+    </script>
+
+The $emit method that we used in the <template> isn't accessible within the script setup section of a component, but defineEmits() returns an equivalent function that we can use instead:
+
+    <script setup>
+        const emit = defineEmits(['inFocus', 'submit'])
+
+        function buttonClick() {
+        emit('submit')
+        }
+    </script>
 
