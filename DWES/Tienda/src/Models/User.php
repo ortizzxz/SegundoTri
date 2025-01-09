@@ -4,7 +4,7 @@
     class User{
         protected static array $errors = [];
         public function __construct(
-                private int $id, 
+                private int | null $id, 
                 private String $name, 
                 private String $lastname, 
                 private String $email, 
@@ -68,19 +68,41 @@
             self::$errors = $errors;
         }
 
-        public function validar(){
-            self::$errors = [];
-
-            if(empty($this->name)){
-                self::$errors['name'] = 'el Nombre es obligatorio';
+        public function validation(): bool {
+            self::$errors = []; 
+        
+            if (empty($this->name)) {
+                self::$errors['name'] = 'El Nombre es obligatorio';
             }
-
-            return empty(self::$errors) ? false : true;
+        
+            if (empty($this->lastname)) {
+                self::$errors['lastname'] = 'El Apellido es obligatorio';
+            }
+        
+            if (empty($this->email)) {
+                self::$errors['email'] = 'El Email es obligatorio';
+            } else if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+                self::$errors['email'] = 'El Email no es válido';
+            }
+        
+            if (empty($this->password)) {
+                self::$errors['password'] = 'El Password es obligatorio';
+            }
+        
+            //si no hay errores, sanitizar
+            if (empty(self::$errors)) {
+                $this->sanitize();
+            }
+        
+            return empty(self::$errors);
         }
-
+        
         public function sanitize() {
-
+            $this->name = htmlspecialchars($this->name, ENT_QUOTES, 'UTF-8');
+            $this->lastname = htmlspecialchars($this->lastname, ENT_QUOTES, 'UTF-8');
+            $this->email = filter_var($this->email, FILTER_SANITIZE_EMAIL);
         }
+        
 
         public static function fromArray(array $data) : User{
             return new User(
@@ -89,7 +111,7 @@
                 lastname: $data['lastname'],
                 email: $data['email'],
                 password: $data['password'],
-                rol: $data['rol']
+                rol: 'user'
             );
         }
     }

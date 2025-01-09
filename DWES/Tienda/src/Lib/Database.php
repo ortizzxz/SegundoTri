@@ -4,7 +4,7 @@ namespace Lib;
 use PDO;
 use PDOException;
 
-class BaseDatos
+class Database
 {
     private PDO $conexion;
     private string $servidor;
@@ -23,10 +23,10 @@ class BaseDatos
         $this->usuario = $_ENV["USER"];
         $this->pass = $_ENV["PASSWORD"];
         $this->base_datos = $_ENV["DATABASE"];
-        $this->conexion = $this->conectar();
+        $this->conexion = $this->connect();
     }
 
-    private function conectar(): PDO
+    private function connect(): PDO
     {
         try {
             $opciones = [
@@ -82,4 +82,19 @@ class BaseDatos
 
 
     }
+    public function execute(string $query, array $params): bool
+{
+    try {
+        $stmt = $this->conexion->prepare($query);
+        $stmt->execute($params);
+        $stmt->closeCursor();
+        return true; 
+    } catch (PDOException $e) {
+        echo "Error al ejecutar la query: " . $e->getMessage();
+        return false; 
+    }
+}
+
+    
+
 }

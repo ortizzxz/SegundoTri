@@ -5,14 +5,21 @@
 
     class UserService{
         private UserRepository $userRepository;
-        private User $user;
 
         public function __construct() {
-            $this->$userRepository = new UserRepository();
+            $this->userRepository = new UserRepository();
         }
 
-        public function save(User $user){
-            $this->userRepository->save($user);
+        /* AUTH */
+
+        public function save(User $user) : bool{
+            $isSave = $this->userRepository->save($user);
+            return $isSave;
+        }
+
+        public function validation(User $user): bool{
+            $validation = $user->validation();
+            return $validation;
         }
 
     }

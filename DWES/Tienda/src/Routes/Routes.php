@@ -18,6 +18,11 @@
                 (new AuthController()) -> register();
             });
 
+            Router::add('POST', '/register', function(){
+                (new AuthController())->register();
+            });
+            
+
             /* ERROR */
             Router::add('GET', '/Error', function(){
                 ErrorController::error404();

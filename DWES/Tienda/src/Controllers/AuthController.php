@@ -18,30 +18,47 @@
             $this->pages->render('Auth/login');
         }
         
-        public function register(){
-            if($_SERVER['REQUEST_METHOD'] === 'POST'){
-                if($_POST['data']){
-                    $user = User::fromArray($_POST['data']);
-                    if($user->validation()){    
+        public function register() {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (isset($_POST['data'])) {
+                    
+                    $user = User::fromArray($_POST['data']); 
+        
+                    if ($user->validation()) { //validar los datos
                         $password = password_hash($user->getPassword(), PASSWORD_BCRYPT, ['cost' => 5]);
-                        $user->setPassword($password);
+                        $user->setPassword($password); // contraseña cifrada
+        
                         try {
-                            $userService->save($user);
+                            // try - guardar el usuario
+                            if ($this->userService->save($user)) {
+                                $this->pages->render('Auth/registerSuccess'); //si se guarda correctamente
+                            } else {
+                                // si no, redirigir con un mensaje de error
+                                $_SESSION['register'] = 'fail';
+                                $_SESSION['errors'] = 'Error al guardar el usuario'; 
+                                $this->pages->render('Auth/registerForm'); 
+                            }
                         } catch (Exception $e) {
-                            $_SESSION['register'] = 'fail'; // Si no hay datos
+                            //si ocurre un error, redirigir 
+                            $_SESSION['register'] = 'fail';
                             $_SESSION['errors'] = $e->getMessage();
+                            $this->pages->render('Auth/registerForm'); 
                         }
-                    }else{
-                        $_SESSION['register'] = 'fail'; // Si no hay datos
+                    } else {
+                        // si la validacion falla
+                        $_SESSION['register'] = 'fail';
                         $_SESSION['errors'] = User::getErrors();
+                        $this->pages->render('Auth/registerForm');
                     }
-                }else{
-                    $_SESSION['register'] = 'fail'; // Si no hay datos
+                } else {
+                    //si no se envian datos
+                    $_SESSION['register'] = 'fail';
+                    $_SESSION['errors'] = 'No se enviaron datos válidos';
+                    $this->pages->render('Auth/registerForm'); 
                 }
-            }else{
-                $this->pages->render('Auth/registerForm');
+            } else {
+                $this->pages->render('Auth/registerForm'); // GET
             }
         }
-    }
-
+    }        
 ?>
