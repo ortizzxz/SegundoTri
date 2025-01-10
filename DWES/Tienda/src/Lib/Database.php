@@ -60,41 +60,31 @@ class Database
         $this->conexion = null;
     }
 
-    public function insert(string $tabla, array $datos):void{
-        try{
-            $columnas = implode(", ", array_keys($datos));//Obtener consultas
-            $placeholders =":". implode(", :", array_keys($datos));//Crear placeHolders
-
-            $sql = "INSERT INTO $tabla($columnas) VALUES($placeholders)";
-            $stmt = $this->conexion->prepare($sql);
-
-            foreach ($datos as $key => $value) {
-                $stmt->bindValue(':'.$key, $value);
-            }
-            $stmt->execute();
-            $resultado = $stmt->rowCount();
-
-        }catch (PDOException $e){
-            $resultado = $e->getMessage();
+    
+    public function execute(string $query, array $params): bool{
+        try {
+            $stmt = $this->conexion->prepare($query);
+            $stmt->execute($params);
+            $stmt->closeCursor();
+            return true; 
+        } catch (PDOException $e) {
+            echo "Error al ejecutar la query: " . $e->getMessage();
+            return false; 
         }
-
-        $stmt->closeCursor();
-
-
     }
-    public function execute(string $query, array $params): bool
-{
-    try {
-        $stmt = $this->conexion->prepare($query);
-        $stmt->execute($params);
-        $stmt->closeCursor();
-        return true; 
-    } catch (PDOException $e) {
-        echo "Error al ejecutar la query: " . $e->getMessage();
-        return false; 
-    }
-}
 
+    public function prepare($sql) {
+        return $this->conexion->prepare($sql);
+    }
+
+    public function queryOne($sql, $params) {
+        $stmt = $this->prepare($sql);
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value);
+        }
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     
 
 }

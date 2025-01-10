@@ -15,7 +15,40 @@
         }
 
         public function login(){
-            $this->pages->render('Auth/login');
+            if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                if(isset($_POST['data'])){
+                    $userEmail = $_POST['data']['email'];
+                    $userPassword = $_POST['data']['password'];                    
+
+                    if($this->userService->validateEmail($userEmail)){
+                        $userDB = $this->userService->findByEmail($userEmail);
+                        if($userDB){
+                            if(password_verify($userPassword, $userDB['password'])){
+                                echo 'Usuario logueado';                                
+                            }else{
+                                $_SESSION['login'] = 'fail';
+                                $_SESSION['errors'] = ['password' => 'Contraseña incorrecta'];
+                                $this->pages->render('Auth/loginForm');
+                            }
+                        }else{
+                            $_SESSION['login'] = 'fail';
+                            $_SESSION['errors'] = ['email' => 'Usuario no encontrado'];
+                            $this->pages->render('Auth/loginForm');
+                        }
+                    }else{
+                        $_SESSION['login'] = 'fail';
+                        $_SESSION['errors'] = User::getErrors();
+                        $this->pages->render('Auth/loginForm');
+                    }
+                }else{
+                    $_SESSION['login'] = 'fail';
+                    $_SESSION['errors'] = 'No se enviaron datos válidos';
+                    $this->pages->render('Auth/loginForm');
+                }
+            }else{
+                $this->pages->render('Auth/loginForm');
+            }
+            
         }
         
         public function register() {

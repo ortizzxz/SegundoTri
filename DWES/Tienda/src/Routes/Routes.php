@@ -10,7 +10,7 @@
         public static function index(){
 
             Router::add('GET', '/', function(){
-                echo '<h1>Ruta Principal de Prueba</h1>';   
+                (new AuthController()) -> login();                
             });
 
             /* AUTH */
@@ -22,6 +22,13 @@
                 (new AuthController())->register();
             });
             
+            Router::add('GET', '/login', function(){
+                (new AuthController()) -> login();                
+            });
+            
+            Router::add('POST', '/login', function(){
+                (new AuthController()) -> login();                
+            });
 
             /* ERROR */
             Router::add('GET', '/Error', function(){

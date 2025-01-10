@@ -7,20 +7,8 @@
 </style>
 
 
-<h3>Registrarse</h3>
-<form action="<?= BASE_URL ?>register" method="POST" class="registration-form">
-        <label for="name">Nombre</label>
-        <input type="text" id="name" name="data[name]" value="<?= isset($_POST['data']['name']) ? htmlspecialchars($_POST['data']['name']) : '' ?>">  <br>
-        <?php if (isset($_SESSION['errors']['name'])): ?>
-            <p class="error"><?= $_SESSION['errors']['name'] ?></p>
-        <?php endif; ?>
-
-        <label for="lastname">Apellido</label>
-        <input type="text" id="lastname" name="data[lastname]" value="<?= isset($_POST['data']['lastname']) ? htmlspecialchars($_POST['data']['lastname']) : '' ?>"> <br>
-        <?php if (isset($_SESSION['errors']['lastname'])): ?>
-            <p class="error"><?= $_SESSION['errors']['lastname'] ?></p>
-        <?php endif; ?>
-
+<h3>Iniciar sesión</h3>
+<form action="<?= BASE_URL ?>login" method="POST" class="registration-form">
         <label for="email">Email</label>
         <input type="email" id="email" name="data[email]" value="<?= isset($_POST['data']['email']) ? htmlspecialchars($_POST['data']['email']) : '' ?>"> <br>
         <?php if (isset($_SESSION['errors']['email'])): ?>

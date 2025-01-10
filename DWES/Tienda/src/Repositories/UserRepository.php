@@ -30,5 +30,13 @@
                 return false;
             }
         }
+
+        public function findByEmail($email) {
+            $sql = "SELECT * FROM usuarios WHERE email = :email";
+            return $this->database->queryOne($sql, [':email' => $email]);
+        }
+        
+        
+        
     }
 
