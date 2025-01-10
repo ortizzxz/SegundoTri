@@ -10,21 +10,11 @@
     const notes = ref([]);
 
     onMounted(() => {
-    const savedNotes = localStorage.getItem('notes');
-    if (savedNotes) {
-        notes.value = JSON.parse(savedNotes);
-    }
+        const savedNotes = localStorage.getItem('notes');
+        if (savedNotes) {
+            notes.value = JSON.parse(savedNotes);
+        }
     })
-
-    function countCompletedTasks(notes){
-        var count = 0;
-        notes.forEach(note => {
-            if(note.completed){ 
-                count++ 
-            }
-        });
-        return count;
-    }
 
     watch(notes, (newNotes) => {
         localStorage.setItem('notes', JSON.stringify(newNotes));
@@ -44,18 +34,31 @@
         notes.value.splice(pos, 1);
     }
 
-    const completedTasks = computed(() => countCompletedTasks(notes.value));
+    const completedTasks = computed(() => notes.value.filter((note) => note.completed).length);
     const totalTasks = computed(() => notes.value.length);
+
+    function sortedNotes() {
+        return [notes].sort((a, b) => {
+            if (sortOrder.value === 'recent') {
+            return b.updateDate - a.updateDate;
+            } else if (sortOrder.value === 'prior') {
+            const priorityOrder = { high: 0, normal: 1, low: 2 };
+            return priorityOrder[a.priority] - priorityOrder[b.priority];
+            } else {
+            return a.updateDate - b.updateDate;
+            }
+        });
+    }
 </script>
 
 <template>
     <NoteContainerHeader></NoteContainerHeader>
     <NoteWriter @add-note="addNote"></NoteWriter>
     <NoteCounter :completedTasks="completedTasks" :totalTasks="totalTasks" @delete-completed="deleteCompletedTasks" @delete-all="deleteAllTasks"></NoteCounter>
-    <NotesList :notes="notes" @delete-note="deleteSingleTask"></NotesList>
+    <NotesList :notes="notes" @sort="sortedNotes" @delete-note="deleteSingleTask"></NotesList>
     <Footer></Footer>
   </template>
-  
+
 
 <style scoped>
 

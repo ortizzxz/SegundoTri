@@ -10,12 +10,17 @@ function sortByRecent() {
 function sortByOldest() {
   emit('sort', 'oldest');
 }
+
+function sortByPriority() {
+  emit('sort', 'prior');
+}
 </script>
 
 <template>
   <p>
     <a @click="sortByRecent">Ordenar por más recientes</a> || 
-    <a @click="sortByOldest">Ordenar por más antiguas</a>
+    <a @click="sortByOldest">Ordenar por más antiguas</a> ||
+    <a @click="sortByPriority">Ordenar por prioridad</a> 
   </p>
 </template>
 
