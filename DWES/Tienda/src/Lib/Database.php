@@ -73,12 +73,9 @@ class Database
         }
     }
 
-    public function prepare($sql) {
-        return $this->conexion->prepare($sql);
-    }
-
+   
     public function queryOne($sql, $params) {
-        $stmt = $this->prepare($sql);
+        $stmt = $this->conexion->prepare($sql);
         foreach ($params as $key => $value) {
             $stmt->bindValue($key, $value);
         }

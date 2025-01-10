@@ -1,6 +1,7 @@
 <?php
     namespace Routes;
     use Controllers\ErrorController;
+    use Controllers\ProductController;
     use Controllers\AuthController;
     use Lib\Router;
     
@@ -9,8 +10,9 @@
 
         public static function index(){
 
+            /* LANDING PAGE */
             Router::add('GET', '/', function(){
-                (new AuthController()) -> login();                
+                (new ProductController()) -> index();
             });
 
             /* AUTH */

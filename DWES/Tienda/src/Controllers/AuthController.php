@@ -24,8 +24,11 @@
                         $userDB = $this->userService->findByEmail($userEmail);
                         if($userDB){
                             if(password_verify($userPassword, $userDB['password'])){
-                                echo 'Usuario logueado';                                
-                            }else{
+                                $_SESSION['login'] = 'success';
+                                $_SESSION['identity'] = $userDB; // Usar datos de la BD en lugar de $_POST
+                                $this->pages->render('Product/landPage');
+                            }
+                            else{
                                 $_SESSION['login'] = 'fail';
                                 $_SESSION['errors'] = ['password' => 'Contraseña incorrecta'];
                                 $this->pages->render('Auth/loginForm');
@@ -64,6 +67,7 @@
                         try {
                             // try - guardar el usuario
                             if ($this->userService->save($user)) {
+                                $_SESSION['register'] = 'success';
                                 $this->pages->render('Auth/registerSuccess'); //si se guarda correctamente
                             } else {
                                 // si no, redirigir con un mensaje de error
