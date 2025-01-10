@@ -2,6 +2,7 @@
     namespace Routes;
     use Controllers\ErrorController;
     use Controllers\ProductController;
+    use Controllers\CategoryController;
     use Controllers\AuthController;
     use Lib\Router;
     
@@ -31,7 +32,25 @@
             Router::add('POST', '/login', function(){
                 (new AuthController()) -> login();                
             });
+            
+            Router::add('GET', '/logout', function(){
+                (new AuthController()) -> logout();                
+            });
 
+            /* ADMIN FUNCTIONS */
+            /* CATEGORIES */
+            Router::add('GET', '/categories', function(){
+                (new CategoryController()) -> index();                
+            });
+            
+            Router::add('POST', '/categories', function(){
+                (new CategoryController()) -> addCategory();                
+            });
+            
+            Router::add('POST', '/categories/delete', function(){
+                (new CategoryController()) -> deleteCategory();                
+            });
+            
             /* ERROR */
             Router::add('GET', '/Error', function(){
                 ErrorController::error404();

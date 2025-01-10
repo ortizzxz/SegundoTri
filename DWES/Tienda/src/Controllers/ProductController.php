@@ -2,7 +2,8 @@
     namespace Controllers;
     use Lib\Pages;
     use Models\Product;
-    // use Services\ProductService;
+    
+    session_start();
 
     class ProductController{
         private Pages $pages; 

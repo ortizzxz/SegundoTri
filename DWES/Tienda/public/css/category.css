@@ -1,0 +1,100 @@
+#categoryTitle {
+    text-align: center; /* Centrar el título */
+    font-size: 2rem; /* Tamaño de fuente más grande */
+    margin-bottom: 20px; /* Espacio debajo del título */
+    color: #333333; /* Color del texto del título */
+
+}
+
+/* Estilos para la tabla */
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px auto; /* Centrar la tabla */
+    font-size: 1em;
+    min-width: 450px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border-radius: 5px; /* Bordes redondeados */
+    overflow: hidden; /* Para que los bordes redondeados se vean bien */
+}
+
+.styled-table thead tr {
+    background-color: #980081; /* Color de fondo del encabezado */
+    color: #ffffff; /* Color del texto */
+    text-align: left;
+}
+
+.styled-table th, .styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd; /* Línea divisoria entre filas */
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f9f9f9; /* Color de fondo para filas pares */
+}
+
+.styled-table tbody tr:hover {
+    background-color: #f1f1f1; /* Color al pasar el ratón sobre una fila */
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879; /* Línea divisoria en la última fila */
+}
+
+/* Estilos para el formulario de categoría */
+.category-form {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #ffffff; /* Color de fondo del formulario */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px; /* Ancho máximo del formulario */
+    margin-left: auto; /* Centrar horizontalmente */
+    margin-right: auto; /* Centrar horizontalmente */
+}
+
+/* Estilo para el título del formulario y la tabla */
+.category-form h2,
+.styled-table h2 {
+    text-align: center; /* Centrar el título */
+    color: #333333; /* Color del texto del título */
+}
+
+/* Espaciado adicional para los títulos */
+.category-form h2 {
+    margin-bottom: 15px; /* Espacio debajo del título del formulario */
+}
+
+.styled-table h2 {
+    margin-bottom: 20px; /* Espacio debajo del título de la tabla */
+}
+
+/* Estilo para los campos de entrada en el formulario */
+.category-form input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc; /* Borde del campo de texto */
+    border-radius: 4px; /* Bordes redondeados para el campo de texto */
+}
+
+/* Estilo para el botón de envío en el formulario */
+.category-form input[type="submit"] {
+    background-color: #007bff; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px; /* Bordes redondeados para el botón */
+}
+
+.category-form input[type="submit"]:hover {
+    background-color: #0056b3; /* Color al pasar el ratón sobre el botón */
+}
+
+/* Estilo para mensajes (opcional) */
+.message {
+    text-align: center;
+}

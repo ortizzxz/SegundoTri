@@ -44,9 +44,16 @@ class Database
         }
     }
 
-    public function query(string $consultaSQL):void{
-        $this->resultado = $this->conexion->query($consultaSQL);
+    public function query(string $consultaSQL): mixed {
+        try {
+            $this->resultado = $this->conexion->query($consultaSQL);
+            return $this->resultado; 
+        } catch (PDOException $e) {
+            echo "Error al ejecutar la consulta: " . $e->getMessage();
+            return false; 
+        }
     }
+    
 
     public function extractRegister():mixed{
         return ($fila = $this->resultado->fetch(PDO::FETCH_ASSOC))?$fila:false;

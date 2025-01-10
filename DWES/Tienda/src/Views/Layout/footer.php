@@ -1,7 +1,7 @@
 <style>
 
 </style>
-
+<!---
 <footer>
     <h1>Footer de Tienda Online</h1>
     
@@ -48,3 +48,4 @@
         © 2025 Mi Tienda Online. Todos los derechos reservados.
     </div>
 </footer>
+-->
