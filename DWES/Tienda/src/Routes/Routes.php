@@ -51,6 +51,15 @@
                 (new CategoryController()) -> deleteCategory();                
             });
             
+            /* PRODUCTS */
+            Router::add('GET', '/products', function(){
+                (new ProductController()) -> index();                
+            });
+            
+            Router::add('POST', '/products', function(){
+                (new ProductController()) -> addProduct();                
+            });
+
             /* ERROR */
             Router::add('GET', '/Error', function(){
                 ErrorController::error404();

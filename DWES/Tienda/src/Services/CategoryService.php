@@ -15,7 +15,7 @@
         }
 
         public function addCategory($name){
-            $this->categoryRepository->addCategory($name);
+           return $this->categoryRepository->addCategory($name);
         }
 
         public function deleteCategory($id) {

@@ -30,7 +30,7 @@ class CategoryRepository {
         try {
             return $this->database->execute($sql, $data); // Usar el método execute para ejecutar la consulta
         } catch (PDOException $e) {
-            return false; // Manejo básico de errores
+            return false; // manejo de errores
         }
     }
 

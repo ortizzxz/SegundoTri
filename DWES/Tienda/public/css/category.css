@@ -1,3 +1,9 @@
+/** CONTENEDOR **/
+#categoryContainer{
+    width: 70dvw;
+    margin: 0 auto; 
+}
+
 #categoryTitle {
     text-align: center; /* Centrar el título */
     font-size: 2rem; /* Tamaño de fuente más grande */
@@ -18,7 +24,7 @@
 }
 
 .styled-table thead tr {
-    background-color: #980081; /* Color de fondo del encabezado */
+    background-color: #2C3E50; /* Color de fondo del encabezado */
     color: #ffffff; /* Color del texto */
     text-align: left;
 }
@@ -97,4 +103,27 @@
 /* Estilo para mensajes (opcional) */
 .message {
     text-align: center;
+}
+
+.error-message {
+    background-color: #ffcccc;
+    border: 1px solid #ff0000;
+    color: #ff0000;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.success-message {
+    background-color: #ccffcc;
+    border: 1px solid #00ff00;
+    color: #006600;
+    padding: 10px;
+    border-radius: 5px;    
+    text-align: center;
+}
+
+.error-message, .success-message{
+    width: 30dvw;
+    margin: 0.2rem auto;
 }
