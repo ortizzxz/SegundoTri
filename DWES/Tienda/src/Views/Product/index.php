@@ -1,3 +1,10 @@
+<style>
+    img{
+        width: 150px;
+        height: 150px;
+    }
+</style>
+
 <div class="container">
     <?php
     function displayMessage()

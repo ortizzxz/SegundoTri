@@ -51,9 +51,15 @@ class Routes
             (new CategoryController())->addCategory();
         });
 
+        Router::add('GET', '/categories/:id', function(int $id) {
+            (new CategoryController())->showProducts($id);
+        });
+        
+            
         Router::add('POST', '/categories/delete', function () {
             (new CategoryController())->deleteCategory();
         });
+
 
         /* PRODUCTS */
         Router::add('GET', '/products', function () {
@@ -64,19 +70,21 @@ class Routes
             (new ProductController())->addProduct();
         });
 
-        Router::add('POST', '/products/edit/:id', function (int $id) {
-            (new ProductController())->editProduct($id);
+        Router::add('GET', '/products/category/{id}', function(int $id) {
+            (new CategoryController())->showProducts($id);
         });
+        
 
 
         /* CART */
         Router::add('GET', '/cart', function () {
             (new CartController())->displayCart();
         });
-
-        Router::add('POST', '/cart/add/:id', function (int $id) {
-            (new CartController())->addProduct($id);
+        
+        Router::add('GET', '/products/category/:id', function (int $id) {
+            (new CategoryController())->showProducts($id);
         });
+        
 
         Router::add('POST', '/cart/update/:id', function (int $id) {
             (new CartController())->updateQuantity($id);
