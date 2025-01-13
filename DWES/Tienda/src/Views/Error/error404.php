@@ -1,7 +1,7 @@
 <hr>
 <h3><?php echo $titulo ?></h3>
 
-<p>Tal vez quieras volver al inicio</p>
-<a href="<?=BASE_URL?>">Ir al inicio</a>
+<p id='error404Message'>Tal vez quieras <a href="<?=BASE_URL?>">volver al inicio</a>
+</p>
 
 <hr>

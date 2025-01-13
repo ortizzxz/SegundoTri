@@ -1,6 +1,4 @@
-<style>
 
-</style>
 <!---
 <footer>
     <h1>Footer de Tienda Online</h1>
@@ -49,3 +47,7 @@
     </div>
 </footer>
 -->
+
+
+</body>
+</html>

@@ -53,7 +53,7 @@
                         <input type='hidden' name='id' value='" . htmlspecialchars($product['id']) . "'>
                         <input type='submit' value='Eliminar'>
                     </form>
-                    <a href='" . BASE_URL . "products/edit/" . htmlspecialchars($product['id']) . "'>Editar</a>
+                    <a href='" . BASE_URL . "products/edit/" . $product['id'] . "'>Editar</a>
                 </td>";
             echo "</tr>";
         }

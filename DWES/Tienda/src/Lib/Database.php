@@ -89,6 +89,11 @@ class Database
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function prepare($sql){
+        return $this->conexion->prepare($sql);
+    }
+
     
 
 }

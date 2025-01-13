@@ -3,6 +3,7 @@
     use Controllers\ErrorController;
     use Controllers\ProductController;
     use Controllers\CategoryController;
+    use Controllers\CartController;
     use Controllers\AuthController;
     use Lib\Router;
     
@@ -58,6 +59,19 @@
             
             Router::add('POST', '/products', function(){
                 (new ProductController()) -> addProduct();                
+            });
+
+            Router::add('POST', '/products/edit/:id', function(int $id){
+                (new ProductController()) -> editProduct($id);                
+            });
+
+            /* CART */
+            Router::add('GET', '/cart', function(){
+                (new CartController()) -> displayCart();                
+            });
+
+            Router::add('POST', '/cart/add/:id', function(int $id){
+                (new CartController()) -> addProduct($id);                
             });
 
             /* ERROR */

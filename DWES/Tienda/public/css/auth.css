@@ -59,3 +59,14 @@
 .submit-button:hover {
     background-color: #2980b9;
 }
+
+.success-register{
+    background-color: #ccffcc;
+    border: 1px solid #00ff00;
+    color: #006600;
+    padding: 10px;
+    border-radius: 5px;    
+    text-align: center;
+    width: 100%;
+    margin: 0.2rem auto;
+}

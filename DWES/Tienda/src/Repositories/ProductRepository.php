@@ -1,7 +1,7 @@
 <?php
     namespace Repositories;
     use Lib\Database;
-    use DTOException;
+    use PDO;
 
     class ProductRepository{
         private Database $database;
@@ -19,6 +19,16 @@
                 return [];
             }
         }
+
+        public function getById(int $id): array
+        {
+            $stmt = $this->database->prepare("SELECT * FROM productos WHERE id = :id");
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC) ?: [];
+        }
+
+        
         
         public function save($product) {
             $sql = "INSERT INTO productos (id, categoria_id, nombre, descripcion, precio, stock, oferta, fecha, imagen) 
@@ -47,6 +57,6 @@
                 return false;
             }
         }
-        
+
     }
 

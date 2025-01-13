@@ -136,3 +136,30 @@ h1, h2 {
 .product-offer {
     color: #28a745;
 }
+
+.add-to-cart-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #45a049; 
+}
+
+.add-to-cart-btn:active {
+    background-color: #3e8e41;
+    transform: scale(0.98);
+}
+
+

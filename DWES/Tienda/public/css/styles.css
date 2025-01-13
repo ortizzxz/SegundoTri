@@ -5,7 +5,21 @@
   font-family: 'Roboto', Arial;
 }
 
-/* HEADER */
+/* ERROR 404*/
+#error404Message{
+  color: black;
+  margin: 0.3rem;
+}
+
+#error404Message a{
+  text-decoration: none;
+  color: black;
+  background-color: rgb(136, 190, 245);
+  padding: 0 0.2rem;
+  border-radius: 0.5rem;
+}
+
+/* HEADER */  
 nav ul {
   list-style-type: none;
   padding: 0;

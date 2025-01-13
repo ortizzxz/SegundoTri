@@ -111,7 +111,7 @@
                 lastname: $data['lastname'],
                 email: $data['email'],
                 password: $data['password'],
-                rol: 'user'
+                rol: $data['rol']
             );
         }
     }

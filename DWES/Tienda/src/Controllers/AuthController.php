@@ -12,13 +12,17 @@ class AuthController {
     private Pages $pages; 
     private UserService $userService;
 
+
+    const ROLE_ADMIN = 'admin';
+    const ROLE_USER = 'user';
+
     public function __construct() {
         $this->pages = new Pages();
         $this->userService = new UserService();
     }
 
     public function login() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] ) {
             if (isset($_POST['data'])) {
                 $userEmail = $_POST['data']['email'];
                 $userPassword = $_POST['data']['password'];                    
@@ -52,19 +56,23 @@ class AuthController {
     }
 
     public function register() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] ) {
             if (isset($_POST['data'])) {
                 $user = User::fromArray($_POST['data']); 
-
                 if ($user->validation()) { // Validar los datos
                     $password = password_hash($user->getPassword(), PASSWORD_BCRYPT, ['cost' => 5]);
                     $user->setPassword($password); // Contraseña cifrada
+                        
+                    // validacion adicional
+                    if ($_SESSION['identity']['rol'] != self::ROLE_ADMIN) {
+                        $user->setRol(self::ROLE_USER);
+                    }
 
                     try {
                         // Intentar guardar el usuario
                         if ($this->userService->save($user)) {
                             $_SESSION['register'] = 'success';
-                            header("Location: " . BASE_URL . "registerSuccess"); // Redirigir después de registro exitoso
+                            header("Location: " . BASE_URL . "register"); // Redirigir después de registro exitoso
                             exit();
                         } else {
                             $_SESSION['register'] = 'fail';
