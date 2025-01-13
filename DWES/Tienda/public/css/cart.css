@@ -27,15 +27,18 @@
 }
 
 .continue-shopping-btn {
-    background-color: #4CAF50;
+    background-color: #008CBA;
+
     color: white;
     text-decoration: none;
     display: inline-block;
+    font-size: large;
     margin-right: 10px;
 }
 
 .checkout-btn {
-    background-color: #008CBA;
+    background-color: #4CAF50;
+    font-size: large;
     color: white;
 }
 

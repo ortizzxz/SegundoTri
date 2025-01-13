@@ -44,7 +44,7 @@
                                 $_SESSION['addproduct'] = 'fail';
                                 $_SESSION['errors'] = 'Error al guardar el producto'; 
                             }
-                        } catch (Exception $e) {
+                        } catch (\Exception $e) {
                             $_SESSION['addproduct'] = 'fail';
                             $_SESSION['errors'] = $e->getMessage();
                         }
@@ -88,7 +88,7 @@
                                     $_SESSION['errors'] = 'Error al actualizar el producto';
                                     $this->pages->render('Product/managementSingleProduct');
                                 }
-                            } catch (Exception $e) {
+                            } catch (\Exception $e) {
                                 $_SESSION['edit'] = 'fail';
                                 $_SESSION['errors'] = $e->getMessage();
                                 $this->pages->render('Product/managementSingleProduct');

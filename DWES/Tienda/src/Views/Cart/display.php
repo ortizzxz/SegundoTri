@@ -2,7 +2,8 @@
     <h1>Tu Carrito de Compras</h1>
 
     <?php
-    function displayMessage() {
+    function displayMessage()
+    {
         if (isset($_SESSION['error'])) {
             echo "<div class='error-message'>" . htmlspecialchars($_SESSION['error']) . "</div>";
             unset($_SESSION['error']);
@@ -29,7 +30,13 @@
             echo "<tr>";
             echo "<td>" . htmlspecialchars($item['nombre']) . "</td>";
             echo "<td>€" . number_format($item['precio'], 2) . "</td>";
-            echo "<td>" . $item['quantity'] . "</td>";
+            echo "<td>
+                    <form action='" . BASE_URL . "cart/update/" . $item['id'] . "' method='POST' style='display:inline;'>
+                        <button type='submit' name='action' value='decrease' class='quantity-btn' " . ($item['quantity'] <= 1 ? 'disabled' : '') . ">-</button>
+                        <span class='quantity'>" . $item['quantity'] . "</span>
+                        <button type='submit' name='action' value='increase' class='quantity-btn' " . ($item['quantity'] >= $item['stock'] ? 'disabled' : '') . ">+</button>
+                    </form>
+                  </td>";
             echo "<td>€" . number_format($subtotal, 2) . "</td>";
             echo "<td>
                     <form action='" . BASE_URL . "cart/remove/" . $item['id'] . "' method='POST' style='display:inline;'>
@@ -40,7 +47,7 @@
         }
 
         echo "</tbody>";
-        echo "<tfoot><tr><td colspan='3'><strong>Total</strong></td><td colspan='2'><strong>€" . number_format($total, 2) . "</strong></td></tr></tfoot>";
+        echo "<tfoot><tr><td colspan='4'><strong>Total</strong></td><td colspan='2'><strong>€" . number_format($total, 2) . "</strong></td></tr></tfoot>";
         echo "</table>";
 
         echo "<div class='cart-actions'>";
@@ -52,4 +59,3 @@
     }
     ?>
 </div>
-

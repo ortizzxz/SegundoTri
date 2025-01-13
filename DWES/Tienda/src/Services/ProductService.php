@@ -14,12 +14,20 @@
             return $this->productRepository->getAll();
         }
 
-        public function getById(int $id){
+        public function getById(int $id): array {
                 return $this->productRepository->getById($id);
         }
 
-        public function updateProduct(){
+        public function getStockById(int $id): int{
+                return $this->productRepository->getStockById($id);
+        }
+
+        public function updateProduct($id, $productData){
             return true;
+        }
+        
+        public function updateStock($id, $quantity): bool{
+            return $this->productRepository->updateStock($id, $quantity);
         }
 
         public function save(Product $product) : bool{
