@@ -1,16 +1,7 @@
-
-<div class="category-form">
-   <h2>Agregar Nueva Categoría</h2>
-   <form action="<?= BASE_URL; ?>categories" method="POST">
-       <input type="text" name="nombre" placeholder="Nombre de la categoría" required>
-       <input type="submit" value="Agregar Categoría">
-   </form>
-    <?=displayMessage() ?>
-</div>
-
-
-<?php
-    function displayMessage() {
+<div class="container">
+    <?php
+    function displayMessage()
+    {
         if (isset($_SESSION['error'])) {
             echo "<div class='error-message'>" . htmlspecialchars($_SESSION['error']) . "</div>";
             unset($_SESSION['error']);
@@ -20,50 +11,38 @@
         }
     }
 
-
-    function displayNoCategoriesMessage() {
+    function displayNoCategoriesMessage()
+    {
         echo "<h2 id='categoryTitle'>No hay categorías disponibles.</h2>";
     }
 
-    function displayCategoriesTable(array $categories) {
-        echo "<div id='categoryContainer'>";
-        echo "<h2 id='categoryTitle'>Lista de Categorías</h2>";
+    function displayCategoriesGrid(array $categories)
+{
+    echo "<h2 id='categoryTitle'>Lista de Categorías</h2>";
+    echo "<div class='categories-grid'>"; // Start of grid
+
+    foreach ($categories as $category) {
+        echo "<div class='category-card'>"; // Start of category card
+        echo "<a href='" . BASE_URL . "products/category/" . htmlspecialchars($category['id']) . "' class='category-link'>";
         
-        echo "<table class='styled-table'>";
-        echo "<thead>";
-        echo "<tr>";
-        echo "<th>ID</th>";
-        echo "<th>Nombre</th>";
-        echo "<th>Acción</th>"; 
-        echo "</tr>";
-        echo "</thead>";
+        // Display category name
+        echo "<h3 class='category-name'>" . htmlspecialchars($category['nombre']) . "</h3>";
         
-        echo "<tbody>";
-        
-        foreach ($categories as $category) {
-            echo "<tr>";
-            echo "<td>" . htmlspecialchars($category['id']) . "</td>";
-            echo "<td>" . htmlspecialchars($category['nombre']) . "</td>";
-            // boton de eliminar
-            echo "<td>
-                    <form action='" . BASE_URL . "categories/delete' method='POST' style='display:inline;'>
-                        <input type='hidden' name='id' value='" . htmlspecialchars($category['id']) . "'>
-                        <input type='submit' value='Eliminar'>
-                    </form>
-                </td>";
-            echo "</tr>";
-        }
-        
-        echo "</tbody>";
-        echo "</table>";
-        echo "</div>";
+        echo "</a>"; // End of link
+        echo "</div>"; // End of category card
     }
+
+    echo "</div>"; // End of grid
+}
+
+
+    // Display any error or success messages
+    displayMessage();
 
     if (empty($categories)) {
         displayNoCategoriesMessage();
     } else {
-        displayCategoriesTable($categories);
+        displayCategoriesGrid($categories);
     }
-?>
-
-
+    ?>
+</div>

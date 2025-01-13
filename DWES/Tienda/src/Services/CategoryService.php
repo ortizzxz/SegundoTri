@@ -18,6 +18,10 @@
            return $this->categoryRepository->addCategory($name);
         }
 
+        public function getProductsByCategory($categoryId){
+            return $this->categoryRepository->getProductsByCategory($categoryId);
+        }
+
         public function deleteCategory($id) {
             return $this->categoryRepository->delete($id);
         }

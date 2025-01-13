@@ -15,25 +15,24 @@
         }
 
         public function index() {
-            // Verificar si el usuario está autenticado y es admin
-            if (!isset($_SESSION['identity']) || $_SESSION['identity']['rol'] !== 'admin') {
-                // Redirigir a la página de inicio o a una página de acceso denegado
-                header("Location: " . BASE_URL . "login"); 
-                exit(); // Detener la ejecución del script
-            }
-        
-            // Si el usuario es admin, obtener las categorías
             $categories = $this->categoryService->getAll();
-            $this->pages->render('Category/index', ['categories' => $categories]);
-        }
         
+            // Verificar si el usuario está autenticado y es admin
+            if (isset($_SESSION['identity']) && $_SESSION['identity']['rol'] === 'admin') {
+                // Si el usuario es admin, vista de gestión
+                $this->pages->render('Category/management', ['categories' => $categories]);
+            } else {
+                // Si el usuario no es admin, vista normal
+                $this->pages->render('Category/index', ['categories' => $categories]);
+            }
+        }
         
 
         public function addCategory() {
             // Verificar si el usuario está autenticado y es admin
             if (!isset($_SESSION['identity']) || $_SESSION['identity']['rol'] !== 'admin') {
                 // Redirigir a la página de inicio o a una página de acceso denegado
-                header("Location: " . BASE_URL . "login"); 
+                header("Location: " . BASE_URL . "products"); 
                 exit(); // Detener la ejecución del script
             }
         
@@ -75,6 +74,21 @@
                 exit();
             }
         }
+
+        public function showProducts($categoryId) {
+            // Get products by category ID
+            $products = $this->categoryService->getProductsByCategory($categoryId);
+            // Check if the category exists and has products
+            if (empty($products)) {
+                $_SESSION['error'] = "No hay productos disponibles en esta categoría.";
+                header("Location: " . BASE_URL . "categories");
+                exit();
+            }
+        
+            // Render the view with products
+            $this->pages->render('Product/index', ['data' => $products]);
+        }
+        
         
         
         public function deleteCategory() {

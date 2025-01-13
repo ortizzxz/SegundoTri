@@ -127,3 +127,38 @@
     width: 30dvw;
     margin: 0.2rem auto;
 }
+
+.categories-grid {
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow wrapping to next line */
+    justify-content: center; /* Center items horizontally */
+    gap: 20px; /* Space between items */
+    margin-top: 20px; /* Space above the grid */
+}
+
+.category-card {
+    background-color: #ffffff; /* White background for cards */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 15px; /* Padding inside the card */
+    text-align: center; /* Center text inside the card */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for hover effects */
+    width: 200px; /* Fixed width for cards */
+}
+
+.category-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+.category-name {
+    font-size: 1.2em; /* Larger font size for category names */
+    color: #333; /* Darker text color for better readability */
+    margin-top: 10px; /* Space above category name */
+}
+
+#categoryTitle {
+    text-align: center; /* Center align title */
+    margin-bottom: 20px; /* Space below title */
+}
