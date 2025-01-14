@@ -35,7 +35,7 @@ function deleteSingleTask(pos){
   <div>
     <NoteOrder @sort="handleSort" />
     <div id="mainContainer">
-      <Note v-for="(note, index) in notes" :key="note.updateDate" :note="note" id="note" @delete-note="deleteSingleTask(index) "/>
+      <Note v-for="(note, index) in notes" :key="note.updateDate" :note="note" id="note" @delete-note="deleteSingleTask(note.id) "/>
     </div>
   </div>
 </template>
