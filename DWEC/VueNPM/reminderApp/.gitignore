@@ -29,5 +29,4 @@ coverage
 
 *.tsbuildinfo
 
-
-./src/firebase.js
+src/firebase.js
