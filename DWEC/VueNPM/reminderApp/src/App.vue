@@ -5,13 +5,13 @@ import NoteWriter from './components/components/NoteWriter.vue'
 import NoteCounter from './components/components/NoteCounter.vue'
 import Footer from './components/components/Footer.vue'
 
-import {  computed, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useCollection, useFirestore } from 'vuefire';
-import { collection, addDoc, deleteDoc, updateDoc, doc } from 'firebase/firestore';
+import { collection, addDoc, deleteDoc, updateDoc, doc, query, orderBy } from 'firebase/firestore';
 
 const db = useFirestore();
 const notesCollection = collection(db, 'notesApp');
-const notes = useCollection(notesCollection);
+const notes = useCollection(query(notesCollection, orderBy('description')));
 
 async function addNote(newNote) {
   try {
