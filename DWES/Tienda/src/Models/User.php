@@ -107,8 +107,8 @@
         public static function fromArray(array $data) : User{
             return new User(
                 id: $data['id'] ?? null,
-                name: $data['name'],
-                lastname: $data['lastname'],
+                name: $data['nombre'],
+                lastname: $data['apellidos'],
                 email: $data['email'],
                 password: $data['password'],
                 rol: $data['rol']
