@@ -8,34 +8,31 @@ const props = defineProps({
 })
 
 const sortOrder = ref('recent') 
-const emit = defineEmits(['delete-note', 'sort']);
-
-function sortByRecent() {
-  emit('sort', 'recent');
-}
-
-function sortByOldest() {
-  emit('sort', 'oldest');
-}
-
-function sortByPriority() {
-  emit('sort', 'prior');
-}
+const emit = defineEmits(['delete-note', 'sort', 'change-priority']);
 
 function handleSort(order) {
   sortOrder.value = order;
+  emit('sort', order);
 }
+
 function deleteSingleTask(pos){
   emit('delete-note', pos);
 }
 
+function changePriority(targetValue, note){
+  emit('change-priority', targetValue, note);
+}
+
+function changeCompletition(note) {
+    emit('change-completition', note);
+}
 </script>
 
 <template>
   <div>
     <NoteOrder @sort="handleSort" />
     <div id="mainContainer">
-      <Note v-for="(note, index) in notes" :key="note.updateDate" :note="note" id="note" @delete-note="deleteSingleTask(note.id) "/>
+      <Note v-for="(note, index) in notes" :key="note.updateDate" :note="note" id="note" @delete-note="deleteSingleTask(note.id)" @change-priority="changePriority" @change-completition="changeCompletition"/>
     </div>
   </div>
 </template>
