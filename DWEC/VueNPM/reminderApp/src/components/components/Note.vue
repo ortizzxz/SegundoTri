@@ -5,22 +5,20 @@
     note: Object
   })
 
-  const emit = defineEmits(['delete-note']);
+  const emit = defineEmits(['delete-note', 'change-priority', 'change-completition']);
+
+  const timeElapsed = computed(() => getTimeElapsed(props.note.updateDate))
 
   function deleteSingleTask() {
     emit('delete-note');
   }
 
-  function changeCompletition() {
-    props.note.completed = !props.note.completed
-    props.note.updateDate = Date.now();
+  function changeCompletition(note) {
+    emit('change-completition', note);
   }
 
-
-  const timeElapsed = computed(() => getTimeElapsed(props.note.updateDate))
-
   function perceiveClick(targetValue, note){
-    console.log(note.priority = targetValue);
+    emit('change-priority', targetValue, note);
   }
 
   function getTimeElapsed(updateDate) {
@@ -44,7 +42,7 @@
   <div>
     <div id="header">
       <div>
-          <h1 :class="{'highlight-title': props.note.completed}" @click="changeCompletition">
+          <h1 :class="{'highlight-title': props.note.completed}" @click="changeCompletition(props.note)">
             <span class="checkball" :class="{'completed': props.note.completed}"></span>
             {{ props.note.description }}
           </h1>
