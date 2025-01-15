@@ -34,21 +34,6 @@
             if (empty($this->name)) {
                 self::$errors['name'] = 'El Nombre es obligatorio';
             }
-        
-            if (empty($this->lastname)) {
-                self::$errors['lastname'] = 'El Apellido es obligatorio';
-            }
-        
-            if (empty($this->email)) {
-                self::$errors['email'] = 'El Email es obligatorio';
-            } else if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-                self::$errors['email'] = 'El Email no es válido';
-            }
-        
-            if (empty($this->password)) {
-                self::$errors['password'] = 'El Password es obligatorio';
-            }
-        
             //si no hay errores, sanitizar
             if (empty(self::$errors)) {
                 $this->sanitize();
@@ -59,8 +44,6 @@
         
         public function sanitize() {
             $this->name = htmlspecialchars($this->name, ENT_QUOTES, 'UTF-8');
-            $this->lastname = htmlspecialchars($this->lastname, ENT_QUOTES, 'UTF-8');
-            $this->email = filter_var($this->email, FILTER_SANITIZE_EMAIL);
         }
         
 

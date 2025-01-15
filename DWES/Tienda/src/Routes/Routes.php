@@ -75,27 +75,35 @@ class Routes
         });
         
 
+        Router::add('GET', '/products/category/:id', function (int $id) {
+            (new CategoryController())->showProducts($id);
+        });
 
         /* CART */
         Router::add('GET', '/cart', function () {
             (new CartController())->displayCart();
         });
         
-        Router::add('GET', '/products/category/:id', function (int $id) {
-            (new CategoryController())->showProducts($id);
+        Router::add('POST', '/cart/add/:id', function (int $id) {
+            (new CartController())->addProduct($id);
         });
         
-
+        
         Router::add('POST', '/cart/update/:id', function (int $id) {
             (new CartController())->updateQuantity($id);
         });
-
+        
         Router::add('POST', '/cart/remove/:id', function (int $id) {
             (new CartController())->removeProduct($id);
         });
-
+        
+        /* ORDER */
         Router::add('POST', '/order/create', function(){
             (new OrderController()) -> createOrder();                
+        });
+        
+        Router::add('POST', '/proceedToPay', function(){
+            (new OrderController()) -> shippingForm();                
         });
         
 
