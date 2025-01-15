@@ -52,7 +52,7 @@
 
         echo "<div class='cart-actions'>";
         echo "<a href='" . BASE_URL . "products' class='continue-shopping-btn'>Continuar Comprando</a>";
-        echo "<form action='" . BASE_URL . "order/create' method='POST' style='display:inline;'>";
+        echo "<form action='" . BASE_URL . "proceedToPay' method='POST' style='display:inline;'>";
         echo "<input type='submit' value='Realizar Pedido' class='checkout-btn'>";
         echo "</form>";
         echo "</div>";

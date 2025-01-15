@@ -6,6 +6,8 @@ use Services\OrderService;
 use Services\ProductService;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Models\Order;
+use Models\User;
 
 session_start();
 
@@ -24,24 +26,29 @@ class OrderController
 
     public function createOrder() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (!$this->isUserLoggedIn()) {
-                $this->setErrorAndRedirect("Debes iniciar sesión para realizar un pedido.", "login");
-            }
 
-            if ($this->isCartEmpty()) {
-                $this->setErrorAndRedirect("Tu carrito está vacío.", "cart");
-            }
+            
+            $user = User::fromArray($_SESSION['identity']);
+            $_POST['shipping']['userId'] = $user->getId();
+            $_POST['shipping']['cost'] = $_SESSION['cart']['total'];
+            $shippingAddress = Order::fromArray($_POST['shipping']);
 
             $userId = $_SESSION['identity']['id'];
             $cartItems = $_SESSION['cart'];
 
-            if (!$this->checkStockAvailability($cartItems)) {
-                return; // Error ya manejado en checkStockAvailability
+            if (!$this->isUserLoggedIn()) {
+                $this->setErrorAndRedirect("Debes iniciar sesión para realizar un pedido.", "login");
             }
-
+            if ($this->isCartEmpty()) {
+                $this->setErrorAndRedirect("Tu carrito está vacío.", "cart");
+            }   
+            if (!$this->checkStockAvailability($cartItems)) {
+                return; 
+            }
+            
             $orderId = $this->orderService->createOrder($userId, $cartItems);
 
-            if ($orderId) {
+            if ($orderId && $shippingAddress->validation()) {
                 $this->updateProductStock($cartItems);
                 $this->sendOrderConfirmationEmail($_SESSION['identity']['email'], $orderId, $cartItems);
                 unset($_SESSION['cart']);
@@ -54,6 +61,15 @@ class OrderController
         } else {
             header("Location: " . BASE_URL . "cart");
             exit();
+        }
+    }
+
+
+    public function shippingForm(){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->pages->render('Order/shippingForm');
+        }else{
+            echo 'get';
         }
     }
 
@@ -72,22 +88,38 @@ class OrderController
     }
 
     private function checkStockAvailability(array $cartItems): bool {
-        foreach ($cartItems as $item) {
-            $currentStock = $this->productService->getStockById($item['id']);
-            if ($currentStock < $item['quantity']) {
-                $_SESSION['error'] = "No hay suficiente stock para " . htmlspecialchars($item['nombre']);
-                header("Location: " . BASE_URL . "cart");
-                return false; // Stock insuficiente
+        if (isset($cartItems['items']) && is_array($cartItems['items'])) {
+            foreach ($cartItems['items'] as $item) {
+                if (!isset($item['id']) || !isset($item['quantity'])) {
+                    $_SESSION['error'] = "Invalid item in cart";
+                    header("Location: " . BASE_URL . "cart");
+                    return false;
+                }
+                $currentStock = $this->productService->getStockById($item['id']);
+                if ($currentStock < $item['quantity']) {
+                    $_SESSION['error'] = "No hay suficiente stock para " . htmlspecialchars($item['nombre'] ?? 'Producto desconocido');
+                    header("Location: " . BASE_URL . "cart");
+                    return false; // Stock insuficiente
+                }
             }
+        } else {
+            $_SESSION['error'] = "Invalid cart structure";
+            header("Location: " . BASE_URL . "cart");
+            return false;
         }
         return true; // Stock suficiente
     }
-
+    
     private function updateProductStock(array $cartItems): void {
-        foreach ($cartItems as $item) {
-            $this->productService->updateStock($item['id'], $item['quantity']);
+        if (isset($cartItems['items']) && is_array($cartItems['items'])) {
+            foreach ($cartItems['items'] as $item) {
+                if (isset($item['id']) && isset($item['quantity'])) {
+                    $this->productService->updateStock($item['id'], $item['quantity']);
+                }
+            }
         }
     }
+    
 
     private function sendOrderConfirmationEmail(string $userEmail, int $orderId, array $cartItems): void {
         // Crear una instancia de PHPMailer
@@ -99,7 +131,7 @@ class OrderController
             $mail->Host       = 'smtp.gmail.com';                 // Especificar el servidor SMTP
             $mail->SMTPAuth   = true;                             // Habilitar autenticación SMTP
             $mail->Username   = $_ENV["EMAIL"];
-            $mail->Password   = $_ENV["PASSWORD"];                   // Tu contraseña de correo electrónico (o App Password)
+            $mail->Password   = $_ENV["EMAIL_PASSWORD"];                   // Tu contraseña de correo electrónico (o App Password)
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Habilitar cifrado TLS
             $mail->Port       = 587;                              // Puerto TCP a usar
 
