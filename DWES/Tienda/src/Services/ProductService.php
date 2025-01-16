@@ -23,7 +23,7 @@
         }
 
         public function updateProduct($id, $productData){
-            return true;
+            return $this->productRepository->updateProduct($id, $productData);
         }
         
         public function updateStock($id, $quantity): bool{
