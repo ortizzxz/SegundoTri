@@ -8,34 +8,31 @@ const props = defineProps({
 })
 
 const sortOrder = ref('recent') 
-const emit = defineEmits(['delete-note', 'sort']);
-
-function sortByRecent() {
-  emit('sort', 'recent');
-}
-
-function sortByOldest() {
-  emit('sort', 'oldest');
-}
-
-function sortByPriority() {
-  emit('sort', 'prior');
-}
+const emit = defineEmits(['delete-note', 'sort', 'change-priority']);
 
 function handleSort(order) {
   sortOrder.value = order;
+  emit('sort', order);
 }
+
 function deleteSingleTask(pos){
   emit('delete-note', pos);
 }
 
+function changePriority(targetValue, note){
+  emit('change-priority', targetValue, note);
+}
+
+function changeCompletition(note) {
+    emit('change-completition', note);
+}
 </script>
 
 <template>
   <div>
     <NoteOrder @sort="handleSort" />
     <div id="mainContainer">
-      <Note v-for="(note, index) in notes" :key="note.updateDate" :note="note" id="note" @delete-note="deleteSingleTask(note.id) "/>
+      <Note v-for="(note, index) in notes" :key="note.updateDate" :note="note" id="note" @delete-note="deleteSingleTask(note.id)" @change-priority="changePriority" @change-completition="changeCompletition"/>
     </div>
   </div>
 </template>
@@ -43,14 +40,16 @@ function deleteSingleTask(pos){
 <style scoped>
 #mainContainer {
   width: 80dvw;
-  max-height: 70dvh;
-  min-height: 70dvh;
-  border: 0;
+  max-height: 68dvh;
+  min-height: 68dvh;
   background-color: #000;
   overflow: scroll;
-
+  scrollbar-width: thin; 
+  scrollbar-color: rgb(5,23,37) #000000; 
   overflow-x: hidden; 
   overflow-y: auto; 
+  border: 0;
+  margin: 0;
 }
 
 #note{
@@ -61,8 +60,4 @@ function deleteSingleTask(pos){
   margin: 3px 0px;
 }
 
-#mainContainer {
-  scrollbar-width: thin; 
-  scrollbar-color: rgb(5,23,37) #000000; 
-}
 </style>
