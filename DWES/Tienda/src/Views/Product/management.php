@@ -69,9 +69,7 @@
             echo "<td>" . htmlspecialchars($product['oferta']) . "</td>";
             echo "<td><img src='" . htmlspecialchars($product['imagen']) . "' alt='Imagen del producto' style='width:50px;height:50px;'></td>";
             echo "<td>
-                    <form action='" . BASE_URL . "products/delete/" . htmlspecialchars($product['id']) . "' method='POST' style='display:inline;'>
-                        <input type='submit' value='Eliminar'>
-                    </form>
+                    <a href='" . BASE_URL . "products/delete/" . $product['id'] . "'>Eliminar</a>
                     <a href='" . BASE_URL . "products/edit/" . $product['id'] . "'>Editar</a>
                 </td>";
             echo "</tr>";

@@ -86,7 +86,7 @@ class ProductController
                         try {
                             if ($this->productService->updateProduct($id, $_POST['data'])) {
                                 $_SESSION['success'] = "Producto actualizado con éxito.";
-                                $this->pages->render('Product/management');
+                               header("Location: " . BASE_URL . "products");
                             } else {
                                 $_SESSION['edit'] = 'fail';
                                 $_SESSION['errors'] = 'Error al actualizar el producto';
@@ -116,8 +116,9 @@ class ProductController
 
     public function deleteProduct(int $id)
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            
             // Check if the user is logged in and has admin privileges
             if (!isset($_SESSION['identity']) || $_SESSION['identity']['rol'] !== self::ROLE_ADMIN) {
                 $_SESSION['errors'] = "No tienes permisos para realizar esta acción.";
@@ -132,15 +133,13 @@ class ProductController
                     $_SESSION['errors'] = "Error al eliminar el producto. Es posible que no exista.";
                 }
             } catch (\Exception $e) {
-                // Handle any exceptions that occur during deletion
                 $_SESSION['errors'] = "Error al intentar eliminar el producto: " . $e->getMessage();
             }
 
-            // Redirect back to the product management page
             header("Location: " . BASE_URL . "products");
             exit();
         } else {
-            echo 'get';
+            header("Location: ". BASE_URL );
         }
     }
 }

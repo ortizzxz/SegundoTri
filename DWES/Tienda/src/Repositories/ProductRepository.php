@@ -101,5 +101,53 @@ class ProductRepository
         }
     }
 
+    public function updateProduct(int $id, $productData): bool
+    {
+        // Step 1: Retrieve the current product from the database to check if it exists
+        $currentProduct = $this->getById($id);
+    
+        if (empty($currentProduct)) {
+            // Product doesn't exist
+            return false;
+        }
+    
+        // Step 2: Prepare the SQL query for updating the product
+        $sql = "UPDATE productos 
+                SET 
+                    categoria_id = :categoria_id, 
+                    nombre = :nombre, 
+                    descripcion = :descripcion, 
+                    precio = :precio, 
+                    stock = :stock, 
+                    oferta = :oferta, 
+                    imagen = :imagen 
+                WHERE id = :id";
+    
+        // Step 3: Prepare the data to be bound to the SQL query
+        $oferta = isset($productData['oferta']) ? $productData['oferta'] : null;
+    
+        $data = [
+            'id' => $id,
+            'categoria_id' => $productData['categoria_id'],
+            'nombre' => $productData['nombre'],
+            'descripcion' => $productData['descripcion'],
+            'precio' => $productData['precio'],
+            'stock' => $productData['stock'],
+            'oferta' => $oferta,
+            'imagen' => $productData['imagen']
+        ];
+    
+        // Step 4: Execute the query to update the product
+        try {
+            $stmt = $this->database->prepare($sql);
+            return $stmt->execute($data);
+        } catch (\PDOException $e) {
+            // Log error if any issue occurs
+            error_log("Error al actualizar el producto: " . $e->getMessage());
+            return false;
+        }
+    }
+    
+
 }
 
