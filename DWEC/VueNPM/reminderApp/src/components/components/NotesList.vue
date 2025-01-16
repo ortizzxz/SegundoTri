@@ -40,14 +40,16 @@ function changeCompletition(note) {
 <style scoped>
 #mainContainer {
   width: 80dvw;
-  max-height: 70dvh;
-  min-height: 70dvh;
-  border: 0;
+  max-height: 68dvh;
+  min-height: 68dvh;
   background-color: #000;
   overflow: scroll;
-
+  scrollbar-width: thin; 
+  scrollbar-color: rgb(5,23,37) #000000; 
   overflow-x: hidden; 
   overflow-y: auto; 
+  border: 0;
+  margin: 0;
 }
 
 #note{
@@ -58,8 +60,4 @@ function changeCompletition(note) {
   margin: 3px 0px;
 }
 
-#mainContainer {
-  scrollbar-width: thin; 
-  scrollbar-color: rgb(5,23,37) #000000; 
-}
 </style>

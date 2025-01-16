@@ -1,81 +1,90 @@
 <script setup>
- import { defineProps, computed } from 'vue';
+import { defineProps, computed } from "vue";
 
-  const props = defineProps({
-    note: Object
-  })
+const props = defineProps({
+  note: Object,
+});
 
-  const emit = defineEmits(['delete-note', 'change-priority', 'change-completition']);
+const emit = defineEmits([
+  "delete-note",
+  "change-priority",
+  "change-completition",
+]);
 
-  const timeElapsed = computed(() => getTimeElapsed(props.note.updateDate))
+const timeElapsed = computed(() => getTimeElapsed(props.note.updateDate));
 
-  function deleteSingleTask() {
-    emit('delete-note');
-  }
+function deleteSingleTask() {
+  emit("delete-note");
+}
 
-  function changeCompletition(note) {
-    emit('change-completition', note);
-  }
+function changeCompletition(note) {
+  emit("change-completition", note);
+}
 
-  function perceiveClick(targetValue, note){
-    emit('change-priority', targetValue, note);
-  }
+function perceiveClick(targetValue, note) {
+  emit("change-priority", targetValue, note);
+}
 
-  function getTimeElapsed(updateDate) {
-    const now = Date.now();
-    const updated = new Date(updateDate).getTime();
-    const diff = now - updated;
+function getTimeElapsed(updateDate) {
+  const now = Date.now();
+  const updated = new Date(updateDate).getTime();
+  const diff = now - updated;
 
-    const minutes = Math.floor(diff / 60000);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
+  const minutes = Math.floor(diff / 60000);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
 
-    if (days > 0) return `hace ${days} día${days > 1 ? 's' : ''}`;
-    if (hours > 0) return `hace ${hours} hora${hours > 1 ? 's' : ''}`;
-    if (minutes > 0) return `hace ${minutes} minuto${minutes > 1 ? 's' : ''}`;
-    return 'hace un momento';
-  }
-
+  if (days > 0) return `hace ${days} día${days > 1 ? "s" : ""}`;
+  if (hours > 0) return `hace ${hours} hora${hours > 1 ? "s" : ""}`;
+  if (minutes > 0) return `hace ${minutes} minuto${minutes > 1 ? "s" : ""}`;
+  return "hace un momento";
+}
 </script>
 
 <template>
   <div>
     <div id="header">
       <div>
-          <h1 :class="{'highlight-title': props.note.completed}" @click="changeCompletition(props.note)">
-            <span class="checkball" :class="{'completed': props.note.completed}"></span>
-            {{ props.note.description }}
-          </h1>
+        <h1
+          :class="{ 'highlight-title': props.note.completed }"
+          @click="changeCompletition(props.note)"
+        >
+          <span
+            class="checkball"
+            :class="{ completed: props.note.completed }"
+          ></span>
+          {{ props.note.description }}
+        </h1>
       </div>
-        <span class="deleteButton" @click="deleteSingleTask"></span>
+        <font-awesome-icon class="deleteButton" icon="fa-solid fa-delete-left" @click="deleteSingleTask"/>
     </div>
 
     <div id="secondaryData">
       <p>
         Prioridad:
-        <span 
-          v-for="priority in ['Low', 'Normal', 'High']" 
+        <span
+          v-for="priority in ['Low', 'Normal', 'High']"
           @click="perceiveClick(priority, props.note)"
           :key="priority"
           :class="{
             'bg-high': props.note.priority === 'High' && priority === 'High',
             'bg-low': props.note.priority === 'Low' && priority === 'Low',
-            'bg-normal': props.note.priority === 'Normal' && priority === 'Normal',
-            'unselected-priority': props.note.priority !== priority
+            'bg-normal':
+              props.note.priority === 'Normal' && priority === 'Normal',
+            'unselected-priority': props.note.priority !== priority,
           }"
-          >
+        >
           {{ priority }}
         </span>
       </p>
-      <p id="lastUpdate">
-        Actualizado {{timeElapsed}} 
-      </p>
+      <p id="lastUpdate">Actualizado {{ timeElapsed }}</p>
     </div>
   </div>
 </template>
 
 <style scoped>
-h1, p {
+h1,
+p {
   text-align: left;
   word-wrap: break-word;
 }
@@ -89,7 +98,7 @@ p {
   font-size: small;
 }
 
-#lastUpdate{
+#lastUpdate {
   margin: 0 5px;
 }
 
@@ -103,11 +112,11 @@ span {
 }
 
 .bg-high {
-  background-color: #E74C3C;
+  background-color: #e74c3c;
 }
 
 .bg-normal {
-  background-color: #3291D2;
+  background-color: #3291d2;
 }
 
 .bg-low {
@@ -115,11 +124,11 @@ span {
 }
 
 .completed {
-  background-color: #00BC8C ;
+  background-color: #00bc8c;
 }
 
 .highlight-title {
-  color: #00BC8C;
+  color: #00bc8c;
   text-decoration: line-through;
 }
 
@@ -137,25 +146,25 @@ li {
   transition: background-color 0.3s ease;
 }
 
-.deleteButton{
+.deleteButton {
   display: inline-block;
-  width: 25px;
-  height: 25px;
-  background-color: red;
-  border: 1px solid white;
+  width: 2rem;
+  height: 2rem;
   margin-right: 10px;
   transition: background-color 0.3s ease;
+  cursor: pointer;
+  color: red;
 }
 
 .checkball.completed {
-  background-color: #00BC8C; 
+  background-color: #00bc8c;
 }
 
-#secondaryData{
+#secondaryData {
   display: flex;
 }
 
-#header{
+#header {
   display: flex;
   justify-content: space-between;
   align-items: center;

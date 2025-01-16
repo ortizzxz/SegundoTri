@@ -1,121 +1,27 @@
 <script setup>
-import NotesList from "./components/components/NotesList.vue";
-import NoteContainerHeader from "./components/components/NoteContainerHeader.vue";
-import NoteWriter from "./components/components/NoteWriter.vue";
-import NoteCounter from "./components/components/NoteCounter.vue";
-import Footer from "./components/components/Footer.vue";
+import { useRouter } from 'vue-router';
 
-import { ref, computed, onMounted } from "vue";
-import { useCollection, useFirestore } from "vuefire";
-import {
-  collection,
-  addDoc,
-  deleteDoc,
-  updateDoc,
-  doc,
-  query,
-  orderBy,
-} from "firebase/firestore";
-const db = useFirestore();
-const notesCollection = collection(db, "notesApp");
-const notes = useCollection(query(notesCollection, orderBy("description")));
-const currentSortOrder = ref('recent'); 
+const router = useRouter();
 
-function addNote(newNote) {
-  addDoc(notesCollection, {
-    ...newNote,
-    completed: false,
-    updateDate: Date.now(),
-  })
-    .then(() => console.log("Success addNote"))
-    .catch((error) => {
-      console.error("Error adding note: ", error);
-    });
-}
-
-function deleteCompletedTasks() {
-  const completedNotes = notes.value.filter((note) => note.completed);
-  Promise.all(
-    completedNotes.map((note) => deleteDoc(doc(notesCollection, note.id)))
-  )
-    .then(() => console.log("Success deleteCompletedTasks"))
-    .catch((error) => console.error("Error deleting completed tasks: ", error));
-}
-
-function deleteAllTasks() {
-  Promise.all(
-    notes.value.map((note) => deleteDoc(doc(notesCollection, note.id)))
-  )
-    .then(() => console.log("Success deleteAllTasks"))
-    .catch((error) => console.error("Error deleting all tasks: ", error));
-}
-
-function deleteSingleTask(noteId) {
-  if (!noteId) {
-    console.error("Error de id: " + noteId);
+router.beforeEach((to, from) => {
+  if (to.fullPath == "/notesApp") {
+    return true;
   }
-
-  deleteDoc(doc(notesCollection, noteId))
-    .then(() => console.log("Success deleteSingleTask"))
-    .catch((error) => console.error("Error deleting singleTask: ", error));
-}
-
-const completedTasks = computed(
-  () => notes.value.filter((note) => note.completed).length
-);
-const totalTasks = computed(() => notes.value.length);
-
-const sortedNotesList = computed(() => {
-  return [...notes.value].sort((a, b) => {
-    if (currentSortOrder.value === "recent") {
-      return b.updateDate - a.updateDate;
-    } else if (currentSortOrder.value === "prior") {
-      const priorityOrder = { high: 0, normal: 1, low: 2 };
-      return priorityOrder[a.priority] - priorityOrder[b.priority];
-    } else {
-      return a.updateDate - b.updateDate;
-    }
-  });
+  return true;
 });
-
-function updateSortOrder(newSortOrder) {
-  currentSortOrder.value = newSortOrder;
-}
-
-function changeNotePriority(targetValue, note){
-  const noteRef = doc(db, 'notesApp', note.id);
-  updateDoc(noteRef, {
-    priority: targetValue,
-    updateDate: Date.now()
-  }).then(() => {
-    note.priority = targetValue;
-    note.updateDate = Date.now();
-  }).catch((error) => {
-    console.error("Error updating document: ", error);
-  });
-}
-
-function changeCompletition(note){
-  const noteRef = doc(db, 'notesApp', note.id);
-  updateDoc(noteRef, {
-    completed: !note.completed,
-    updateDate: Date.now()
-  }).then(() => {
-    note.completed = !note.completed;
-    note.updateDate = Date.now();
-  }).catch((error) => {
-    console.error("Error updating document: ", error);
-  });
-}
 </script>
 
 <template>
-  <NoteContainerHeader></NoteContainerHeader>
-  <NoteWriter @add-note="addNote"></NoteWriter>
-  <NoteCounter :completedTasks="completedTasks" :totalTasks="totalTasks" @delete-completed="deleteCompletedTasks" @delete-all="deleteAllTasks"></NoteCounter>
-  <NotesList :notes="sortedNotesList" @sort="updateSortOrder" @delete-note="deleteSingleTask" @change-priority="changeNotePriority" @change-completition="changeCompletition"></NotesList>
-  <Footer></Footer>
+  <RouterView></RouterView>
 </template>
 
-<style scoped>
+<style computed>
+ul{
+  display: flex;
+  flex-direction: row;
+}
+
+ul li{
+  margin: 1rem;
+}
 </style>
