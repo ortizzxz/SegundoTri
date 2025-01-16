@@ -36,7 +36,7 @@ class ProductController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['data'])) {
                 $product = Product::fromArray($_POST['data']);
-
+                var_dump($product);
                 if ($product->validation()) { // Validar los datos
                     try {
                         if ($this->productService->save($product)) {
@@ -44,14 +44,17 @@ class ProductController
                             header("Location: " . BASE_URL . "products"); // Redirigir después de registro exitoso
                             exit();
                         } else {
+                            header("Location: " . BASE_URL . "products");
                             $_SESSION['addproduct'] = 'fail';
                             $_SESSION['errors'] = 'Error al guardar el producto';
                         }
                     } catch (\Exception $e) {
+                        header("Location: " . BASE_URL . "products");
                         $_SESSION['addproduct'] = 'fail';
                         $_SESSION['errors'] = $e->getMessage();
                     }
                 } else {
+                    header("Location: " . BASE_URL . "products");
                     $_SESSION['addproduct'] = 'fail';
                     $_SESSION['errors'] = Product::getErrors();
                 }
