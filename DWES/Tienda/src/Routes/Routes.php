@@ -69,11 +69,23 @@ class Routes
         Router::add('POST', '/products', function () {
             (new ProductController())->addProduct();
         });
+        
+        Router::add('POST', '/products/delete/{id}', function(int $id) {
+            (new ProductController())->deleteProduct($id);
+        });
+        
+        Router::add('GET', '/products/delete/{id}', function(int $id) {
+            (new ProductController())->deleteProduct($id);
+        });
+
+        Router::add('GET', '/test/{id}', function(int $id) {
+            echo "Test route is working. ID: " . $id;
+        });
+        
 
         Router::add('GET', '/products/category/{id}', function(int $id) {
             (new CategoryController())->showProducts($id);
         });
-        
 
         Router::add('GET', '/products/category/:id', function (int $id) {
             (new CategoryController())->showProducts($id);

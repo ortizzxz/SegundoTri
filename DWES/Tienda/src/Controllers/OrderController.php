@@ -46,14 +46,15 @@ class OrderController
                 return; 
             }
             
-            $orderId = $this->orderService->createOrder($userId, $cartItems);
+            var_dump($cartItems);
+            $orderId = $this->orderService->createOrder($cartItems);
 
             if ($orderId && $shippingAddress->validation()) {
                 $this->updateProductStock($cartItems);
                 $this->sendOrderConfirmationEmail($_SESSION['identity']['email'], $orderId, $cartItems);
                 unset($_SESSION['cart']);
                 $_SESSION['success'] = "Pedido realizado con éxito. Tu número de pedido es: " . $orderId;
-                header("Location: " . BASE_URL . "cart");
+                header("Location: " . BASE_URL );
                 exit();
             } else {
                 $this->setErrorAndRedirect("Hubo un problema al crear tu pedido. Por favor, inténtalo de nuevo.", "cart");

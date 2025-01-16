@@ -34,4 +34,10 @@
             $isSave = $this->productRepository->save($product);
             return $isSave;
         }
+
+        
+        public function deleteById($id) : bool{
+            return $this->productRepository->deleteById($id);
+        }
+        
     }

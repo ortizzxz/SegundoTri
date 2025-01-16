@@ -88,5 +88,18 @@ class ProductRepository
         }
     }
 
+    public function deleteById(int $id): bool {
+        $db = $this->database->getConnection();
+    
+        try {
+            $stmt = $db->prepare("DELETE FROM productos WHERE id = :id");
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    
+            return $stmt->execute();
+        } catch (\Exception $e) {
+            throw new \Exception("Error al eliminar el producto: " . $e->getMessage());
+        }
+    }
+
 }
 
