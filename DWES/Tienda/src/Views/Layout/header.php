@@ -27,6 +27,7 @@
         <li><a href="<?=  BASE_URL;?>categories">Gestionar categorias</a></li>
       <?php else: ?>   
         <li><a class="active" href="<?=  BASE_URL; ?>">Tienda Online</a></li>
+        <li><a href="<?=  BASE_URL;?>categories">Categorías</a></li>
         <li><a href="<?=  BASE_URL; ?>cart">Carrito 🛒</a></li>
         <?php endif; ?>   
         <li><a href="<?= BASE_URL; ?>logout">Cerrar Sesión <?= ucfirst(strtolower($_SESSION['identity']['nombre'])); ?></a></li>
