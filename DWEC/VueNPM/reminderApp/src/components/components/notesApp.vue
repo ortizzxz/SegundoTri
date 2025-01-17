@@ -19,14 +19,57 @@ import {
   where,
 } from "firebase/firestore";
 
+const currentSortOrder = ref('recent'); 
 const user = useCurrentUser();
 const db = useFirestore();
 const notesCollection = collection(db, "notesApp");
-const notes = useCollection(query(notesCollection, orderBy("description"), where('userid', '==', user.value.uid)));
-const currentSortOrder = ref('recent'); 
+
+const notes = useCollection(
+  computed(() => {
+    if (user.value) {
+      if(user.value.email == 'admin@admin.com'){
+        return query(
+          notesCollection,
+          orderBy("description")
+        );
+      }else{
+        return query(
+          notesCollection,
+          orderBy("description"),
+          where("userid", "==", user.value.uid)
+        );
+      } 
+    }
+    return null; 
+  })
+);
+
+const completedTasks = computed(() => {
+  const notesArray = Array.isArray(notes.value) ? notes.value : [];
+  return notesArray.filter((note) => note.completed).length;
+});
+
+const totalTasks = computed(() => {
+  const notesArray = Array.isArray(notes.value) ? notes.value : [];
+  return notesArray.length;
+});
+
+const sortedNotesList = computed(() => {
+  const notesArray = Array.isArray(notes.value) ? notes.value : [];
+  return [...notesArray].sort((a, b) => {
+    if (currentSortOrder.value === "recent") {
+      return b.updateDate - a.updateDate;
+    } else if (currentSortOrder.value === "prior") {
+      const priorityOrder = { high: 0, normal: 1, low: 2 };
+      return priorityOrder[a.priority] - priorityOrder[b.priority];
+    } else {
+      return a.updateDate - b.updateDate;
+    }
+  });
+});
+
 
 function addNote(newNote) {
-  console.log(user.value.uid);
   addDoc(notesCollection, {
     ...newNote,
     completed: false,
@@ -66,23 +109,6 @@ function deleteSingleTask(noteId) {
     .catch((error) => console.error("Error deleting singleTask: ", error));
 }
 
-const completedTasks = computed(
-  () => notes.value.filter((note) => note.completed).length
-);
-const totalTasks = computed(() => notes.value.length);
-
-const sortedNotesList = computed(() => {
-  return [...notes.value].sort((a, b) => {
-    if (currentSortOrder.value === "recent") {
-      return b.updateDate - a.updateDate;
-    } else if (currentSortOrder.value === "prior") {
-      const priorityOrder = { high: 0, normal: 1, low: 2 };
-      return priorityOrder[a.priority] - priorityOrder[b.priority];
-    } else {
-      return a.updateDate - b.updateDate;
-    }
-  });
-});
 
 function updateSortOrder(newSortOrder) {
   currentSortOrder.value = newSortOrder;
