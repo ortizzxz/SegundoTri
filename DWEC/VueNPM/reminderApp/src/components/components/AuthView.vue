@@ -1,15 +1,15 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch, onMounted } from "vue";
 import {
   GoogleAuthProvider,
   signInWithPopup,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { getCurrentUser, useCurrentUser, useFirebaseAuth } from "vuefire";
+import { useCurrentUser, useFirebaseAuth } from "vuefire";
 import { useRouter } from "vue-router";
 
-const user = useCurrentUser();
+const user = useCurrentUser(); // Reactive user state
 const auth = useFirebaseAuth();
 const googleAuthProvider = new GoogleAuthProvider();
 const router = useRouter();
@@ -78,19 +78,21 @@ function signUpWithEmail() {
     });
 }
 
-router.beforeEach(async (to, from) => {
-  if (to.meta.requiresAuth) {
-    const user = await getCurrentUser();
-    return user ? true : false;
+// Automatically redirect authenticated users to /notesApp
+watch(user, (currentUser) => {
+  if (currentUser) {
+    router.push("/notesApp");
   }
+});
 
-  if(user && to.fullPath == '/'){
-    router.push('/notesApp');
+// Optionally check auth status on initial load (e.g., refresh scenarios)
+onMounted(() => {
+  if (user.value) {
+    router.push("/notesApp");
   }
-
-  return true;
 });
 </script>
+
 
 <template>
   <div v-if="!user" class="login-container">
