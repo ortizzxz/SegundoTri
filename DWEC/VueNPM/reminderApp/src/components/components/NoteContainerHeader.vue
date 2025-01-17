@@ -14,12 +14,20 @@ function logOut() {
       console.error("Failed signout", reason);
     });
 }
+
+
 </script>
+
 <template>
   <div>
     <h1 v-if="user">
-      Hola {{ user.displayName }} ||
-      <span><font-awesome-icon :icon="['fas', 'arrow-right-from-bracket']" class="logout-span" @click="logOut" /></span>
+      Hola {{ user.displayName || user.email }} ||
+      <span
+        ><font-awesome-icon
+          :icon="['fas', 'arrow-right-from-bracket']"
+          class="logout-span"
+          @click="logOut"
+      /></span>
     </h1>
   </div>
 </template>

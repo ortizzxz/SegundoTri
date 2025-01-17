@@ -5,6 +5,7 @@ import NoteWriter from "./NoteWriter.vue";
 import NoteCounter from "./NoteCounter.vue";
 import Footer from "./Footer.vue";
 
+import { useCurrentUser } from "vuefire";
 import { ref, computed, onMounted } from "vue";
 import { useCollection, useFirestore } from "vuefire";
 import {
@@ -15,17 +16,22 @@ import {
   doc,
   query,
   orderBy,
+  where,
 } from "firebase/firestore";
+
+const user = useCurrentUser();
 const db = useFirestore();
 const notesCollection = collection(db, "notesApp");
-const notes = useCollection(query(notesCollection, orderBy("description")));
+const notes = useCollection(query(notesCollection, orderBy("description"), where('userid', '==', user.value.uid)));
 const currentSortOrder = ref('recent'); 
 
 function addNote(newNote) {
+  console.log(user.value.uid);
   addDoc(notesCollection, {
     ...newNote,
     completed: false,
     updateDate: Date.now(),
+    userid: user.value.uid
   })
     .then(() => console.log("Success addNote"))
     .catch((error) => {
