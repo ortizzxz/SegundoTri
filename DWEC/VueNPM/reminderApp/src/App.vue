@@ -21,12 +21,5 @@ router.beforeEach(async (to, from) => {
 </template>
 
 <style computed>
-ul{
-  display: flex;
-  flex-direction: row;
-}
 
-ul li{
-  margin: 1rem;
-}
 </style>
