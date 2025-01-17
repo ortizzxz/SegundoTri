@@ -54,26 +54,43 @@ class Routes
         Router::add('GET', '/categories/:id', function(int $id) {
             (new CategoryController())->showProducts($id);
         });
+       
         
-            
-        Router::add('POST', '/categories/delete', function () {
-            (new CategoryController())->deleteCategory();
-        });
-
-
+        
         /* PRODUCTS */
         Router::add('GET', '/products', function () {
             (new ProductController())->index();
         });
-
+        
         Router::add('POST', '/products', function () {
             (new ProductController())->addProduct();
         });
+        
+        Router::add('GET', '/products/delete/:id', function(int $id) {
+            (new ProductController())->deleteProduct($id);
+        });
 
+        Router::add('POST', '/products/delete/:id', function(int $id) {
+            (new ProductController())->deleteProduct($id);
+        });
+
+        Router::add('GET', '/products/edit/:id', function(int $id) {
+            (new ProductController())->editProduct($id);
+        });
+       
+        Router::add('POST', '/products/edit/:id', function(int $id) {
+            (new ProductController())->editProduct($id);
+        });
+        
+        
         Router::add('GET', '/products/category/{id}', function(int $id) {
             (new CategoryController())->showProducts($id);
         });
         
+
+        Router::add('GET', '/products/category/{id}', function(int $id) {
+            (new CategoryController())->showProducts($id);
+        });
 
         Router::add('GET', '/products/category/:id', function (int $id) {
             (new CategoryController())->showProducts($id);
