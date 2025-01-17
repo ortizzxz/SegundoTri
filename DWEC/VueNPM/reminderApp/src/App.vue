@@ -1,14 +1,19 @@
 <script setup>
 import { useRouter } from 'vue-router';
+import {  useCurrentUser } from "vuefire";
 
 const router = useRouter();
+const user = useCurrentUser();
 
-router.beforeEach((to, from) => {
-  if (to.fullPath == "/notesApp") {
-    return true;
-  }
+router.beforeEach(async (to, from) => {
+
+  // if(user && to.fullPath == '/'){
+  //   router.push('/notesApp');
+  // }
+
   return true;
 });
+
 </script>
 
 <template>
