@@ -23,7 +23,7 @@
         }
 
         public function updateProduct($id, $productData){
-            return true;
+            return $this->productRepository->updateProduct($id, $productData);
         }
         
         public function updateStock($id, $quantity): bool{
@@ -34,4 +34,10 @@
             $isSave = $this->productRepository->save($product);
             return $isSave;
         }
+
+        
+        public function deleteById($id) : bool{
+            return $this->productRepository->deleteById($id);
+        }
+        
     }

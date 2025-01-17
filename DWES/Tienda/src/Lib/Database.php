@@ -94,6 +94,9 @@ class Database
         return $this->conexion->prepare($sql);
     }
 
-    
+     public function getConnection(): PDO
+     {
+         return $this->conexion;
+     }
 
 }

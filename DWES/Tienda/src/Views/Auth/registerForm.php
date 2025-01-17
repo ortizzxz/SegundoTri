@@ -15,19 +15,19 @@
     <form action="<?= BASE_URL ?>register" method="POST" class="registration-form">
         <div class="form-group">
             <label for="name">Nombre</label>
-            <input type="text" id="name" name="data[name]"
-                value="<?= isset($_POST['data']['name']) ? htmlspecialchars($_POST['data']['name']) : '' ?>">
-            <?php if (isset($_SESSION['errors']['name'])): ?>
-                <p class="error"><?= $_SESSION['errors']['name'] ?></p>
+            <input type="text" id="name" name="data[nombre]"
+                value="<?= isset($_POST['data']['nombre']) ? htmlspecialchars($_POST['data']['nombre']) : '' ?>">
+            <?php if (isset($_SESSION['errors']['nombre'])): ?>
+                <p class="error"><?= $_SESSION['errors']['nombre'] ?></p>
             <?php endif; ?>
         </div>
 
         <div class="form-group">
             <label for="lastname">Apellido</label>
-            <input type="text" id="lastname" name="data[lastname]"
-                value="<?= isset($_POST['data']['lastname']) ? htmlspecialchars($_POST['data']['lastname']) : '' ?>">
-            <?php if (isset($_SESSION['errors']['lastname'])): ?>
-                <p class="error"><?= $_SESSION['errors']['lastname'] ?></p>
+            <input type="text" id="lastname" name="data[apellidos]"
+                value="<?= isset($_POST['data']['apellidos']) ? htmlspecialchars($_POST['data']['apellidos']) : '' ?>">
+            <?php if (isset($_SESSION['errors']['apellidos'])): ?>
+                <p class="error"><?= $_SESSION['errors']['apellidos'] ?></p>
             <?php endif; ?>
         </div>
 
