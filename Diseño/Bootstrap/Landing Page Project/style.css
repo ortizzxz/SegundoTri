@@ -1,0 +1,53 @@
+/** GLOBAL CONFIGS **/
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Oswald:wght@200..700&family=Permanent+Marker&display=swap");
+:root {
+  --transparente: #00000055;
+  --fuente-titulos: "Orbitron", serif;
+}
+body {
+  font-family: var(--fuente-titulos);
+}
+
+.hero {
+  background-image: url("./img/displayGarage.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.hero h1 {
+  background-color: var(--transparente);
+  font-family: var(--fuente-titulos);
+  border-radius: 1rem;
+}
+
+/** CAR CARDS **/
+.card-fix-height {
+  height: 35rem;
+  width: 50rem;
+  overflow: hidden;
+}
+.card-img-top {
+  object-fit: cover;
+  height: 70%;
+  width: 100%;
+}
+.card-body-fixed {
+  height: 30%;
+  overflow-y: auto;
+}
+
+/** CAROUSEL **/
+.carousel-item img {
+  height: 60vh;
+  width: 100%;
+  object-fit: cover;
+}
+
+/** LINK BUTTONS **/
+.nav-link{
+  color: black;
+  background: rgb(167,115,66);
+  background: linear-gradient(90deg, rgba(167,115,66,1) 0%, rgba(118,192,155,1) 100%);
+  margin: 0 0.2rem;
+}
+

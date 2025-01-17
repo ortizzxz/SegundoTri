@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Oswald:wght@200..700&family=Permanent+Marker&display=swap");
+:root {
+  --transparente: #00000055;
+  --fuente-titulos: "Orbitron", serif;
+}
+
+body {
+  font-family: var(--fuente-titulos);
+}
+
+.hero {
+  background-image: url("./img/rio1.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.nav-link:hover,
+.nav-link:focus {
+  color: var(--bs-nav-link-hover-color);
+}
+
+.hero h1 {
+  background-color: var(--transparente);
+  border-radius: 25px;
+}
+
+.btn-primary {
+  background-color: rgb(90, 197, 197);
+}
+
+.btn-primary:hover {
+  background-color: rgb(46, 102, 102);
+}
+
+.carousel-item{
+    height: 50dvh;
+}
