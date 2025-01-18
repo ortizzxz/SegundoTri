@@ -1,5 +1,5 @@
 <style>
-    img{
+    img {
         width: 150px;
         height: 150px;
     }
@@ -34,8 +34,9 @@
             echo "<h3 class='product-name'>" . htmlspecialchars($product['nombre']) . "</h3>";
             echo "<p class='product-description'>" . htmlspecialchars($product['descripcion']) . "</p>";
             echo "<p class='product-price'>Precio: €" . htmlspecialchars($product['precio']) . "</p>";
-            echo "<p class='product-offer'>" . (empty($product['oferta']) ? 'No hay oferta' : 'Oferta: ' . htmlspecialchars($product['oferta'])) . "</p>";
-
+            echo "<p class='product-offer'>" .
+                (empty($product['oferta']) ? 'No hay oferta' : 'Oferta: ' . htmlspecialchars($product['oferta']) . '%') .
+                "</p>";
             echo "<form action='" . BASE_URL . "cart/add/" . htmlspecialchars($product['id']) . "' method='POST'>";
             echo "<input type='hidden' name='id' value='" . htmlspecialchars($product['id']) . "'>";
             echo "<input type='submit' value='Añadir al carrito' class='add-to-cart-btn'>";

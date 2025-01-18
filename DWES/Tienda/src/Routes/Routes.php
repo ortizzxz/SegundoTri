@@ -50,6 +50,10 @@ class Routes
         Router::add('POST', '/categories', function () {
             (new CategoryController())->addCategory();
         });
+        
+        Router::add('POST', '/categories/delete', function () {
+            (new CategoryController())->deleteCategory();
+        });
 
         Router::add('GET', '/categories/:id', function(int $id) {
             (new CategoryController())->showProducts($id);

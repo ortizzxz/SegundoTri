@@ -21,12 +21,13 @@ class ProductController
     public function index()
     {
         $data = $this->productService->getAll();
+        $categories = $this->productService->getCategories();
 
         // Verificar si el usuario está autenticado y es admin
         if (!isset($_SESSION['identity']) || $_SESSION['identity']['rol'] !== 'admin') {
             $this->pages->render('Product/index', ['data' => $data]);
         } else {
-            $this->pages->render('Product/management', ['data' => $data]);
+            $this->pages->render('Product/management', ['data' => $data, 'categories' => $categories]);
         }
 
     }

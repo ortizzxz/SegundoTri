@@ -1,11 +1,10 @@
 <?php
 namespace Controllers;
 
+use Lib\EmailSender;
 use Lib\Pages;
 use Services\OrderService;
 use Services\ProductService;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 use Models\Order;
 use Models\User;
 
@@ -17,11 +16,15 @@ class OrderController
     private OrderService $orderService;
     private ProductService $productService;
 
+    private EmailSender $emailSender;
+
+
     public function __construct()
     {
         $this->pages = new Pages();
         $this->orderService = new OrderService();
         $this->productService = new ProductService();
+        $this->emailSender = new EmailSender();
     }
 
     public function createOrder() {
@@ -52,6 +55,14 @@ class OrderController
                 if ($orderSuccessful) {
                     $this->updateProductStock($cartItems);
                     unset($_SESSION['cart']);
+                    
+                    //email
+                    if ($this->emailSender->sendEmail($_SESSION['identity']['email'], $_SESSION['identity']['name'], 'Payment Confirmation', '<p>Thank you for your payment!</p>')) {
+                        echo 'Message has been sent';
+                    } else {
+                        echo 'Message could not be sent';
+                    }
+                    // 
                     $_SESSION['success'] = "Pedido realizado con éxito";
                     header("Location: " . BASE_URL );
                     exit();
