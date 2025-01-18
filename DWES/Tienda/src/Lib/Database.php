@@ -44,44 +44,44 @@ class Database
         }
     }
 
-    public function query(string $consultaSQL): mixed {
+    public function query(string $consultaSQL): mixed
+    {
         try {
             $this->resultado = $this->conexion->query($consultaSQL);
-            return $this->resultado; 
+            return $this->resultado;
         } catch (PDOException $e) {
             echo "Error al ejecutar la consulta: " . $e->getMessage();
-            return false; 
+            return false;
         }
     }
-    
 
-    public function extractRegister():mixed{
-        return ($fila = $this->resultado->fetch(PDO::FETCH_ASSOC))?$fila:false;
+
+    public function extractRegister(): mixed
+    {
+        return ($fila = $this->resultado->fetch(PDO::FETCH_ASSOC)) ? $fila : false;
     }
 
-    public function fetchAll():array{
+    public function fetchAll(): array
+    {
         return $this->resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function end():void{
-        $this->conexion = null;
-    }
-
-    
-    public function execute(string $query, array $params): bool{
+    public function execute(string $query, array $params): bool
+    {
         try {
             $stmt = $this->conexion->prepare($query);
             $stmt->execute($params);
             $stmt->closeCursor();
-            return true; 
+            return true;
         } catch (PDOException $e) {
             echo "Error al ejecutar la query: " . $e->getMessage();
-            return false; 
+            return false;
         }
     }
 
-   
-    public function queryOne($sql, $params) {
+
+    public function queryOne($sql, $params)
+    {
         $stmt = $this->conexion->prepare($sql);
         foreach ($params as $key => $value) {
             $stmt->bindValue($key, $value);
@@ -90,13 +90,14 @@ class Database
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function prepare($sql){
+    public function prepare($sql)
+    {
         return $this->conexion->prepare($sql);
     }
 
-     public function getConnection(): PDO
-     {
-         return $this->conexion;
-     }
+    public function getConnection(): PDO
+    {
+        return $this->conexion;
+    }
 
 }

@@ -37,38 +37,82 @@ class ProductController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['data'])) {
                 $product = Product::fromArray($_POST['data']);
-                var_dump($product);
-                if ($product->validation()) { // Validar los datos
+
+                if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+                    $uploadDir = __DIR__ . '/../../public/uploads/productos/';
+                    if (!is_dir($uploadDir)) {
+                        mkdir($uploadDir, 0755, true);
+                    }
+
+                    $imageName = uniqid() . '_' . basename($_FILES['imagen']['name']);
+                    $imagePath = $uploadDir . $imageName;
+
+                    $validMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                    $maxSize = 4 * 1024 * 1024; // Max 4MB
+                    if ($_FILES['imagen']['size'] > $maxSize) {
+                        $_SESSION['addproduct'] = 'fail';
+                        $_SESSION['errors'] = 'La imagen es demasiado grande. El tamaño máximo permitido es 2MB.';
+                        header("Location: " . BASE_URL . "products");
+                        exit();
+                    }
+                    if (!in_array($_FILES['imagen']['type'], $validMimeTypes)) {
+                        $_SESSION['addproduct'] = 'fail';
+                        $_SESSION['errors'] = 'El archivo debe ser una imagen válida (JPEG, PNG, GIF).';
+                        header("Location: " . BASE_URL . "products");
+                        exit();
+                    }
+
+                    if (move_uploaded_file($_FILES['imagen']['tmp_name'], $imagePath)) {
+                        $product->setImagen($imageName);
+                    } else {
+                        $_SESSION['addproduct'] = 'fail';
+                        $_SESSION['errors'] = 'Error al subir la imagen.';
+                        header("Location: " . BASE_URL . "products");
+                        exit();
+                    }
+                } else {
+                    $_SESSION['addproduct'] = 'fail';
+                    $_SESSION['errors'] = 'No se proporcionó una imagen válida.';
+                    header("Location: " . BASE_URL . "products");
+                    exit();
+                }
+
+                if ($product->validation()) {
                     try {
                         if ($this->productService->save($product)) {
                             $_SESSION['success'] = "Producto agregado con éxito.";
-                            header("Location: " . BASE_URL . "products"); // Redirigir después de registro exitoso
+                            header("Location: " . BASE_URL . "products");
                             exit();
                         } else {
-                            header("Location: " . BASE_URL . "products");
                             $_SESSION['addproduct'] = 'fail';
-                            $_SESSION['errors'] = 'Error al guardar el producto';
+                            $_SESSION['errors'] = 'Error al guardar el producto.';
+                            header("Location: " . BASE_URL . "products");
+                            exit();
                         }
                     } catch (\Exception $e) {
-                        header("Location: " . BASE_URL . "products");
                         $_SESSION['addproduct'] = 'fail';
                         $_SESSION['errors'] = $e->getMessage();
+                        header("Location: " . BASE_URL . "products");
+                        exit();
                     }
                 } else {
-                    header("Location: " . BASE_URL . "products");
                     $_SESSION['addproduct'] = 'fail';
                     $_SESSION['errors'] = Product::getErrors();
+                    header("Location: " . BASE_URL . "products");
+                    exit();
                 }
             } else {
                 $_SESSION['addproduct'] = 'fail';
-                $_SESSION['errors'] = 'No se enviaron datos válidos';
+                $_SESSION['errors'] = 'No se enviaron datos válidos.';
                 header("Location: " . BASE_URL . "products");
                 exit();
             }
         } else {
-            $this->pages->render('Product/index'); // Siempre renderizar el formulario al final
+            $this->pages->render('Product/index'); // Render the form if it's not a POST request
         }
     }
+
+
 
     public function editProduct($id)
     {
@@ -90,7 +134,7 @@ class ProductController
                         try {
                             if ($this->productService->updateProduct($id, $_POST['data'])) {
                                 $_SESSION['success'] = "Producto actualizado con éxito.";
-                               header("Location: " . BASE_URL . "products");
+                                header("Location: " . BASE_URL . "products");
                             } else {
                                 $_SESSION['edit'] = 'fail';
                                 $_SESSION['errors'] = 'Error al actualizar el producto';
@@ -122,7 +166,7 @@ class ProductController
     {
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            
+
             // Check if the user is logged in and has admin privileges
             if (!isset($_SESSION['identity']) || $_SESSION['identity']['rol'] !== self::ROLE_ADMIN) {
                 $_SESSION['errors'] = "No tienes permisos para realizar esta acción.";
@@ -143,7 +187,7 @@ class ProductController
             header("Location: " . BASE_URL . "products");
             exit();
         } else {
-            header("Location: ". BASE_URL );
+            header("Location: " . BASE_URL);
         }
     }
 }

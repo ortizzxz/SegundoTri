@@ -67,7 +67,7 @@
             echo "<td>" . htmlspecialchars($product['precio']) . "</td>";
             echo "<td>" . htmlspecialchars($product['stock']) . "</td>";
             echo "<td>" . htmlspecialchars($product['oferta']) . "</td>";
-            echo "<td><img src='" . htmlspecialchars($product['imagen']) . "' alt='Imagen del producto' style='width:50px;height:50px;'></td>";
+            echo "<td><img src='" . BASE_URL . "uploads/productos/" . htmlspecialchars($product['imagen']) . "' alt='Imagen de " . htmlspecialchars($product['nombre']) . "' class='product-image'></td>";
             echo "<td>
                     <a href='" . BASE_URL . "products/delete/" . $product['id'] . "'>Eliminar</a>
                     <a href='" . BASE_URL . "products/edit/" . $product['id'] . "'>Editar</a>
@@ -86,30 +86,29 @@
     }
     ?>
 
-<div class="product-form">
-    <h2>Agregar Nuevo Producto</h2>
-    <form action="<?= BASE_URL; ?>products" method="POST">
-        <label for="categoria_id">Categoría del producto:</label>
-        <select name="data[categoria_id]" id="categoria_id" required>
-            <option value="">Seleccione una categoría</option>
-            <?php foreach ($categories as $category): ?>
-                <option value="<?= htmlspecialchars($category['id']); ?>">
-                    <?= htmlspecialchars($category['nombre']); ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
+    <div class="product-form">
+        <h2>Agregar Nuevo Producto</h2>
+        <form action="<?= BASE_URL; ?>products" method="POST" enctype="multipart/form-data">
+            <label for="categoria_id">Categoría del producto:</label>
+            <select name="data[categoria_id]" id="categoria_id" required>
+                <option value="">Seleccione una categoría</option>
+                <?php foreach ($categories as $category): ?>
+                    <option value="<?= htmlspecialchars($category['id']); ?>">
+                        <?= htmlspecialchars($category['nombre']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
 
-        <input type="text" name="data[nombre]"
-            placeholder="Nombre del producto (Abrigo de Lana, Zapatillas Nike Fussion, ...)" required>
-        <input type="text" name="data[descripcion]"
-            placeholder="Descripcion del producto (Abrigo hecho de 100% lana de camello dorado...)" required>
-        <input type="text" name="data[precio]" placeholder="Precio del producto (100€, 260€, ...)" required>
-        <input type="number" name="data[stock]" placeholder="Stock del producto (10, 20, 60, ...)" required>
-        <input type="text" name="data[oferta]" placeholder="Oferta del producto (0, 50%, 10%, ...)">
-        <input type="text" name="data[imagen]"
-            placeholder="URL de la imagen del producto (https://imagenes.com/abrigoDeLana)" required>
-        <input type="submit" value="Agregar Producto">
-    </form>
-</div>
+            <input type="text" name="data[nombre]"
+                placeholder="Nombre del producto (Abrigo de Lana, Zapatillas Nike Fussion, ...)" required>
+            <input type="text" name="data[descripcion]"
+                placeholder="Descripcion del producto (Abrigo hecho de 100% lana de camello dorado...)" required>
+            <input type="text" name="data[precio]" placeholder="Precio del producto (100€, 260€, ...)" required>
+            <input type="number" name="data[stock]" placeholder="Stock del producto (10, 20, 60, ...)" required>
+            <input type="text" name="data[oferta]" placeholder="Oferta del producto (0, 50%, 10%, ...)">
+            <input type="file" name="imagen" id="imagen" class="custom-file-input" required>
+            <input type="submit" value="Agregar Producto">
+        </form>
+    </div>
 
 </div>
