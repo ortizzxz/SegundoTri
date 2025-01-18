@@ -17,7 +17,17 @@ class ProductRepository
         $sql = "SELECT * FROM productos";
         $result = $this->database->query($sql);
         if ($result) {
-            return $result->fetchAll();
+            return $result->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return [];
+        }
+    }
+    public function getCategories()
+    {
+        $sql = "SELECT * FROM categorias";
+        $result = $this->database->query($sql);
+        if ($result) {
+            return $result->fetchAll(PDO::FETCH_ASSOC);
         } else {
             return [];
         }

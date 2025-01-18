@@ -2,6 +2,7 @@
 namespace Repositories;
 
 use Lib\Database;
+use PDO;
 
 class CategoryRepository
 {
@@ -40,13 +41,12 @@ class CategoryRepository
 
     public function getProductsByCategory($categoryId)
     {
-        // Query to get products by category ID
         $query = "SELECT * FROM productos WHERE categoria_id = :category_id";
         $stmt = $this->database->prepare($query);
         $stmt->bindParam(':category_id', $categoryId);
         $stmt->execute();
 
-        return $stmt->fetchAll(); // Return all products for the category
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function delete($id)
@@ -56,5 +56,18 @@ class CategoryRepository
         return $this->database->execute($sql, [':id' => $id]);
     }
 
+    public function updateProductCategory($idFrom, $idTo): bool
+{
+    $sql = "UPDATE productos SET categoria_id = :idTo WHERE categoria_id = :idFrom";
+    $data = [
+        'idTo' => $idTo,
+        'idFrom' => $idFrom
+    ];
+    try {
+        return $this->database->execute($sql, $data);
+    } catch (\PDOException $e) {
+        return false;
+    }
+}
 
 }

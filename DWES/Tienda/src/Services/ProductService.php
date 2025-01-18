@@ -25,7 +25,9 @@
         public function updateProduct($id, $productData){
             return $this->productRepository->updateProduct($id, $productData);
         }
-        
+        public function getCategories(){
+            return $this->productRepository->getCategories();
+        }
         public function updateStock($id, $quantity): bool{
             return $this->productRepository->updateStock($id, $quantity);
         }
