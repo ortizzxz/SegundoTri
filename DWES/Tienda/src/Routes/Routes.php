@@ -19,6 +19,12 @@ class Routes
         Router::add('GET', '/', function () {
             (new ProductController())->index();
         });
+        
+        Router::add('GET', '/orders', function () {
+            (new OrderController())->getOrders();
+        });
+
+        
 
         /* AUTH */
         Router::add('GET', '/register', function () {

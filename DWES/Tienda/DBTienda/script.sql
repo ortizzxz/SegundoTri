@@ -66,4 +66,9 @@ CONSTRAINT fk_linea_producto FOREIGN KEY(producto_id) REFERENCES productos(id)
 )ENGINE=InnoDb DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
+-- ALTERACION DEL CODIGO DADO
+ALTER TABLE lineas_pedidos
+DROP FOREIGN KEY fk_linea_producto;
 
+ALTER TABLE lineas_pedidos
+ADD CONSTRAINT fk_linea_producto FOREIGN KEY (producto_id) REFERENCES productos(id) ON DELETE CASCADE;

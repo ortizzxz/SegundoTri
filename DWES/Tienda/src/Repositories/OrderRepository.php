@@ -50,7 +50,24 @@ class OrderRepository
         }
     }
 
+    public function getOrdersByClient($clienteId)
+    {
+        // Consulta SQL para obtener los pedidos del cliente
+        $stmt = $this->db->prepare('SELECT * FROM pedidos WHERE usuario_id = :cliente_id');
+        $stmt->bindParam(':cliente_id', $clienteId, PDO::PARAM_INT);
+        $stmt->execute();
 
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+   
+    public function getOrders()
+    {
+        // Consulta SQL para obtener los pedidos del cliente
+        $stmt = $this->db->prepare('SELECT * FROM pedidos');
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     public function createOrderLine(int $orderId, int $productId, int $quantity): bool
     {
         $sql = "INSERT INTO lineas_pedidos (id, pedido_id, producto_id, unidades) VALUES (null, :pedido_id, :producto_id, :unidades)";

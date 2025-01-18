@@ -52,8 +52,8 @@ class Product {
             self::$errors[] = "La fecha no es válida. Use el formato YYYY-MM-DD HH:MM:SS";
         }
 
-        if (empty($this->imagen) || !filter_var($this->imagen, FILTER_VALIDATE_URL)) {
-            self::$errors[] = "La imagen debe ser una URL válida";
+        if (empty($this->imagen)) {
+            self::$errors[] = "La imagen del producto es obligatoria.";
         }
 
         if (empty(self::$errors)) {
@@ -68,22 +68,24 @@ class Product {
         return $d && $d->format($format) === $date;
     }
 
-    public function sanitize() {
+    public function sanitize($file = null) {
+        // Sanitizar cadenas de texto
         $this->nombre = filter_var(trim($this->nombre), FILTER_SANITIZE_STRING);
         $this->descripcion = filter_var(trim($this->descripcion), FILTER_SANITIZE_STRING);
-        $this->imagen = filter_var(trim($this->imagen), FILTER_SANITIZE_URL);
-        
+    
         // Asegurarse de que los valores numéricos sean válidos
         $this->precio = filter_var($this->precio, FILTER_VALIDATE_FLOAT) ? $this->precio : 0;
         $this->stock = filter_var($this->stock, FILTER_VALIDATE_INT) ? $this->stock : 0;
         $this->oferta = $this->oferta !== null ? (filter_var($this->oferta, FILTER_VALIDATE_FLOAT) ? $this->oferta : null) : null;
-        
+    
         // Sanitizar la fecha si existe
         if ($this->fecha !== null) {
             $sanitizedDate = date('Y-m-d H:i:s', strtotime($this->fecha));
             $this->fecha = $this->validateDate($sanitizedDate) ? $sanitizedDate : null;
         }
+    
     }
+    
 
     public static function fromArray(array $data): Product {
         return new Product(

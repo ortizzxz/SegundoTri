@@ -30,7 +30,7 @@
 
         foreach ($products as $product) {
             echo "<div class='product-card'>";
-            echo "<img src='" . htmlspecialchars($product['imagen']) . "' alt='Imagen de " . htmlspecialchars($product['nombre']) . "' class='product-image'>";
+            echo "<img src='" . BASE_URL . "uploads/productos/" . htmlspecialchars($product['imagen']) . "' alt='Imagen de " . htmlspecialchars($product['nombre']) . "' class='product-image'>";
             echo "<h3 class='product-name'>" . htmlspecialchars($product['nombre']) . "</h3>";
             echo "<p class='product-description'>" . htmlspecialchars($product['descripcion']) . "</p>";
             echo "<p class='product-price'>Precio: €" . htmlspecialchars($product['precio']) . "</p>";

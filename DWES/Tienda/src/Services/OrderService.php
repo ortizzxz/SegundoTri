@@ -32,6 +32,16 @@ class OrderService
         }
     }
 
+    public function getOrders()
+    {
+        // Solicitar los pedidos del repositorio
+        return $this->orderRepository->getOrders();
+    }
+    public function getOrdersByClient($clienteId)
+    {
+        // Solicitar los pedidos del repositorio
+        return $this->orderRepository->getOrdersByClient($clienteId);
+    }
 
     private function createOrderLines(int $orderId, array $cartItems): bool
     {
