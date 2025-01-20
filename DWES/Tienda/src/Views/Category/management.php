@@ -41,6 +41,11 @@
         echo "<tbody>";
         
         foreach ($categories as $category) {
+            
+            if ($category['id'] == $_ENV['SAFE_CATEGORY']){//saltarse al seguro
+                continue;
+            }
+
             echo "<tr>";
             echo "<td>" . htmlspecialchars($category['id']) . "</td>";
             echo "<td>" . htmlspecialchars($category['nombre']) . "</td>";

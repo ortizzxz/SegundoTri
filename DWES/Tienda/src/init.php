@@ -6,7 +6,7 @@
     $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
     $dotenv->load();
     
-
+    
     Routes::index();
 ?>
 

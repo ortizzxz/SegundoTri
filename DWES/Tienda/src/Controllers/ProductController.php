@@ -108,7 +108,7 @@ class ProductController
                 exit();
             }
         } else {
-            $this->pages->render('Product/index'); // Render the form if it's not a POST request
+            $this->pages->render('Product/index'); 
         }
     }
 

@@ -10,12 +10,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../public/css/styles.css">
-    <link rel="stylesheet" href="../../public/css/cart.css">
-    <link rel="stylesheet" href="../../public/css/auth.css">
-    <link rel="stylesheet" href="../../public/css/category.css">
-    <link rel="stylesheet" href="../../public/css/product.css">
-    <title>Tienda Online</title>
+    <title>Tienda</title>
 </head>
 
 <body>
