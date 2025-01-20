@@ -99,7 +99,12 @@ class CategoryController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
             $id = $_POST['id']; // ID de la categoría a eliminar
-    
+            if( $id == $_ENV['SAFE_CATEGORY']) {
+                $_SESSION['error'] = "Categoria no eliminable.";
+                header("Location: " . BASE_URL . "categories");
+                exit();
+            }
+
             // Obtener productos asociados a la categoría
             $products = $this->categoryService->getProductsByCategory($id);
     

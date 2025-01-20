@@ -72,3 +72,5 @@ DROP FOREIGN KEY fk_linea_producto;
 
 ALTER TABLE lineas_pedidos
 ADD CONSTRAINT fk_linea_producto FOREIGN KEY (producto_id) REFERENCES productos(id) ON DELETE CASCADE;
+
+ 
