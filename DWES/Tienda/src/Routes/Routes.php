@@ -128,6 +128,9 @@ class Routes
         Router::add('POST', '/order/create', function(){
             (new OrderController()) -> createOrder();                
         });
+        Router::add('POST', '/orders/updateOrderState', function(){
+            (new OrderController()) -> updateOrderState();                
+        });
         
         Router::add('POST', '/proceedToPay', function(){
             (new OrderController()) -> shippingForm();                

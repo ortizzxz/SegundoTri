@@ -43,7 +43,7 @@ class OrderController
 
             $cartItems = $_SESSION['cart'];
 
-                if (!$this->checkStockAvailability($cartItems)) {
+            if (!$this->checkStockAvailability($cartItems)) {
                 return;
             }
 
@@ -54,7 +54,7 @@ class OrderController
             $order = Order::fromArray($_POST['shipping']);
 
 
-            
+
             //SI ESTÁ VALIDADO
             if ($order->validation()) {
                 $orderSuccessful = $this->orderService->createOrder($order, $cartItems);
@@ -145,14 +145,28 @@ class OrderController
     public function getOrders()
     {
         $clienteId = $_SESSION['identity']['id'];
-        
-        if($_SESSION['identity']['rol'] == $_ENV['ADMIN']){
+
+        if ($_SESSION['identity']['rol'] == $_ENV['ADMIN']) {
             $pedidos = $this->orderService->getOrders();
-        }else{
+        } else {
             $pedidos = $this->orderService->getOrdersByClient($clienteId);
         }
-        
+
         $this->pages->render('Order/myOrder', ['pedidos' => $pedidos]);
     }
-    
+
+    public function updateOrderState()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['estado']) && isset($_POST['order_id'])) {
+            $orderId = $_POST['order_id'];
+            $newState = $_POST['estado'];
+
+            $this->orderService->updateOrderState($orderId, $newState);
+
+            header('Location: ' . BASE_URL .'orders');
+            exit;
+        }
+
+    }
+
 }
