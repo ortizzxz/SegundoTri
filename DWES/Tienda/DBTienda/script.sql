@@ -73,4 +73,35 @@ DROP FOREIGN KEY fk_linea_producto;
 ALTER TABLE lineas_pedidos
 ADD CONSTRAINT fk_linea_producto FOREIGN KEY (producto_id) REFERENCES productos(id) ON DELETE CASCADE;
 
- 
+-- codigo dummy
+-- Inserts para la tabla usuarios
+INSERT INTO usuarios (nombre, apellidos, email, password, rol) VALUES
+('Juan', 'Pérez', 'juan@email.com', 'password123', 'cliente'),
+('María', 'González', 'maria@email.com', 'securepass', 'admin'),
+('Carlos', 'Rodríguez', 'carlos@email.com', 'userpass', 'cliente');
+
+-- Inserts para la tabla categorias
+INSERT INTO categorias (nombre) VALUES
+('Electrónica'),
+('Ropa'),
+('Hogar'),
+('Deportes');
+
+-- Inserts para la tabla productos
+INSERT INTO productos (categoria_id, nombre, descripcion, precio, stock, oferta, fecha, imagen) VALUES
+(1, 'Smartphone XYZ', 'Último modelo de smartphone', 599.99, 50, 0, '2025-01-20', 'smartphone.jpeg'),
+(2, 'Camiseta Casual', 'Camiseta de algodón', 19.99, 100, 10, '2025-01-20', 'camiseta.jpg'),
+(3, 'Lámpara de Mesa', 'Lámpara moderna para el hogar', 39.99, 30, 0, '2025-01-20', 'lampara.jpg'),
+(4, 'Balón de Fútbol', 'Balón oficial de la liga', 29.99, 80, 0, '2025-01-20', 'balon.jpg');
+
+-- Inserts para la tabla pedidos
+INSERT INTO pedidos (usuario_id, provincia, localidad, direccion, coste, estado, fecha, hora) VALUES
+(1, 'Madrid', 'Madrid', 'Calle Principal 123', 619.98, 'pendiente', '2025-01-20', '10:30:00'),
+(2, 'Barcelona', 'Barcelona', 'Avenida Central 456', 59.98, 'enviado', '2025-01-19', '15:45:00');
+
+-- Inserts para la tabla lineas_pedidos
+INSERT INTO lineas_pedidos (pedido_id, producto_id, unidades) VALUES
+(1, 1, 1),
+(1, 2, 1),
+(2, 3, 1),
+(2, 4, 1);

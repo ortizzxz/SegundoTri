@@ -101,6 +101,22 @@ class Product {
         );
     }
 
+    public function toArray(): array
+{
+    return [
+        'id' => $this->getId(),
+        'categoria_id' => $this->getCategoriaId(),
+        'nombre' => $this->getNombre(),
+        'descripcion' => $this->getDescripcion(),
+        'precio' => $this->getPrecio(),
+        'stock' => $this->getStock(),
+        'oferta' => $this->getOferta(), 
+        'fecha' => $this->getFecha(),
+        'imagen' => $this->getImagen(),
+    ];
+}
+
+
     // Getters
     public function getId(): ?int { return $this->id; }
     public function getCategoriaId(): int { return $this->categoria_id; }
