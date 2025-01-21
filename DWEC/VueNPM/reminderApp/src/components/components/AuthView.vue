@@ -5,6 +5,7 @@ import {
   signInWithPopup,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  GithubAuthProvider,
 } from "firebase/auth";
 import { useCurrentUser, useFirebaseAuth } from "vuefire";
 import { useRouter } from "vue-router";
@@ -13,6 +14,7 @@ const user = useCurrentUser(); // Reactive user state
 const auth = useFirebaseAuth();
 const googleAuthProvider = new GoogleAuthProvider();
 const router = useRouter();
+const githubProvider = new GithubAuthProvider();
 
 const isLoading = ref(false);
 const email = ref("");
@@ -30,6 +32,19 @@ function logInWithGoogle() {
     })
     .catch((reason) => {
       console.error("Failed Google validation", reason);
+      isLoading.value = false;
+    });
+}
+
+function signInWithGithub() {
+  isLoading.value = true;
+  signInWithPopup(auth, githubProvider)
+    .then(() => {
+      isLoading.value = false;
+      router.push("/notesApp");
+    })
+    .catch((error) => {
+      console.error("Failed GitHub sign-in", error);
       isLoading.value = false;
     });
 }
@@ -78,21 +93,18 @@ function signUpWithEmail() {
     });
 }
 
-// Automatically redirect authenticated users to /notesApp
 watch(user, (currentUser) => {
   if (currentUser) {
     router.push("/notesApp");
   }
 });
 
-// Optionally check auth status on initial load (e.g., refresh scenarios)
 onMounted(() => {
   if (user.value) {
     router.push("/notesApp");
   }
 });
 </script>
-
 
 <template>
   <div v-if="!user" class="login-container">
@@ -138,17 +150,30 @@ onMounted(() => {
     <div class="divider"></div>
 
     <button
-      @click="logInWithGoogle"
-      class="login-button google-button"
-      :disabled="isLoading"
-    >
-      <img
-        src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-        alt="Google logo"
-        class="google-icon"
-      />
-      {{ isLoading ? "Processing..." : "Continue with Google" }}
-    </button>
+    @click="logInWithGoogle"
+    class="login-button google-button"
+    :disabled="isLoading"
+  >
+    <img
+      src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+      alt="Google logo"
+      class="google-icon"
+    />
+    {{ isLoading ? "Processing..." : "Continue with Google" }}
+  </button>
+
+  <button
+    @click="signInWithGithub"
+    class="login-button github-button"
+    :disabled="isLoading"
+  >
+    <img
+      src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+      alt="GitHub logo"
+      class="github-icon"
+    />
+    {{ isLoading ? "Processing..." : "Continue with GitHub" }}
+  </button>
   </div>
 
   <p v-else><RouterLink to="/notesApp">App</RouterLink></p>
@@ -160,17 +185,17 @@ onMounted(() => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 75vh;
+  max-height: 85vh;
   background: rgb(5, 23, 37);
   background: radial-gradient(
     circle,
     rgba(5, 23, 37, 1) 0%,
     rgba(7, 0, 65, 1) 100%
   );
-  width: 20dvw;
+  width: 30dvw;
   border-radius: 1rem;
   border: 1px solid white;
-  margin: 10dvh auto;
+  margin: 5dvh auto;
   padding: 2rem;
 }
 
@@ -226,6 +251,7 @@ onMounted(() => {
   background-color: #fff;
   color: #757575;
   border: 1px solid #ddd;
+  margin: 5px auto;
 }
 
 .google-button:hover {
@@ -291,4 +317,21 @@ onMounted(() => {
 .login-input.error {
   border-color: #ff4136;
 }
+
+
+.github-button {
+  background-color: #24292e;
+  color: #ffffff;
+}
+
+.github-button:hover {
+  background-color: #2f363d;
+}
+
+.github-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+}
+
 </style>

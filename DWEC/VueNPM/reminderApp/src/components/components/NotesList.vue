@@ -32,8 +32,10 @@ function changeCompletition(note) {
   <div>
     <NoteOrder @sort="handleSort" />
     <div id="mainContainer">
-      <Note v-for="(note, index) in notes" :key="note.updateDate" :note="note" id="note" @delete-note="deleteSingleTask(note.id)" @change-priority="changePriority" @change-completition="changeCompletition"/>
-    </div>
+      <transition-group name="fade" tag="div" id="mainContainer">
+        <Note v-for="(note, index) in notes" :key="note.updateDate" :note="note" id="note" @delete-note="deleteSingleTask(note.id)" @change-priority="changePriority" @change-completition="changeCompletition"/>
+      </transition-group>
+      </div>
   </div>
 </template>
 
@@ -58,6 +60,23 @@ function changeCompletition(note) {
   padding: 0.5rem;
   border-radius: 0.3rem;
   margin: 3px 0px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.fade-leave-from,
+.fade-enter-to {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 </style>
