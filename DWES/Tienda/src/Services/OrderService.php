@@ -28,7 +28,7 @@ class OrderService
         } catch (\Exception $e) {
             $this->orderRepository->rollback();
             error_log("Error al crear el pedido: " . $e->getMessage());
-            throw $e; 
+            throw $e;
         }
     }
 
@@ -62,5 +62,13 @@ class OrderService
             return false;
         }
     }
+
+    // In OrderService.php
+
+    public function updateOrderState($orderId, $newState)
+    {
+        return $this->orderRepository->updateOrderState($orderId, $newState);
+    }
+
 
 }

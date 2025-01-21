@@ -50,6 +50,19 @@ class OrderRepository
         }
     }
 
+
+    public function updateOrderState($orderId, $newState)
+    {
+        $query = "UPDATE pedidos SET estado = :newState WHERE id = :orderId";
+        $stmt = $this->db->prepare($query);
+
+        $stmt->bindParam(':newState', $newState, PDO::PARAM_STR);
+        $stmt->bindParam(':orderId', $orderId, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
+
+
     public function getOrdersByClient($clienteId)
     {
         // Consulta SQL para obtener los pedidos del cliente
@@ -59,7 +72,7 @@ class OrderRepository
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-   
+
     public function getOrders()
     {
         // Consulta SQL para obtener los pedidos del cliente
