@@ -12,25 +12,31 @@ body {
   background-image: url("./img/displayGarage.jpg");
   background-position: center;
   background-size: cover;
+  height: 100vh;
 }
 
 .hero h1 {
   background-color: var(--transparente);
   font-family: var(--fuente-titulos);
   border-radius: 1rem;
+  margin-top: 1rem;
+  padding: 10px 20px;
 }
 
 /** CAR CARDS **/
 .card-fix-height {
-  height: 35rem;
+  height: 30rem;
   width: 50rem;
   overflow: hidden;
+  margin: 0;
 }
+
 .card-img-top {
   object-fit: cover;
   height: 70%;
   width: 100%;
 }
+
 .card-body-fixed {
   height: 30%;
   overflow-y: auto;
@@ -38,7 +44,7 @@ body {
 
 /** CAROUSEL **/
 .carousel-item img {
-  height: 60vh;
+  height: 55vh;
   width: 100%;
   object-fit: cover;
 }
@@ -51,3 +57,131 @@ body {
   margin: 0 0.2rem;
 }
 
+.nav-pills .nav-link.active, 
+.nav-pills .show > .nav-link {
+  color: #E05138 !important;
+}
+
+/** RESPONSIVE STYLES **/
+@media (max-width: 1200px) {
+  .card-fix-height {
+    height: 30rem;
+    width: 100%;
+  }
+
+  .carousel-item img {
+    height: 50vh;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .card-fix-height {
+    height: 30rem;
+    width: 100%;
+  }
+
+  .nav-pills .nav-link {
+    font-size: 0.9rem;
+  }
+
+  .carousel-item img {
+    height: 40vh;
+  }
+
+  .container-fluid.hero {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    background-size: contain;
+    height: 80vh;
+  }
+
+  .hero h1 {
+    font-size: 1.6rem;
+    padding: 5px 10px;
+  }
+
+  .card-fix-height {
+    height: 25rem;
+    width: 100%;
+  }
+
+  .carousel-item img {
+    height: 40vh;
+  }
+
+  .accordion-button {
+    font-size: 1rem;
+  }
+
+  .col-md-6 {
+    width: 100%;
+    padding: 10px;
+  }
+
+  #carouselExampleControls {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero h1 {
+    font-size: 1.4rem;
+    padding: 5px 10px;
+  }
+
+  .card-fix-height {
+    height: 20rem;
+    width: 100%;
+  }
+
+  .carousel-item img {
+    height: 35vh;
+  }
+
+  .nav-pills .nav-link {
+    font-size: 0.8rem;
+  }
+
+  .container-fluid.py-5 {
+    padding: 20px;
+  }
+
+  .col-md-4, .col-md-8 {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .carousel-item img {
+    height: 30vh; 
+  }
+
+  .form-control, .form-select {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 60vh;
+  }
+
+  .hero h1 {
+    font-size: 1.2rem; 
+  }
+
+  .carousel-item img {
+    height: 30vh;
+  }
+}
