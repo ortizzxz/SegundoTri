@@ -19,24 +19,25 @@
     function displayCategoriesGrid(array $categories)
 {
     echo "<h2 id='categoryTitle'>Lista de Categorías</h2>";
-    echo "<div class='categories-grid'>"; // Start of grid
+    echo "<div class='categories-grid'>";
 
     foreach ($categories as $category) {
-        echo "<div class='category-card'>"; // Start of category card
+        if($category['id'] == $_ENV['SAFE_CATEGORY']){
+            continue; // saltarse la safe cateogry
+        }
+        
+        echo "<div class='category-card'>"; 
         echo "<a href='" . BASE_URL . "products/category/" . htmlspecialchars($category['id']) . "' class='category-link'>";
         
-        // Display category name
         echo "<h3 class='category-name'>" . htmlspecialchars($category['nombre']) . "</h3>";
         
-        echo "</a>"; // End of link
-        echo "</div>"; // End of category card
+        echo "</a>";
+        echo "</div>"; 
     }
 
-    echo "</div>"; // End of grid
+    echo "</div>";
 }
 
-
-    // Display any error or success messages
     displayMessage();
 
     if (empty($categories)) {

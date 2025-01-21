@@ -6,7 +6,7 @@ use Models\User;
 use Services\UserService;
 use Exception;
 
-session_start(); // Iniciar sesión al principio del archivo
+session_start(); 
 
 class AuthController
 {

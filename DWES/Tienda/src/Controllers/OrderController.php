@@ -30,6 +30,22 @@ class OrderController
     public function createOrder()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (!isset($_SESSION['identity'])) {
+                $_SESSION['error'] = 'Debe iniciar sesión para realizar el pedido';
+                header("Location: " . BASE_URL);
+                exit();
+            }
+            if ($this->isCartEmpty()) {
+                $_SESSION['error'] = 'El carrito está vacío';
+                header("Location: " . BASE_URL);
+                exit();
+            }
+
+            $cartItems = $_SESSION['cart'];
+
+                if (!$this->checkStockAvailability($cartItems)) {
+                return;
+            }
 
             $user = User::fromArray($_SESSION['identity']);
 
@@ -37,18 +53,8 @@ class OrderController
             $_POST['shipping']['cost'] = $_SESSION['cart']['total'];
             $order = Order::fromArray($_POST['shipping']);
 
-            $userId = $_SESSION['identity']['id'];
-            $cartItems = $_SESSION['cart'];
 
-            if (!$this->isUserLoggedIn()) {
-                $this->setErrorAndRedirect("Debes iniciar sesión para realizar un pedido.", "login");
-            }
-            if ($this->isCartEmpty()) {
-                $this->setErrorAndRedirect("Tu carrito está vacío.", "cart");
-            }
-            if (!$this->checkStockAvailability($cartItems)) {
-                return;
-            }
+            
             //SI ESTÁ VALIDADO
             if ($order->validation()) {
                 $orderSuccessful = $this->orderService->createOrder($order, $cartItems);
@@ -93,7 +99,7 @@ class OrderController
 
     private function isUserLoggedIn(): bool
     {
-        return isset($_SESSION['identity']['id']);
+        return isset($_SESSION['identity']);
     }
 
     private function isCartEmpty(): bool
@@ -101,12 +107,6 @@ class OrderController
         return empty($_SESSION['cart']);
     }
 
-    private function setErrorAndRedirect(string $message, string $redirect): void
-    {
-        $_SESSION['error'] = $message;
-        header("Location: " . BASE_URL . $redirect);
-        exit();
-    }
 
     private function checkStockAvailability(array $cartItems): bool
     {
@@ -144,17 +144,14 @@ class OrderController
     }
     public function getOrders()
     {
-        // Assuming that the client ID is stored in the session
         $clienteId = $_SESSION['identity']['id'];
         
-        // Retrieve orders from the service
         if($_SESSION['identity']['rol'] == $_ENV['ADMIN']){
             $pedidos = $this->orderService->getOrders();
         }else{
             $pedidos = $this->orderService->getOrdersByClient($clienteId);
         }
         
-        // Render the view and pass the data ('pedidos') to it
         $this->pages->render('Order/myOrder', ['pedidos' => $pedidos]);
     }
     
