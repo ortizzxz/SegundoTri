@@ -19,6 +19,7 @@ const githubProvider = new GithubAuthProvider();
 const isLoading = ref(false);
 const email = ref("");
 const password = ref("");
+const passwordTwo = ref("");
 const isSignUp = ref(false);
 const emailError = ref("");
 const passwordError = ref("");
@@ -72,6 +73,11 @@ function logInWithEmail() {
 }
 
 function signUpWithEmail() {
+  if(password.value.trim() !== passwordTwo.value.trim()){
+    passwordError.value = "Passwords doesn't match";
+    return;
+  }
+  
   isLoading.value = true;
   emailError.value = "";
   passwordError.value = "";
@@ -89,7 +95,7 @@ function signUpWithEmail() {
         passwordError.value = "Password is too weak";
       } else {
         emailError.value = error.message;
-      }
+      } 
     });
 }
 
@@ -114,8 +120,9 @@ onMounted(() => {
     <form
       @submit.prevent="isSignUp ? signUpWithEmail() : logInWithEmail()"
       class="login-form"
-    >
+    > 
       <div class="input-group">
+        <h2>Email</h2>
         <input
           v-model="email"
           type="email"
@@ -125,11 +132,21 @@ onMounted(() => {
         />
         <p v-if="emailError" class="error-message">{{ emailError }}</p>
       </div>
+      <h2>Password</h2>
       <div class="input-group">
         <input
           v-model="password"
           type="password"
           placeholder="Password"
+          required
+          class="login-input"
+        />
+      <h2 v-if="isSignUp">Confirm Password</h2>
+        <input 
+          v-if="isSignUp"
+          v-model="passwordTwo"
+          type="password"
+          placeholder="Confirm Password"
           required
           class="login-input"
         />
@@ -139,7 +156,7 @@ onMounted(() => {
         {{ isLoading ? "Processing..." : isSignUp ? "Sign Up" : "Log In" }}
       </button>
     </form>
-
+    
     <p class="login-toggle">
       {{ isSignUp ? "Already have an account?" : "Don't have an account?" }}
       <a href="#" @click.prevent="isSignUp = !isSignUp">{{
@@ -180,19 +197,23 @@ onMounted(() => {
 </template>
 
 <style scoped>
+h2{
+  text-align: left;
+}
+
 .login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-height: 85vh;
+  max-height: 90vh;
   background: rgb(5, 23, 37);
   background: radial-gradient(
     circle,
     rgba(5, 23, 37, 1) 0%,
     rgba(7, 0, 65, 1) 100%
   );
-  width: 30dvw;
+  width: 35dvw;
   border-radius: 1rem;
   border: 1px solid white;
   margin: 5dvh auto;
@@ -217,8 +238,6 @@ onMounted(() => {
 }
 
 .login-input {
-  margin-bottom: 1rem;
-  padding: 0.5rem;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -266,7 +285,6 @@ onMounted(() => {
 
 .login-toggle {
   margin-top: 1rem;
-  font-size: 0.9rem;
 }
 
 .login-toggle a {
@@ -279,7 +297,7 @@ onMounted(() => {
   text-align: center;
   border-bottom: 1px solid #ccc;
   line-height: 0.1em;
-  margin: 20px 0;
+  margin: 0.2rem 0;
 }
 
 .divider span {
@@ -295,6 +313,7 @@ onMounted(() => {
   color: #ff4136;
   font-size: 0.8rem;
   margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
   position: absolute;
   bottom: -1.2rem;
   left: 0;
@@ -333,5 +352,7 @@ onMounted(() => {
   height: 18px;
   margin-right: 10px;
 }
+
+
 
 </style>
