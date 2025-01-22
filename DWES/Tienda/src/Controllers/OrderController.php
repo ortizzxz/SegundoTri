@@ -61,14 +61,19 @@ class OrderController
 
                 if ($orderSuccessful) {
                     $this->updateProductStock($cartItems);
-                    unset($_SESSION['cart']);
 
                     //email
-                    if ($this->emailSender->sendEmail($_SESSION['identity']['email'], $_SESSION['identity']['name'], 'Payment Confirmation', '<p>Thank you for your payment!</p>')) {
-                        echo 'Message has been sent';
+                    if ($this->emailSender->sendEmail(
+                        $_SESSION['identity']['email'], 
+                        $_SESSION['identity']['name'], 
+                        'Payment Confirmation', 
+                        $this->getBodySchema($_SESSION['cart'])
+                    )) {
+                        echo 'Mensaje enviado';
                     } else {
-                        echo 'Message could not be sent';
+                        echo 'Mensaje no enviado';
                     }
+                    unset($_SESSION['cart']);
                     // 
                     $_SESSION['success'] = "Pedido realizado con éxito";
                     header("Location: " . BASE_URL);
@@ -163,10 +168,41 @@ class OrderController
 
             $this->orderService->updateOrderState($orderId, $newState);
 
-            header('Location: ' . BASE_URL .'orders');
+            header('Location: ' . BASE_URL . 'orders');
             exit;
         }
 
     }
+
+    public function getBodySchema(array $cart)
+    {
+        $body = "<h1>Confirmación de Pago</h1>";
+        $body .= "<p>¡Gracias por tu compra! Aquí tienes los detalles de tu pedido:</p>";
+
+        if (isset($cart['items']) && is_array($cart['items'])) {
+            $body .= "<table border='1' cellpadding='5' cellspacing='0' style='border-collapse: collapse; width: 100%;'>";
+            $body .= "<thead><tr><th>Producto</th><th>Precio</th><th>Cantidad</th><th>Subtotal</th></tr></thead>";
+            $body .= "<tbody>";
+
+            foreach ($cart['items'] as $item) {
+                $body .= "<tr>";
+                $body .= "<td>" . htmlspecialchars($item['nombre']) . "</td>";
+                $body .= "<td>" . number_format($item['precio'], 2, ',', '.') . " €</td>";
+                $body .= "<td>" . (int) $item['quantity'] . "</td>";
+                $body .= "<td>" . number_format($item['subtotal'], 2, ',', '.') . " €</td>";
+                $body .= "</tr>";
+            }
+
+            $body .= "</tbody>";
+            $body .= "</table>";
+
+            $body .= "<p><strong>Total: " . number_format($cart['total'], 2, ',', '.') . " €</strong></p>";
+        } else {
+            $body .= "<p>No se encontraron artículos en tu carrito.</p>";
+        }
+
+        return $body;
+    }
+
 
 }
