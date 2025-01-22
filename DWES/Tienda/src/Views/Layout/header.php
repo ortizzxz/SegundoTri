@@ -14,7 +14,6 @@ if (session_status() === PHP_SESSION_NONE) {
 </head>
 
 <body>
-
     <nav>
         <ul>
             <?php if (isset($_SESSION['identity'])): ?>
