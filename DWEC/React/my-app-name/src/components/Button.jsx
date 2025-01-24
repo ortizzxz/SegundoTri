@@ -1,21 +1,29 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import { useState } from "react";
 
 function Button({ position }) {
-    Button.propTypes = {
-        position: PropTypes.string
-    };
+  const [count, setCount] = useState(0);
 
-    function generateAlert() {
-    alert("click button: " + position);
+  Button.propTypes = {
+    position: PropTypes.string,
+  };
+
+  function generateAlert() {
+    console.log("Position: " + position);
+  }
+
+  function handleClick() {
+    generateAlert();
+    setCount((prevCount) => prevCount + 1);
   }
 
   return (
     <>
       <div className="card">
-        <button onClick={generateAlert}>Click</button>
+        <button onClick={handleClick}>Click {count}</button> 
       </div>
     </>
   );
 }
 
-export default Button;
+export default Button; // No se puede llamar a dos eventos en un mismo OnClick
