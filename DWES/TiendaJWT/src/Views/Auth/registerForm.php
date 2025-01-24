@@ -1,15 +1,4 @@
 <div class="form-container">
-    <?php if (isset($_SESSION['register']) && $_SESSION['register'] == 'success'): ?>
-        <p class="success-register">Usuario registrado correctamente</p>
-    <?php endif; ?>
-
-    <?php if (isset($_SESSION['errors']) && is_array($_SESSION['errors'])): ?>
-        <div class="error-messages">
-            <?php foreach ($_SESSION['errors'] as $error): ?>
-                <p class="error"><?= htmlspecialchars($error) ?></p>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
 
     <h3>Registrarse</h3>
     <form action="<?= BASE_URL ?>register" method="POST" class="registration-form">

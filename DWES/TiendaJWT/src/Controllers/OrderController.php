@@ -76,9 +76,7 @@ class OrderController
                     }
                     unset($_SESSION['cart']);
                     // 
-                    $token = Security::generateToken();
-                    $this->emailSender->sendConfirmation($_SESSION['identity']['email'], $_SESSION['identity']['nombre'], $token);
-                    $_SESSION['success'] = "Pedido realizado con éxito";
+                   $_SESSION['success'] = "Pedido realizado con éxito";
                     header("Location: " . BASE_URL);
                     exit();
                 } else {

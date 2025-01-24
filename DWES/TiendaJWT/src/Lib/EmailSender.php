@@ -66,7 +66,7 @@ class EmailSender
 
             $contenido = '<html>';
             $contenido .= "<p>Hola " . $recipientName . ", Has creado tu cuenta en OrtizShop.com. Solo debes confirmarla presionando el siguiente enlace:</p>";
-            $contenido .= "<p>Presiona aquí: <a href='http://localhost/confirmar-cuenta/" . $token . "'>Confirmar Cuenta</a></p>";
+            $contenido .= "<p>Presiona aqui: <a href='" . BASE_URL . "confirmAccount/" . $this->token . "'>Confirmar Cuenta</a>";
             $contenido .= "<p>Si tú no solicitaste este cambio, puedes ignorar este mensaje.</p>";
             $contenido .= '</html>';
 

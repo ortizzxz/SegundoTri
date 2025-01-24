@@ -1,7 +1,7 @@
 /** GLOBAL CONFIGS **/
 @import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Oswald:wght@200..700&family=Permanent+Marker&display=swap");
 :root {
-  --transparente: #00000055;
+  --transparente: #000000da;
   --fuente-titulos: "Orbitron", serif;
 }
 body {
@@ -21,6 +21,7 @@ body {
   border-radius: 1rem;
   margin-top: 1rem;
   padding: 10px 20px;
+  color: #EF0808;
 }
 
 /** CAR CARDS **/
@@ -60,6 +61,23 @@ body {
 .nav-pills .nav-link.active, 
 .nav-pills .show > .nav-link {
   color: #E05138 !important;
+}
+
+.video-main-div{
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 1rem;
+}
+
+#carContent{
+  color: white;
+}
+
+.collapse {
+  transition: all 0.3s ease-in-out;
+}
+
+.container-fluid-II{
+  min-height: 100dvh;
 }
 
 /** RESPONSIVE STYLES **/
