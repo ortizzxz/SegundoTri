@@ -1,2 +1,4 @@
 *.mp4
 .mp4
+Diseño/Bootstrap/Landing Page Project/img/*.mp4
+Diseño/Bootstrap/Landing Page Project/img/background.mp4
