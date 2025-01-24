@@ -5,6 +5,24 @@ document.addEventListener("DOMContentLoaded", function () {
   const carInfoButtons = document.querySelectorAll(".car-info-btn");
   const closeInfoBtn = document.getElementById('closeInfoBtn');
 
+  document.querySelectorAll('.toggle-btn').forEach(button => {
+    button.addEventListener('click', function () {
+      const targetId = this.getAttribute('data-bs-target');
+      const targetElement = document.querySelector(targetId);
+  
+      // Listen for Bootstrap events to toggle button text
+      targetElement.addEventListener('shown.bs.collapse', () => {
+        button.textContent = 'Leer menos';
+        button.style.backgroundColor = 'red';
+      });
+  
+      targetElement.addEventListener('hidden.bs.collapse', () => {
+        button.textContent = 'Leer más';
+        button.style.backgroundColor = '#0D6EFD';
+      });
+    });
+  });
+  
   const carInfo = {
     GT2: {
       title: "Porsche GT2 RS",
