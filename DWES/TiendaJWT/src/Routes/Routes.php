@@ -7,11 +7,11 @@ use Controllers\CartController;
 use Controllers\AuthController;
 use Controllers\OrderController;
 use Lib\Router;
+use Security\Security;
 
 
 class Routes
 {
-
     public static function index()
     {
 
@@ -141,6 +141,16 @@ class Routes
         Router::add('GET', '/Error', function () {
             ErrorController::error404();
         });
+        
+        Router::add('GET', '/confirmAccount/:token', function ($token) {
+            if (Security::validateJWTToken($token)) {
+                (new AuthController()) -> confirmAccount($token);
+            } else {
+                echo 'Invalid or expired token';
+            }
+        });
+        
+        
 
         Router::dispatch();
     }

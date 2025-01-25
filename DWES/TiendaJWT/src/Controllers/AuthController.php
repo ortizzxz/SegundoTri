@@ -5,15 +5,17 @@ use Lib\Pages;
 use Models\User;
 use Services\UserService;
 use Security\Security;
+use Lib\EmailSender;
 use Exception;
 
-session_start(); 
+session_start();
 
 class AuthController
 {
     private Pages $pages;
     private UserService $userService;
     private Security $security;
+    private EmailSender $emailSender;
 
     const ROLE_ADMIN = 'admin';
     const ROLE_USER = 'user';
@@ -22,7 +24,8 @@ class AuthController
     {
         $this->pages = new Pages();
         $this->userService = new UserService();
-        $this->security = new Security();    
+        $this->security = new Security();
+        $this->emailSender = new EmailSender();
     }
 
 
@@ -92,7 +95,9 @@ class AuthController
                         // Intentar guardar el usuario
                         if ($this->userService->save($user)) {
                             $_SESSION['register'] = 'success';
-                            header('Location: ' . BASE_URL . 'register');
+                            $token = Security::generateToken($user->getEmail(), $user->getName());
+                            $this->emailSender->sendConfirmation($user->getEmail(), $user->getName(), $token);
+                            header('Location: ' . BASE_URL . 'login');
                             exit();
                         } else {
                             $_SESSION['register'] = 'fail';
@@ -115,6 +120,39 @@ class AuthController
         $this->pages->render('Auth/registerForm'); // Siempre renderizar el formulario al final
     }
 
+    public function confirmAccount($token)
+    {
+        try {
+            $payload = Security::decode($token, Security::secretKey());
+            $email = $payload['data']['email'];
+
+            $user = $this->userService->findByEmail($email);
+            if (!$user) {
+                $_SESSION['error'] = 'No existe un usuario con este correo.';
+                $this->pages->render('Auth/confirmation');
+            }
+            if ($user['confirmado'] === TRUE) {
+                $_SESSION['confirmation'] = 'already';
+                header('Location: ' . BASE_URL);
+                exit();
+            }
+
+            if ($this->userService->updateConfirmation($email)) {
+                $_SESSION['confirmation'] = 'success';
+                $this->pages->render('Auth/confirmation');
+                exit();
+            } else {
+                $_SESSION['confirmation'] = 'fail';
+                $this->pages->render('Auth/confirmation');
+                exit();
+            }
+
+        } catch (Exception $e) {
+            $_SESSION['error'] = 'Token inválido o expirado.';
+            header('Location: ' . BASE_URL);
+            exit();
+        }
+    }
 
 
     public function logout()

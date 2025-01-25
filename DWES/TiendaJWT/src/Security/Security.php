@@ -87,16 +87,41 @@ class Security
         return base64_decode(strtr($data, '-_', '+/'));
     }
 
-    public static function generateToken(): string
+    public static function generateToken($userEmail, $userName): string
     {
         $userData = [
-            'email' => $_SESSION['identity']['email'],
-            'name' => $_SESSION['identity']['nombre']
+            'email' => $userEmail,
+            'name' => $userName
         ];
 
         $key = self::secretKey();
 
         return self::createToken($key, $userData);
     }
+
+
+    public static function validateJWTToken($token)
+{
+    try {
+        $key = self::secretKey();
+        $payload = self::decode($token, $key);
+        
+        // Check if the token has expired
+        if (isset($payload['exp']) && time() > $payload['exp']) {
+            return false;
+        }
+        
+        // Check if the required data is present
+        if (!isset($payload['data']['email']) || !isset($payload['data']['name'])) {
+            return false;
+        }
+        
+        // If we've made it this far, the token is valid
+        return true;
+    } catch (Exception $e) {
+        // If an exception was thrown during decoding, the token is invalid
+        return false;
+    }
+}
 
 }

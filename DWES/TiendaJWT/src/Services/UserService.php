@@ -24,7 +24,9 @@
             return $user;
         }
        
-        
+        public function updateConfirmation($email){
+            return $this->userRepository->updateConfirmation($email);
+        }        
         /* USER VALIDATION */
         public function validation(User $user): bool{
             $validation = $user->validation();
