@@ -11,7 +11,7 @@ Realizar una aplicación on-line sobre Pokemons. Para ello nos basaremos en el d
 Se trata de una SPA, con lo que la única recarga de la página se produce al inicio.
 
 # Optional ( 5 > 10 )
-
+    
 - (0.5 puntos) El juego implementado debe permitir un Ranking de puntuaciones (los nombres de usuario se escriben estáticamente)
 Convertir esta app que es puramente monousuario y local en una web multiusuario accesible desde cualquier lugar. Para ello debemos tener usuarios registrados cada uno con su portfolio (no sería pues necesario escribir el nombre estáticamente). Por tanto:
 
