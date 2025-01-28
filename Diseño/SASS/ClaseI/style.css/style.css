@@ -1,0 +1,16 @@
+.hero {
+  height: 75vh;
+  background-color: bisque;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero h1 {
+  color: royalblue;
+  font-size: 1.25rem;
+}
+
+
+
+/*# sourceMappingURL=style.css.map */
