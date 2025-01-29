@@ -55,7 +55,7 @@ function Register() {
 
     return (
         <>
-            <div className="container mt-5">
+            <div className="container mt-2">
                 <div className="row justify-content-center">
                     <div className="col-md-6">
                         <div className="card shadow-lg p-4">
@@ -63,23 +63,23 @@ function Register() {
                             <form onSubmit={(e) => e.preventDefault()}>
                                 <div className="mb-3">
                                     <label htmlFor="name" className="form-label">Nombre</label>
-                                    <input type="text" className="form-control" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
+                                    <input type="text" className="form-control" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Jesus Ortiz" required />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="email" className="form-label">Dirección Email</label>
-                                    <input type="email" className="form-control" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                                    <input type="email" className="form-control" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="tu@email.com" required />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="password" className="form-label">Contraseña</label>
-                                    <input type="password" className="form-control" id="password" value={pass1} onChange={(e) => setPassword1(e.target.value)} autoComplete="on" required />
+                                    <input type="password" className="form-control" id="password" value={pass1} onChange={(e) => setPassword1(e.target.value)} autoComplete="on" placeholder="Hazla segura..." required />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="confirm-password" className="form-label">Confirmar Contraseña</label>
-                                    <input type="password" className="form-control" id="confirm-password" value={pass2} onChange={(e) => setPassword2(e.target.value)} autoComplete="on" required />
+                                    <input type="password" className="form-control" id="confirm-password" value={pass2} onChange={(e) => setPassword2(e.target.value)} autoComplete="on" placeholder="Repítela" required />
                                 </div>
                                 {error && <div className="alert alert-danger">{error}</div>}
                                 <div className="d-grid gap-2">
-                                    <button type="button" onClick={register} className="btn btn-success">Registrarse</button>
+                                    <button type="button" onClick={register} className="btn login-button">Registrarse</button>
                                 </div>
                             </form>
                             <div className="text-center mt-3">

@@ -11,10 +11,9 @@ function Home() {
         </p>
         <hr className="my-4" />
         <p>
-          Ready to explore? Click below to start your Pokémon adventure!
           ¿Listo para explorar? - Haz click debajo para empezar tu aventura Pokemon.
         </p>
-        <Link to="/pokemons" className="btn btn-primary btn-lg custom-primary-btn">
+        <Link to="/pokemons" className="btn  btn-lg custom-primary-btn">
           Explora Pokemones
         </Link>
       </div>

@@ -1,11 +1,11 @@
 function Footer() {
     return (
-        <footer className="text-black py-4 mt-2" style={{ backgroundColor: '#FFCC00' }}>
+        <footer className="text-black pt-4 pb-1 mt-2" style={{ backgroundColor: '#FFCC00' }}>
             <div className="container text-center">
                 <div className="row">
                     <div className="col-md-4">
                         <h5>About.</h5>
-                        <p>Este proyecto ha sido realizado como uno de los principales para el módulo de DWEC. Haciendo uso de React + Vite, Bootstrap</p>
+                        <p>Este proyecto ha sido realizado como uno de los principales para el módulo de DWEC. Haciendo uso de React + Vite y Bootstrap</p>
                     </div>
                     <div className="col-md-4">
                         <h5>Quick Links</h5>

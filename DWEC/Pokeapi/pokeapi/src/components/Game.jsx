@@ -37,29 +37,64 @@ function Game() {
 
             setPokemonMaquetado(
                 <div className="col-12 text-center">
-                    <div className="section-heading">
-                        <img className="img-fluid" src={solution.image} alt={solution.name} style={{ width: '300px', height: '300px', objectFit: 'contain' }} />
-                    </div>
-                    <div className="d-flex justify-content-center mt-3">
-                        {pokemons.map((pokemon, index) => (
-                            <button
-                                onClick={() => handleOption(pokemon.name)}
-                                key={index}
-                                className="btn btn-outline-primary mx-2"
-                                style={{
-                                    fontSize: '18px',
-                                    padding: '12px 24px',
-                                    borderRadius: '8px',
-                                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                                    transition: 'background-color 0.3s, transform 0.3s'
-                                }}
-                            >
-                                {pokemon.name}
-                            </button>
-                        ))}
-                    </div>
+                  {/* Image */}
+                  <div className="section-heading">
+                    <img
+                      className="img-fluid"
+                      src={solution.image}
+                      alt={solution.name}
+                      style={{
+                        width: "300px",
+                        height: "300px",
+                        objectFit: "contain",
+                        filter: "drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.2))",
+                      }}
+                    />
+                  </div>
+              
+                  {/* Buttons */}
+                  <div className="d-flex flex-wrap justify-content-center mt-4">
+                    {pokemons.map((pokemon, index) => (
+                      <button
+                        onClick={() => handleOption(pokemon.name)}
+                        key={index}
+                        className="btn pokemon-btn mx-2 my-2"
+                      >
+                        {pokemon.name}
+                      </button>
+                    ))}
+                  </div>
+              
+                  {/* Styles */}
+                  <style>
+                    {`
+                      .pokemon-btn {
+                        font-size: 18px;
+                        padding: 12px 24px;
+                        border-radius: 8px;
+                        border: 2px solid #FFC300;
+                        background: linear-gradient(45deg, #FFD92A, #FFC300, #FFB700);
+                        color: #222;
+                        font-weight: bold;
+                        transition: all 0.3s ease-in-out;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                      }
+              
+                      .pokemon-btn:hover {
+                        transform: translateY(-3px);
+                        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+                        background: linear-gradient(45deg, #FFB700, #FFC300, #FFD92A);
+                      }
+              
+                      .pokemon-btn:active {
+                        transform: translateY(1px);
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                      }
+                    `}
+                  </style>
                 </div>
-            );
+              );
+              
         });
     }
 
@@ -97,10 +132,8 @@ function Game() {
 
     function handleOption(namePokemon) {
         if (namePokemon === solution.name) {
-            // Use callback to ensure the previous state is correctly used
             setPuntuation((prevPuntuation) => {
                 const newPuntuation = prevPuntuation + 1;
-                // If new score is higher than the best score, update it
                 if (newPuntuation > bestPuntuation) {
                     setBestPuntuation(newPuntuation);
                     updateBestPuntuation(newPuntuation);
@@ -110,19 +143,79 @@ function Game() {
     
             setPokemonMaquetado(
                 <div className="col-12 text-center">
-                    <div className="section-heading">
-                        <img className="img-fluid" src={solution.image} alt={solution.name} style={{ width: '300px', height: '300px', objectFit: 'contain' }} />
-                    </div>
-                    <div className="d-flex justify-content-center mt-3">
-                        <h5 style={{ color: 'green', fontSize: '24px' }}>Correct!</h5><br /><br />
-                    </div>
-                    <div className="d-flex justify-content-center">
-                        <button className="btn btn-success mx-2" style={{ fontSize: '18px', padding: '12px 24px', borderRadius: '8px' }}>
-                            {solution.name}
-                        </button>
-                    </div>
+                  {/* Pokémon Image */}
+                  <div className="section-heading">
+                    <img
+                      className="img-fluid"
+                      src={solution.image}
+                      alt={solution.name}
+                      style={{
+                        width: "300px",
+                        height: "300px",
+                        objectFit: "contain",
+                        filter: "drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.2))",
+                      }}
+                    />
+                  </div>
+              
+                  {/* Correct Message */}
+                  <div className="d-flex justify-content-center mt-3">
+                    <h5 className="correct-text">¡Correcto!</h5>
+                  </div>
+              
+                  {/* Correct Answer Button */}
+                  <div className="d-flex justify-content-center">
+                    <button className="btn correct-btn mx-2">{solution.name}</button>
+                  </div>
+              
+                  {/* Custom Styles */}
+                  <style>
+                    {`
+                      .correct-text {
+                        color: #28a745;
+                        font-size: 24px;
+                        font-weight: bold;
+                        animation: fadeIn 0.5s ease-in-out;
+                      }
+              
+                      .correct-btn {
+                        font-size: 18px;
+                        padding: 12px 24px;
+                        border-radius: 8px;
+                        background: linear-gradient(45deg, #28a745, #34d058);
+                        color: white;
+                        font-weight: bold;
+                        border: none;
+                        transition: all 0.3s ease-in-out;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                      }
+              
+                      .correct-btn:hover {
+                        transform: translateY(-3px);
+                        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+                        background: linear-gradient(45deg, #34d058, #28a745);
+                      }
+              
+                      .correct-btn:active {
+                        transform: translateY(1px);
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                      }
+              
+                      @keyframes fadeIn {
+                        from {
+                          opacity: 0;
+                          transform: scale(0.9);
+                        }
+                        to {
+                          opacity: 1;
+                          transform: scale(1);
+                        }
+                      }
+                    `}
+                  </style>
                 </div>
-            );
+              );
+              
     
             setTimeout(() => {
                 initGame();
@@ -138,7 +231,7 @@ function Game() {
                         <img className="img-fluid" src={solution.image} alt={solution.name} style={{ width: '300px', height: '300px', objectFit: 'contain' }} />
                     </div>
                     <div className="d-flex justify-content-center mt-3">
-                        <h5 style={{ color: 'red', fontSize: '24px' }}>Incorrect!</h5><br /><br />
+                        <h5 style={{ color: 'red', fontSize: '24px' }}>¡Incorrecto!</h5><br /><br />
                     </div>
                     <div className="d-flex justify-content-center">
                         <button className="btn btn-danger mx-2" style={{ fontSize: '18px', padding: '12px 24px', borderRadius: '8px' }}>
@@ -151,12 +244,63 @@ function Game() {
             setTimeout(() => {
                 setPokemonMaquetado(
                     <div className="col-12 text-center">
-                        <h2 style={{ color: 'red', fontSize: '36px', fontWeight: 'bold' }}>GAME OVER</h2><br /><br />
-                        <button onClick={restartGame} className="btn btn-danger mx-2" style={{ fontSize: '18px', padding: '12px 24px', borderRadius: '8px' }}>
-                            Restart
-                        </button>
+                      {/* Game Over  */}
+                      <h2 className="game-over-text">Has perdido</h2>
+                  
+                      {/* Restart  */}
+                      <button onClick={restartGame} className="btn restart-btn mx-2">
+                        Restart
+                      </button>
+                  
+                      {/* Styles */}
+                      <style>
+                        {`
+                          .game-over-text {
+                            color: red;
+                            font-size: 36px;
+                            font-weight: bold;
+                            text-transform: uppercase;
+                            letter-spacing: 2px;
+                            animation: fadeIn 0.8s ease-in-out;
+                          }
+                  
+                          .restart-btn {
+                            font-size: 18px;
+                            padding: 12px 24px;
+                            border-radius: 8px;
+                            background: linear-gradient(45deg, #dc3545, #ff0000);
+                            color: white;
+                            font-weight: bold;
+                            border: none;
+                            transition: all 0.3s ease-in-out;
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                          }
+                  
+                          .restart-btn:hover {
+                            transform: translateY(-3px);
+                            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+                            background: linear-gradient(45deg, #ff0000, #dc3545);
+                          }
+                  
+                          .restart-btn:active {
+                            transform: translateY(1px);
+                            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                          }
+                  
+                          @keyframes fadeIn {
+                            from {
+                              opacity: 0;
+                              transform: scale(0.9);
+                            }
+                            to {
+                              opacity: 1;
+                              transform: scale(1);
+                            }
+                          }
+                        `}
+                      </style>
                     </div>
-                );
+                  );
             }, 2000);
         }
     }
@@ -182,35 +326,30 @@ function Game() {
     }
 
     return (
-        <>
-            <div className="section cta" style={{ background: '#f4f4f4', padding: '30px 0' }}>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-5">
-                            <div className="shop">
-                                <div className="row">
-                                    <div className="col-lg-12">
-                                        <div className="section-heading">
-                                            <h2 style={{ fontSize: '36px', color: '#333', fontWeight: 'bold' }}>¿Quién es ese pókemon?</h2>
-                                        </div>
-                                        <h5 style={{ fontSize: '20px', margin: '10px 0' }}>Tu puntuación: {puntuation}</h5>
-                                        <h5 style={{ fontSize: '20px', margin: '10px 0' }}>Tu mejor puntuación: {bestPuntuation}</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-5 offset-lg-2">
-                            <div className="subscribe">
-                                <div className="row">
-                                    {pokemonMaquetado}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div className="section cta game-section text-white">
+          <div className="container">
+            <div className="row align-items-center">
+              {/* Left Section */}
+              <div className="col-lg-5">
+                <div className="shop bg-light p-4 rounded shadow border-custom">
+                  <div className="section-heading">
+                    <h2 className="game-title text-center">¿Quién es ese Pokémon?</h2>
+                  </div>
+                  <h5 className="score-text text-center">Tu puntuación: <span className="fw-bold">{puntuation}</span></h5>
+                  <h5 className="score-text text-center">Tu mejor puntuación: <span className="fw-bold">{bestPuntuation}</span></h5>
                 </div>
+              </div>
+    
+              {/* Right Section */}
+              <div className="col-lg-5 offset-lg-2">
+                <div className="subscribe p-4 bg-light rounded shadow border-custom">
+                  <div className="row">{pokemonMaquetado}</div>
+                </div>
+              </div>
             </div>
-        </>
-    );
+          </div>
+        </div>
+      );
 }
 
 export default Game;

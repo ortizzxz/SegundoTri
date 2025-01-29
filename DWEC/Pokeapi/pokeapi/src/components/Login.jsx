@@ -56,7 +56,7 @@ function Login() {
         <div className="row justify-content-center">
           <div className="col-md-6">
             <div className="card shadow-lg bg-light p-4">
-              <h3 className="text-center mb-4">Login</h3>
+              <h3 className="text-center mb-4">Iniciar Sesión</h3>
               <form onSubmit={(e) => e.preventDefault()}>
                 <div className="mb-3">
                   <label htmlFor="email" className="form-label">
@@ -68,6 +68,7 @@ function Login() {
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    placeholder="tu@correo.com"
                     required
                   />
                 </div>
@@ -82,6 +83,7 @@ function Login() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     autoComplete="on"
+                    placeholder="Tu contraseña"
                     required
                   />
                 </div>
@@ -90,14 +92,14 @@ function Login() {
                   <button
                     type="button"
                     onClick={loginUserPassword}
-                    className="btn btn-primary"
+                    className="btn login-button"
                   >
                     Log In
                   </button>
                   <button
                     type="button"
                     onClick={loginGoogle}
-                    className="btn btn-danger"
+                    className="btn google-button"
                   >
                     <i className="bi bi-google"></i> Log In con Google
                   </button>

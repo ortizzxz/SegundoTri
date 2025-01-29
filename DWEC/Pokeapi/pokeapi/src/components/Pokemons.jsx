@@ -62,7 +62,7 @@ function Pokemons() {
           <h5 className="card-title mt-2 text-capitalize">{pokemon.name}</h5>
           <Link
             to={`/detail/${pokemon.id}`}
-            className="btn btn-outline-primary btn-custom"
+            className="btn btn-outline-primary custom-primary-btn"
           >
             Ver Detalles{" "}
           </Link>
@@ -114,7 +114,7 @@ function Pokemons() {
             <div className="col-12 text-center">
               <button
                 onClick={loadPokemonData}
-                className="btn btn-primary mt-4"
+                className="btn custom-load-btn"
               >
                 Cargar más
               </button>
