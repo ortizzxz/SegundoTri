@@ -56,13 +56,13 @@ function Pokemons() {
           </Link>
         </div>
         <div className="card-body text-center">
-          <span className="badge bg-primary text-uppercase">
+          <span className="badge bg-custom text-uppercase">
             {pokemon.types[0].type.name}
           </span>
           <h5 className="card-title mt-2 text-capitalize">{pokemon.name}</h5>
           <Link
             to={`/detail/${pokemon.id}`}
-            className="btn btn-outline-primary"
+            className="btn btn-outline-primary btn-custom"
           >
             Ver Detalles{" "}
           </Link>

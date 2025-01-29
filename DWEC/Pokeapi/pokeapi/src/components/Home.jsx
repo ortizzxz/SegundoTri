@@ -1,12 +1,10 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 function Home() {
   return (
     <div className="container mt-5">
       {/* Header */}
-      <div className="jumbotron bg-light text-center p-5 rounded border border-dark">
+      <div className="jumbotron bg-light text-center p-5 rounded border-custom">
         <h1 className="display-4">¡Bienvenido al Explorador PokeAPI!</h1>
         <p className="lead">
             Descubre el fascinante mundo de Pokemon utilizando la PokeAPI. Busca pokemones, explora sus habilidades, y pon a prueba tu conocimiento con divertidos juegos.
@@ -16,7 +14,7 @@ function Home() {
           Ready to explore? Click below to start your Pokémon adventure!
           ¿Listo para explorar? - Haz click debajo para empezar tu aventura Pokemon.
         </p>
-        <Link to="/pokemons" className="btn btn-primary btn-lg">
+        <Link to="/pokemons" className="btn btn-primary btn-lg custom-primary-btn">
           Explora Pokemones
         </Link>
       </div>

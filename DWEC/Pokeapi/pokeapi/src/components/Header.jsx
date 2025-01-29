@@ -42,12 +42,12 @@ function Header() {
               </Link>
             </li>
             <li className="nav-item">
-              <span className="nav-link">{user.displayName}</span>
-            </li>
-            <li className="nav-item">
               <button className="btn btn-link nav-link" onClick={logout}>
                 Log Out
               </button>
+            </li>
+            <li className="nav-item">
+              <span className="nav-link">{user.displayName}</span>
             </li>
           </ul>
         );
@@ -87,7 +87,7 @@ function Header() {
 
   return (
     <>
-      <header className="header-area header-sticky bg-light">
+      <header className="header-area header-sticky">
         <div className="container">
           <div className="row">
             <div className="col-12">

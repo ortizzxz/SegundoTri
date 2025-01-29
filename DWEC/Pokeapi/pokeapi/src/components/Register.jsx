@@ -1,10 +1,9 @@
-import { Link, useNavigate } from "react-router-dom"
-import { createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
 import { useState } from "react";
 
 function Register() {
-
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [pass1, setPassword1] = useState('');
@@ -13,136 +12,85 @@ function Register() {
     const navigate = useNavigate();
 
     function register() {
-        // Validate empty fields
         if (!email || !pass1 || !pass2 || !name) {
-            setError("All fields are mandatory");
+            setError("Todos los campos son obligatorios");
             return;
         }
 
-        // Validate email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            setError("Enter a valid email");
+            setError("Ingresa un email válido");
             return;
         }
 
-        // Validate matching passwords
         if (pass1 !== pass2) {
-            setError("Passwords do not match");
+            setError("Las contraseñas no coinciden");
             return;
         }
+
         createUserWithEmailAndPassword(auth, email, pass1)
             .then((userCredential) => {
-
                 const user = userCredential.user;
-                updateProfile(user, {
-                    displayName: name
-                }).then(() => {
+                updateProfile(user, { displayName: name }).then(() => {
                     navigate("/");
-                })
+                });
             })
             .catch((error) => {
                 switch (error.code) {
                     case 'auth/email-already-in-use':
-                        setError("Email is already registered");
+                        setError("Email ya registrado");
                         break;
                     case 'auth/invalid-email':
-                        setError("Invalid email");
+                        setError("Email inválido");
                         break;
                     case 'auth/weak-password':
-                        setError("Weak password, it must be at least 6 characters");
+                        setError("La contraseña es muy débil. Debe contener mínimo 6 carácteres");
                         break;
                     default:
-                        setError("Error while registering the user");
+                        setError("Error al registrar el usuario.");
                         console.error("Authentication error:", error);
                 }
             });
-
     }
-
-    const handleLogin = (event) => {
-        event.preventDefault(); // Evita que el formulario se envíe automáticamente
-    };
-
 
     return (
         <>
-            <div className="page-heading header-text">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <h3>Register</h3>
-                            <span className="breadcrumb"><a href="#">Home</a> &gt; Register</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="contact-page section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6 align-self-center">
-                            <div class="left-text">
-                                <div class="section-heading">
-                                    <h6>Register</h6>
-                                    <h2>Welcome!</h2>
+            <div className="container mt-5">
+                <div className="row justify-content-center">
+                    <div className="col-md-6">
+                        <div className="card shadow-lg p-4">
+                            <h3 className="text-center mb-4">Registrarse</h3>
+                            <form onSubmit={(e) => e.preventDefault()}>
+                                <div className="mb-3">
+                                    <label htmlFor="name" className="form-label">Nombre</label>
+                                    <input type="text" className="form-control" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
                                 </div>
-                                Welcome to our registration page! Begin your journey by creating an account and accessing a world of opportunities. Your adventure starts right here.
-                                <br /><br />
-                                <ul>
-                                    <li><span>Already have an account? <Link to={"/login"}>Click here</Link></span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="right-content">
-                                <div class="row">
-                                    <div class="col-lg-12">
-
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <form id="contact-form" onSubmit={handleLogin}>
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <fieldset>
-                                                        <h2>Please register</h2><br /><br />
-                                                        <input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your Name..." required="" />
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <fieldset>
-                                                        <input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} pattern="[^ @]*@[^ @]*" placeholder="Your E-mail..." required="" />
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <fieldset>
-                                                        <input type="password" name="subject" value={pass1} onChange={(e) => setPassword1(e.target.value)} id="subject" placeholder="Password..." autocomplete="on" />
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <fieldset>
-                                                        <input type="password" name="subject" value={pass2} onChange={(e) => setPassword2(e.target.value)} id="subject" placeholder="Repeat password..." autocomplete="on" />
-                                                        <p style={{ color: 'red' }}>&nbsp;&nbsp;&nbsp;&nbsp;{error}</p>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <fieldset>
-                                                        <button onClick={register} class="orange-button">Sign up</button>
-                                                    </fieldset>
-                                                </div>
-
-                                            </div>
-                                        </form>
-                                    </div>
+                                <div className="mb-3">
+                                    <label htmlFor="email" className="form-label">Dirección Email</label>
+                                    <input type="email" className="form-control" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                                 </div>
+                                <div className="mb-3">
+                                    <label htmlFor="password" className="form-label">Contraseña</label>
+                                    <input type="password" className="form-control" id="password" value={pass1} onChange={(e) => setPassword1(e.target.value)} autoComplete="on" required />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="confirm-password" className="form-label">Confirmar Contraseña</label>
+                                    <input type="password" className="form-control" id="confirm-password" value={pass2} onChange={(e) => setPassword2(e.target.value)} autoComplete="on" required />
+                                </div>
+                                {error && <div className="alert alert-danger">{error}</div>}
+                                <div className="d-grid gap-2">
+                                    <button type="button" onClick={register} className="btn btn-success">Registrarse</button>
+                                </div>
+                            </form>
+                            <div className="text-center mt-3">
+                                <p>¿Ya tienes una cuenta? - <Link to="/login">Inicia sesión aquí</Link></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </>
-    )
+    );
 }
 
-export default Register
+export default Register;

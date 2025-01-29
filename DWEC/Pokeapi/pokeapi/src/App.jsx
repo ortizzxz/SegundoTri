@@ -1,17 +1,19 @@
-import { useState } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 import Header from './components/Header'
 import Home from './components/Home'
 import Pokemons from './components/Pokemons'
 import Login from './components/Login'
 import Register from './components/Register'
 import Detail from './components/Detail'
-// import Game from './components/Game'
+import Game from './components/Game'
 import Error from './components/Error'
 import Footer from './components/Footer'
 import { Outlet } from 'react-router-dom'
 import PrivateRoute from './components/PrivateRoute'
+import "bootstrap-icons/font/bootstrap-icons.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap-icons/font/bootstrap-icons.css";
+
+
 
 import {
   createBrowserRouter,
@@ -72,17 +74,17 @@ const router = createBrowserRouter([
           </>
         ),
       },
-      // {
-      //   path: "game",
-      //   element: (
-      //     <>
-      //       <PrivateRoute>
-      //         <Game></Game>
-      //       </PrivateRoute>
+      {
+        path: "game",
+        element: (
+          <>
+            <PrivateRoute>
+              <Game></Game>
+            </PrivateRoute>
 
-      //     </>
-      //   ),
-      // },
+          </>
+        ),
+      },
       {
         path: "*",
         element:
