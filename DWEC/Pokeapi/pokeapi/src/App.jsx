@@ -9,25 +9,57 @@ import Error from './components/Error'
 import Footer from './components/Footer'
 import { Outlet } from 'react-router-dom'
 import PrivateRoute from './components/PrivateRoute'
+import { useEffect } from 'react';
+import { getRedirectResult } from "firebase/auth";
+import { auth } from './firebase';
+import { useNavigate } from 'react-router-dom';
 import "bootstrap-icons/font/bootstrap-icons.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
-
-
 
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 
+function RedirectHandler({ children }) {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log("Checking redirect result...");
+
+    getRedirectResult(auth)
+      .then((result) => {
+        console.log("Redirect result received:", result);
+        
+        if (result?.user) {
+          console.log("User signed in via redirect:", result.user);
+          navigate("/game");
+        } else {
+          console.log("No user found in redirect result.");
+        }
+      })
+      .catch((error) => {
+        console.error("Redirect Sign-In Error:", error);
+      });
+  }, [navigate]);
+
+  return children;
+}
+
+
+
+
 const router = createBrowserRouter([
   {
     element: (
+      <RedirectHandler>
       <>
         <Header></Header>
         <Outlet></Outlet>
         <Footer></Footer>
       </>
+      </RedirectHandler>
     ),
 
     children: [

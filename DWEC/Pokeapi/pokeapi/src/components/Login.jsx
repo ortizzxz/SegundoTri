@@ -6,20 +6,40 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase";
 import { useState } from "react";
+import { signInWithRedirect } from "firebase/auth";
 
 function Login() {
   const provider = new GoogleAuthProvider();
   const navigate = useNavigate();
 
   function loginGoogle() {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        navigate("/game");
-      })
-      .catch((error) => {
-        console.error("Google Sign-In Error", error);
-      });
+    console.log('Start google sign in');
+    
+    const isMobile =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      );
+  
+    if (isMobile) {
+      signInWithRedirect(auth, provider)
+    .then(() => {
+      console.log("Redirect initiated"); // Debugging line
+    })
+    .catch((error) => {
+      console.error("Google Sign-In Redirect Error:", error);
+    });
+    } else {
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          console.log("Sign-in successful", result.user);
+          navigate("/game");
+        })
+        .catch((error) => {
+          console.error("Google Sign-In Error", error);
+        });
+    }
   }
+  
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

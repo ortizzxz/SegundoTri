@@ -3,13 +3,13 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyC-y0F1pgw_6MzwJ0NlXb2Yrs4-iby1kDg",
-    authDomain: "poke-api-76163.firebaseapp.com",
-    projectId: "poke-api-76163",
-    storageBucket: "poke-api-76163.appspot.com",
-    messagingSenderId: "157515449891",
-    appId: "1:157515449891:web:629db8e3598a923155d396"
-  };
+  apiKey: "AIzaSyAUPlJ0jSwSU1gXe9ljyMZ4kiZHyYMUTvo",
+  authDomain: "pokeapp-3f1a6.firebaseapp.com",
+  projectId: "pokeapp-3f1a6",
+  storageBucket: "pokeapp-3f1a6.firebasestorage.app",
+  messagingSenderId: "878414489246",
+  appId: "1:878414489246:web:9bbbad921ac179eb9e3d8f"
+};
 
 const app = initializeApp(firebaseConfig);
 

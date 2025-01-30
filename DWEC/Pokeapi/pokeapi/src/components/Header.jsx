@@ -16,7 +16,7 @@ function Header() {
         <Link to="/pokemons">Pokemons</Link>
       </li>
       <li>
-        <Link to="/login">Sign In</Link>
+        <Link to="/login">Iniciar Sesión</Link>
       </li>
     </ul>
   );
