@@ -1,6 +1,111 @@
 import { useState, useEffect } from "react";
 import { db, auth } from "../firebase";
-import { collection, doc, setDoc, getDoc } from "firebase/firestore";
+import { collection, doc, setDoc, getDoc, getDocs } from "firebase/firestore";
+
+function Leaderboard() {
+  const [leaderboard, setLeaderboard] = useState([]);
+
+  useEffect(() => {
+      loadLeaderboard();
+  }, []);
+
+  function loadLeaderboard() {
+      const pokeapiDB = collection(db, "pokeapi");
+
+      getDocs(pokeapiDB).then((snapshot) => {
+          const leaderboardData = snapshot.docs.map(doc => ({
+              id: doc.id,
+              ...doc.data(),
+          }));
+
+          leaderboardData.sort((a, b) => b.puntuation - a.puntuation);
+
+          setLeaderboard(leaderboardData.slice(0, 5));
+      }).catch((error) => {
+          console.error("Error fetching leaderboard data:", error);
+      });
+  }
+
+  return (
+      <div className="leaderboard-section bg-gradient p-4 rounded-lg shadow">
+          <h3 className="text-center custom-title font-weight-bold">Leaderboard</h3>
+          <ul className="list-group leaderboard-list">
+              {leaderboard.map((player, index) => (
+                  <li key={player.id} className="list-group-item d-flex justify-content-between align-items-center leaderboard-item">
+                      <span className="rank-number">{index + 1}.</span>
+                      <div className="player-info">
+                          <span className="player-name">{player.name}</span>
+                          <span className="player-points">{player.puntuation} points</span>
+                      </div>
+                  </li>
+              ))}
+          </ul>
+
+          {/* Custom styles */}
+          <style>
+              {`
+                  .leaderboard-section {
+                      margin-top: 1rem;
+                      border-radius: 10px;
+                      padding: 20px;
+                  }
+
+                  .leaderboard-list {
+                      margin-top: 20px;
+                      border-radius: 8px;
+                      padding: 0;
+                      overflow-y: auto;
+                  }
+
+                  .leaderboard-item {
+                      background-color: #ffffff;
+                      border-radius: 8px;
+                      padding: 12px 18px;
+                      margin-bottom: 12px;
+                      font-size: 18px;
+                      font-weight: 500;
+                      transition: background-color 0.3s ease;
+                      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                  }
+
+                  .leaderboard-item:hover {
+                      background-color: #f1f1f1;
+                      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+                  }
+
+                  .custom-title{
+                    color: black;
+                  }
+
+                  .rank-number {
+                      font-size: 24px;
+                      font-weight: bold;
+                      color: #FFC300;
+                  }
+
+                  .player-info {
+                      display: flex;
+                      flex-direction: column;
+                      align-items: flex-start;
+                  }
+
+                  .player-name {
+                      font-size: 18px;
+                      font-weight: 600;
+                      color: #333;
+                  }
+
+                  .player-points {
+                      font-size: 18px;
+                      font-weight: 400;
+                      color: #FFC300;
+                  }
+              `}
+          </style>
+      </div>
+  );
+}
+
 
 function Game() {
     let [pokemonMaquetado, setPokemonMaquetado] = useState();
@@ -47,7 +152,7 @@ function Game() {
                         width: "300px",
                         height: "300px",
                         objectFit: "contain",
-                        filter: "drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.2))",
+                        filter: "blur(0.5rem)"
                       }}
                     />
                   </div>
@@ -64,8 +169,7 @@ function Game() {
                       </button>
                     ))}
                   </div>
-              
-                  {/* Styles */}
+
                   <style>
                     {`
                       .pokemon-btn {
@@ -93,8 +197,7 @@ function Game() {
                     `}
                   </style>
                 </div>
-              );
-              
+            );
         });
     }
 
@@ -153,7 +256,6 @@ function Game() {
                         width: "300px",
                         height: "300px",
                         objectFit: "contain",
-                        filter: "drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.2))",
                       }}
                     />
                   </div>
@@ -167,7 +269,7 @@ function Game() {
                   <div className="d-flex justify-content-center">
                     <button className="btn correct-btn mx-2">{solution.name}</button>
                   </div>
-              
+
                   {/* Custom Styles */}
                   <style>
                     {`
@@ -214,8 +316,7 @@ function Game() {
                     `}
                   </style>
                 </div>
-              );
-              
+            );
     
             setTimeout(() => {
                 initGame();
@@ -246,13 +347,12 @@ function Game() {
                     <div className="col-12 text-center">
                       {/* Game Over  */}
                       <h2 className="game-over-text">Has perdido</h2>
-                  
+              
                       {/* Restart  */}
                       <button onClick={restartGame} className="btn restart-btn mx-2">
                         Restart
                       </button>
-                  
-                      {/* Styles */}
+
                       <style>
                         {`
                           .game-over-text {
@@ -299,13 +399,13 @@ function Game() {
                           }
                         `}
                       </style>
+
                     </div>
-                  );
+                );
             }, 2000);
         }
     }
     
-
     function updateBestPuntuation(newPuntuation) {
         const user = auth.currentUser;
         if (user) {
@@ -327,29 +427,36 @@ function Game() {
 
     return (
         <div className="section cta game-section text-white">
-          <div className="container">
-            <div className="row align-items-center">
-              {/* Left Section */}
-              <div className="col-lg-5">
-                <div className="shop bg-light p-4 rounded shadow border-custom">
-                  <div className="section-heading">
-                    <h2 className="game-title text-center">¿Quién es ese Pokémon?</h2>
-                  </div>
-                  <h5 className="score-text text-center">Tu puntuación: <span className="fw-bold">{puntuation}</span></h5>
-                  <h5 className="score-text text-center">Tu mejor puntuación: <span className="fw-bold">{bestPuntuation}</span></h5>
+            <div className="container">
+                <div className="row align-items-center">
+                    {/* Left Section */}
+                    <div className="col-lg-5">
+                        <div className="shop bg-light p-4 rounded shadow border-custom">
+                            <div className="section-heading">
+                                <h2 className="game-title text-center">¿Quién es ese Pokémon?</h2>
+                            </div>
+                            <h5 className="score-text text-center">Tu puntuación: <span className="fw-bold">{puntuation}</span></h5>
+                            <h5 className="score-text text-center">Tu mejor puntuación: <span className="fw-bold">{bestPuntuation}</span></h5>
+                        </div>
+                    </div>
+        
+                    {/* Right Section */}
+                    <div className="col-lg-5 offset-lg-2">
+                        <div className="subscribe p-4 bg-light rounded shadow border-custom">
+                            <div className="row">{pokemonMaquetado}</div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-    
-              {/* Right Section */}
-              <div className="col-lg-5 offset-lg-2">
-                <div className="subscribe p-4 bg-light rounded shadow border-custom">
-                  <div className="row">{pokemonMaquetado}</div>
+
+                {/* Leaderboard Section */}
+                <div className="row">
+                    <div className="col-12">
+                        <Leaderboard />
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      );
+    );
 }
 
 export default Game;

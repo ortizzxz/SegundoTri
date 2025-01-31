@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:300,400,700');
+
+//Variables
+$font-family: "Nunito", sans-serif;
+
+// Paleta Colores
+$colors: (
+    primary: #333,
+    secondary: #ffe,
+    tertiary: #f2f0f1,
+    quuaternary: #e75480,
+    quinta: red
+);
+
+// Funcion para devolver el color
+@function color ($color-name){
+    @return map-get($colors, $color-name);
+}
+
+// Fuentes tamaños
+$font-sizes:(
+    xxl: 6rem,
+    xl: 3rem, 
+    lg: 2.5rem,
+    md: 2rem,
+    sm: 1.8rem,
+    xs: 1.6rem
+);
+
+// Funcion para devolver el tamaño
+@function font ($font-size){
+    @return map-get($font-sizes, $font-size);
+}

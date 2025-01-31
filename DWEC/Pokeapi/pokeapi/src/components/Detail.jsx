@@ -15,7 +15,7 @@ function Detail() {
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching Pokemon data:", error);
+        console.error("error fetching:", error);
         setLoading(false);
       });
   }, [id]);
@@ -55,7 +55,7 @@ function Detail() {
             <img
               src={pokemon.sprites.other["official-artwork"].front_default}
               alt={pokemon.name}
-              className="img-fluid rounded shadow border border-1 border-secondary"
+              className="img-fluid rounded yellow-shadow border border-1 border-secondary"
             />
           </Col>
           <Col lg={6}>
@@ -77,19 +77,16 @@ function Detail() {
 
             <ListGroup variant="flush" className="mb-4">
               <ListGroup.Item>
-                <strong>Height:</strong> {(pokemon.height / 10).toFixed(1)} m
+                <strong>Altura:</strong> {(pokemon.height / 10).toFixed(1)} m
               </ListGroup.Item>
               <ListGroup.Item>
-                <strong>Weight:</strong> {(pokemon.weight / 10).toFixed(1)} kg
+                <strong>Peso:</strong> {(pokemon.weight / 10).toFixed(1)} kg
               </ListGroup.Item>
 
-              <ListGroup.Item>
-                <strong>Moves:</strong>{" "}
-                {pokemon.moves.map((move) => move.move.name).join(", ")}
-              </ListGroup.Item>
+              
               {pokemon.abilities.map((ability, index) => (
                 <ListGroup.Item key={index}>
-                  <strong>Ability {index + 1}:</strong> {ability.ability.name}
+                  <strong>Habilidad {index + 1}:</strong> {ability.ability.name}
                 </ListGroup.Item>
               ))}
             </ListGroup>

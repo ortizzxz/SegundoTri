@@ -149,3 +149,32 @@
 .border-custom {
     border: 1px solid #ffd92a;
 }
+.border-input{
+    width: 15rem;
+    border-radius: 0.5rem;
+}
+.border-input:hover{
+    background: linear-gradient(90deg, #FBBC05, #ffea8a) !important;
+}
+.border-input:hover::placeholder{
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.custom-search{
+    background-color: #FFE57F;
+    cursor: pointer;
+}
+
+.custom-search:hover{
+    background-color: #FBBC05;
+
+}
+
+.custom-yellow-spinner{
+    border-color: #FFC300 !important;
+}
+
+.yellow-shadow {
+    box-shadow: 0 0px 0 2px  rgba(255, 255, 0, 0.6) !important;
+  }
+  
