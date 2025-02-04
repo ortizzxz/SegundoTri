@@ -2,179 +2,198 @@
   background-color: #ffd92a;
 }
 
-
-  
-.bg-custom{
-    background-color: #ffd92a;
+.bg-custom {
+  background-color: #ffd92a;
 }
 
-.btn-custom{
-    background-color: #ffea8a !important;
-    border: 1px solid #ffd92a !important;
-    color: black !important;
+.btn-custom {
+  background-color: #ffea8a !important;
+  border: 1px solid #ffd92a !important;
+  color: black !important;
 }
 
 .login-button {
-    background: linear-gradient(45deg, #FFD92A, #FFC300, #FFB700) !important;
-    color: #333333 !important; /* Changed to dark gray for better contrast */
-    border: none !important;
-    padding: 10px 20px !important;
-    font-size: 16px !important;
-    border-radius: 25px !important;
-    cursor: pointer !important;
-    transition: all 0.3s ease !important;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
-    position: relative !important;
-    overflow: hidden !important;
+  background: linear-gradient(45deg, #ffd92a, #ffc300, #ffb700) !important;
+  color: #333333 !important; /* Changed to dark gray for better contrast */
+  border: none !important;
+  padding: 10px 20px !important;
+  font-size: 16px !important;
+  border-radius: 25px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+  position: relative !important;
+  overflow: hidden !important;
 }
 
 .login-button:before {
-    content: "" !important;
-    position: absolute !important;
-    top: -50% !important;
-    left: -50% !important;
-    width: 200% !important;
-    height: 200% !important;
-    background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 70%) !important;
-    transform: scale(0) !important;
-    transition: transform 0.5s !important;
+  content: "" !important;
+  position: absolute !important;
+  top: -50% !important;
+  left: -50% !important;
+  width: 200% !important;
+  height: 200% !important;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0) 70%
+  ) !important;
+  transform: scale(0) !important;
+  transition: transform 0.5s !important;
 }
 
 .login-button:hover {
-    transform: translateY(-3px) !important;
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2) !important;
-    background: linear-gradient(45deg, #FFB700, #FFC300, #FFD92A) !important; /* Reversed gradient on hover */
+  transform: translateY(-3px) !important;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2) !important;
+  background: linear-gradient(
+    45deg,
+    #ffb700,
+    #ffc300,
+    #ffd92a
+  ) !important; /* Reversed gradient on hover */
 }
 
 .login-button:hover:before {
-    transform: scale(1) !important;
+  transform: scale(1) !important;
 }
 
 .login-button:active {
-    transform: translateY(1px) !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  transform: translateY(1px) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
 }
 
-
 .google-button {
-    background: linear-gradient(90deg, #EA4335, #FBBC05, #34A853, #4285F4) !important;
-    color: white !important;
-    border: none !important;
-    padding: 10px 20px !important;
-    font-size: 16px !important;
-    border-radius: 25px !important;
-    cursor: pointer !important;
-    transition: background-position 0.3s ease-in-out !important;
-    background-size: 300% 100% !important;
+  background: linear-gradient(
+    90deg,
+    #ea4335,
+    #fbbc05,
+    #34a853,
+    #4285f4
+  ) !important;
+  color: white !important;
+  border: none !important;
+  padding: 10px 20px !important;
+  font-size: 16px !important;
+  border-radius: 25px !important;
+  cursor: pointer !important;
+  transition: background-position 0.3s ease-in-out !important;
+  background-size: 300% 100% !important;
 }
 
 .google-button:hover {
-    background-position: right center !important;
+  background-position: right center !important;
 }
 
-
-
-.custom-primary-btn, .custom-load-btn {
-    background-color: #ffea8a !important;
-    color: black !important;
-    border: none !important;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 8px; 
-    cursor: pointer;
-    transition: all 0.3s ease-in-out !important; 
+.custom-primary-btn,
+.custom-load-btn {
+  background-color: #ffea8a !important;
+  color: black !important;
+  border: none !important;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out !important;
 }
 
-.custom-primary-btn:hover, .custom-load-btn:hover {
-    background-color: #fff5f5 !important;
-    border: 1px solid #ffd92a !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.custom-primary-btn:hover,
+.custom-load-btn:hover {
+  background-color: #fff5f5 !important;
+  border: 1px solid #ffd92a !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.custom-load-btn{
-    font-size: 20px !important;
-    border: 2px solid #FFE57F !important;
+.custom-load-btn {
+  font-size: 20px !important;
+  border: 2px solid #ffe57f !important;
 }
 
-
-.btn-custom:hover{
-    background-color: #fff5f5 !important;
-    font-size: large !important;
-    border: 1px solid red !important;
+.btn-custom:hover {
+  background-color: #fff5f5 !important;
+  font-size: large !important;
+  border: 1px solid red !important;
 }
 
-.nav-link{
-    color: black !important;
+.nav-link {
+  color: black !important;
 }
 
-.nav-link:hover{
-    background-color: #ffea8a !important;
-    border-radius: 0.5rem !important;
+.nav-link:hover {
+  background-color: #ffea8a !important;
+  border-radius: 0.5rem !important;
 }
 
 .game-section {
-    padding: 50px 0 !important;
+  padding: 50px 0 !important;
 }
 
 .shop {
-    background: white !important;
-    border-radius: 20px !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
-    padding: 40px !important;
+  background: white !important;
+  border-radius: 20px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+  padding: 40px !important;
 }
 
 .game-title {
-    font-size: 36px !important;
-    color: #333 !important;
-    font-weight: bold !important;
-    margin-bottom: 20px !important;
-    text-align: center !important;
+  font-size: 36px !important;
+  color: #333 !important;
+  font-weight: bold !important;
+  margin-bottom: 20px !important;
+  text-align: center !important;
 }
 
 .score-text {
-    font-size: 20px !important;
-    margin: 10px 0 !important;
-    color: #555 !important;
-    text-align: center !important;
+  font-size: 20px !important;
+  margin: 10px 0 !important;
+  color: #555 !important;
+  text-align: center !important;
 }
 
 .subscribe {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
-
 
 .border-custom {
-    border: 1px solid #ffd92a;
+  border: 1px solid #ffd92a;
 }
-.border-input{
-    width: 15rem;
-    border-radius: 0.5rem;
+.border-input {
+  width: 15rem;
+  border-radius: 0.5rem;
 }
-.border-input:hover{
-    background: linear-gradient(90deg, #FBBC05, #ffea8a) !important;
+.border-input:hover {
+  background: linear-gradient(90deg, #fbbc05, #ffea8a) !important;
 }
-.border-input:hover::placeholder{
-    color: rgba(0, 0, 0, 0.7) !important;
-}
-
-.custom-search{
-    background-color: #FFE57F;
-    cursor: pointer;
+.border-input:hover::placeholder {
+  color: rgba(0, 0, 0, 0.7) !important;
 }
 
-.custom-search:hover{
-    background-color: #FBBC05;
-
+.custom-search {
+  background-color: #ffe57f;
+  cursor: pointer;
 }
 
-.custom-yellow-spinner{
-    border-color: #FFC300 !important;
+.custom-search:hover {
+  background-color: #fbbc05;
+}
+
+.custom-yellow-spinner {
+  border-color: #ffc300 !important;
 }
 
 .yellow-shadow {
-    box-shadow: 0 0px 0 2px  rgba(255, 255, 0, 0.6) !important;
-  }
-  
+  box-shadow: 0 0px 0 2px rgba(255, 255, 0, 0.6) !important;
+}
+
+.custom-pointer {
+  color: #2c2404 !important;
+  cursor: default !important;
+  border: 1px solid #fbbc05 !important;
+  background: linear-gradient(90deg, #fbbc05, #ffea8a) !important;
+}
+
+.custom-pointer:hover {
+  color: black !important;
+}

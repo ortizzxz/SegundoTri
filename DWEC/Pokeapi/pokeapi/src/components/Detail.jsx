@@ -53,7 +53,7 @@ function Detail() {
         <Row>
           <Col lg={4} className="mb-lg-0 p-4">
             <img
-              src={pokemon.sprites.other["official-artwork"].front_default}
+              src={pokemon.sprites.other["official-artwork"].front_default} // la mejor que se ves
               alt={pokemon.name}
               className="img-fluid rounded yellow-shadow border border-1 border-secondary"
             />
@@ -61,13 +61,13 @@ function Detail() {
           <Col lg={6}>
             <h2 className="text-uppercase py-4">{pokemon.name}</h2>
 
+            {/* Tipo de pokemon */}
             <div className="mb-4 d-flex flex-wrap align-items-center">
                 <p className="me-2 mb-0" style={{ fontSize: '18px', fontWeight: '600' }}>Tipo:</p>
                 {pokemon.types.map((type, index) => (
                     <Button
                     key={index}
-                    variant="outline-primary"
-                    className="me-2 mb-2"
+                    className="me-2 mb-2 custom-pointer"
                     >
                     {type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}
                     </Button>
@@ -75,18 +75,18 @@ function Detail() {
             </div>
 
 
-            <ListGroup variant="flush" className="mb-4">
-              <ListGroup.Item>
-                <strong>Altura:</strong> {(pokemon.height / 10).toFixed(1)} m
+            <ListGroup variant="flush" className="mb-4"> 
+              <ListGroup.Item>  {/* La altura está en 'd' así que hay que convertirla */}
+                <strong>Altura:</strong> {(pokemon.height / 10).toFixed(1)} 
               </ListGroup.Item>
               <ListGroup.Item>
                 <strong>Peso:</strong> {(pokemon.weight / 10).toFixed(1)} kg
               </ListGroup.Item>
 
               
-              {pokemon.abilities.map((ability, index) => (
+              {pokemon.abilities.map((ability, index) => ( // Habialidad del pokemons (i + 1)
                 <ListGroup.Item key={index}>
-                  <strong>Habilidad {index + 1}:</strong> {ability.ability.name}
+                  <strong>Habilidad {index + 1}:</strong> {ability.ability.name} 
                 </ListGroup.Item>
               ))}
             </ListGroup>

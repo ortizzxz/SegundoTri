@@ -7,13 +7,13 @@ function PrivateRoute({ children }) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
+    useEffect(() => { // useEffect para ejecutar solo una vez 
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             setUser(user);
             setLoading(false);
         });
 
-        return () => unsubscribe();
+        return () => unsubscribe(); // el unsubscribe detiene el listener de autenticación cuando ya no hace falta
     }, []);
 
     if (loading) {
@@ -22,8 +22,8 @@ function PrivateRoute({ children }) {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
-                            <h3>Loading page...</h3>
-                            <span className="breadcrumb">Loading...</span>
+                            <h3>Cargando página...</h3>
+                            <span className="breadcrumb">Cargando...</span>
                         </div>
                     </div>
                 </div>

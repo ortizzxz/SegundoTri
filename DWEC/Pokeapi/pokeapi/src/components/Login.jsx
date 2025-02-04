@@ -23,7 +23,7 @@ function Login() {
     if (isMobile) {
       signInWithRedirect(auth, provider)
     .then(() => {
-      console.log("Redirect initiated"); // Debugging line
+      console.log("Redirect initiated"); // Debugging 
     })
     .catch((error) => {
       console.error("Google Sign-In Redirect Error:", error);
@@ -55,17 +55,17 @@ function Login() {
         const errorMessage = error.message;
 
         if (errorCode === "auth/user-not-found") {
-          setError("User not found. Please check your email or sign up.");
+          setError("Usuario no encontrado. Verifique su correo o regístrese.");
         } else if (errorCode === "auth/wrong-password") {
-          setError("Incorrect password. Please try again.");
+          setError("Contraseña incorrecta. Por favor inténtelo de nuevo.");
         } else if (errorCode === "auth/invalid-credential") {
-          setError("Incorrect credentials. Please try again.");
+          setError("Datos incorrectos. Por favor inténtelo de nuevo.");
         } else if (errorCode === "auth/invalid-email") {
           setError(
-            "Invalid email format. Please provide a valid email address."
+            "Formato de correo inválid. Inténtelo de nuevo."
           );
         } else {
-          setError("Error signing in: " + errorMessage);
+          setError("Error iniciando sesión: " + errorMessage);
         }
       });
   }

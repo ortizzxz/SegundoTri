@@ -30,13 +30,8 @@ function RedirectHandler({ children }) {
 
     getRedirectResult(auth)
       .then((result) => {
-        console.log("Redirect result received:", result);
-        
         if (result?.user) {
-          console.log("User signed in via redirect:", result.user);
           navigate("/game");
-        } else {
-          console.log("No user found in redirect result.");
         }
       })
       .catch((error) => {
@@ -107,7 +102,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "game",
+        path: "game", // nuesra ruta protegida con PrivateRoute
         element: (
           <>
             <PrivateRoute>
