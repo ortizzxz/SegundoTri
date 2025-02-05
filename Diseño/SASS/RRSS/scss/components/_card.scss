@@ -1,0 +1,36 @@
+.product {
+    position: relative;
+    padding: 2rem;
+    flex-basis: 40rem;
+    flex-grow: 1;
+
+    display: flex;
+    align-items: flex-start;
+
+    border: 1px solid black;
+    margin: 0.2rem;
+  &-media {
+    column-gap: 1.5rem;
+    width: 10rem;
+    height: 10rem;
+    img {
+      width: inherit;
+      height: inherit;
+      object-fit: cover;
+    }
+  }
+
+  &-content {
+    flex: 1;
+
+    h3{
+        font-size: size(md);
+    }p{
+        font-size: sixe(xs);
+    }
+  }
+
+  @for $i from 1 through 6{
+    
+  }
+}

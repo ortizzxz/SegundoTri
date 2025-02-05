@@ -1,0 +1,17 @@
+
+.first-nav {
+    //posicionamiento
+    grid-column: 6/9;
+    grid-row: 1/2;
+
+    @include nav-styles;
+}
+
+.second-nav {
+    //posicionamiento
+    grid-column: 4/6;
+    grid-row: 2/2;
+
+    @include navigation;
+    @include nav-styles;
+}

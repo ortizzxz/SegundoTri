@@ -1,0 +1,66 @@
+@mixin flexposition($direction: row, $justifycontent: center, $alignitem: center){
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justifycontent;
+    align-items: $alignitem;
+}
+
+@mixin nav-styles {
+    &-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    &-item {
+        list-style: none;
+    }
+
+    &-link {
+        text-decoration: none;
+        color: red;
+        padding: 0.3rem;
+        
+        &:hover {
+            color: yellow;
+        }
+    }
+}
+
+@mixin navigation(){
+    &-list{
+        @include flexposition(row, space-around);
+        height: 100%;
+    }
+
+    &-item{
+        list-style-type: none;
+    }
+
+    &-link{
+        color: color(primary);
+        font-size: size(xs);
+        text-decoration: none;
+        padding: 0.5rem;
+        
+        &:link::after{
+            position: absolute;
+            content: "";
+            left: 0;
+            width: 100%;
+            height: 0.25rem;
+            background-color: pink;
+            bottom: 0;
+            transform-origin: left;
+            transform: scale(0);
+            transition: transform 0.6s cubic-bezier(1, 0, 0, 1);
+        }
+
+        &:hover::after{
+            transform: scale(1);
+        }
+    }
+
+
+    
+}
