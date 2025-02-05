@@ -53,7 +53,6 @@ class UserRepository
         }
     }
 
-<<<<<<< HEAD
     public function updatePassword($email, $hashedPassword)
     {
         $sql = "UPDATE usuarios SET password = ? WHERE email = ?";
@@ -61,7 +60,5 @@ class UserRepository
         return $stmt->execute([$hashedPassword, $email]);
     }
 
-=======
->>>>>>> 381a7006baff64be86b8025f8a82287b465a96b8
 }
 
