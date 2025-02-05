@@ -53,5 +53,12 @@ class UserRepository
         }
     }
 
+    public function updatePassword($email, $hashedPassword)
+    {
+        $sql = "UPDATE usuarios SET password = ? WHERE email = ?";
+        $stmt = $this->database->prepare($sql);
+        return $stmt->execute([$hashedPassword, $email]);
+    }
+
 }
 

@@ -4,8 +4,13 @@
   --transparente: #000000da;
   --fuente-titulos: "Orbitron", serif;
 }
+
 body {
   font-family: var(--fuente-titulos);
+}
+
+.background-video {
+  background-color: #000;
 }
 
 .hero {
@@ -20,8 +25,8 @@ body {
   font-family: var(--fuente-titulos);
   border-radius: 1rem;
   margin-top: 1rem;
-  padding: 10px 20px;
-  color: #EF0808;
+  padding: 0.80rem 1.5rem;
+  color: #ef0808;
 }
 
 /** CAR CARDS **/
@@ -51,24 +56,35 @@ body {
 }
 
 /** LINK BUTTONS **/
-.nav-link{
+.nav-link {
   color: black;
-  background: rgb(167,115,66);
-  background: linear-gradient(90deg, rgba(167,115,66,1) 0%, rgba(118,192,155,1) 100%);
+  background: rgb(167, 115, 66);
+  background: linear-gradient(
+    90deg,
+    rgba(167, 115, 66, 1) 0%,
+    rgba(118, 192, 155, 1) 100%
+  );
   margin: 0 0.2rem;
 }
 
-.nav-pills .nav-link.active, 
+.nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
-  color: #E05138 !important;
+  color: #e05138 !important;
 }
 
-.video-main-div{
+.nav-link:hover {
+  background-color: rgba(118, 192, 155, 0.8);
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+
+.video-main-div {
   background-color: rgba(0, 0, 0, 0.8);
   padding: 1rem;
 }
 
-#carContent{
+#carContent {
   color: white;
 }
 
@@ -76,7 +92,7 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
-.container-fluid-II{
+.container-fluid-II {
   min-height: 100dvh;
 }
 
@@ -115,7 +131,7 @@ body {
   }
 
   .container-fluid.hero {
-    padding: 20px;
+    padding: 0.6rem;
   }
 }
 
@@ -127,7 +143,7 @@ body {
 
   .hero h1 {
     font-size: 1.6rem;
-    padding: 5px 10px;
+    padding: 0.20rem 0.40rem;
   }
 
   .card-fix-height {
@@ -145,7 +161,7 @@ body {
 
   .col-md-6 {
     width: 100%;
-    padding: 10px;
+    padding: 0.2rem;
   }
 
   #carouselExampleControls {
@@ -156,7 +172,7 @@ body {
 @media (max-width: 576px) {
   .hero h1 {
     font-size: 1.4rem;
-    padding: 5px 10px;
+    padding: 0.2rem 0.4rem;
   }
 
   .card-fix-height {
@@ -173,19 +189,21 @@ body {
   }
 
   .container-fluid.py-5 {
-    padding: 20px;
+    padding: 0.5rem;
   }
 
-  .col-md-4, .col-md-8 {
+  .col-md-4,
+  .col-md-8 {
     width: 100%;
-    padding: 10px;
+    padding: 0.8rem;
   }
 
   .carousel-item img {
-    height: 30vh; 
+    height: 30vh;
   }
 
-  .form-control, .form-select {
+  .form-control,
+  .form-select {
     font-size: 1rem;
   }
 }
@@ -196,7 +214,7 @@ body {
   }
 
   .hero h1 {
-    font-size: 1.2rem; 
+    font-size: 1.2rem;
   }
 
   .carousel-item img {

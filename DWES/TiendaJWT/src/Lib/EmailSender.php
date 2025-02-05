@@ -25,11 +25,11 @@ class EmailSender
     private function setupSMTP()
     {
         $this->mail->isSMTP();
-        $this->mail->Host = $_ENV['SMTP_HOST']; 
+        $this->mail->Host = $_ENV['SMTP_HOST'];
         $this->mail->SMTPAuth = true;
         $this->mail->Username = $_ENV['SMTP_USERNAME'];
         $this->mail->Password = $_ENV['SMTP_PASSWORD'];
-        $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; 
+        $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $this->mail->Port = $_ENV['SMTP_PORT'];
         $this->mail->CharSet = 'UTF-8';
     }
@@ -52,7 +52,7 @@ class EmailSender
         }
     }
 
-    public function sendConfirmation(String $recipientEmail, String $recipientName, String $token)
+    public function sendConfirmation(string $recipientEmail, string $recipientName, string $token)
     {
         try {
             // Configuramos el remitente y el destinatario
@@ -66,11 +66,37 @@ class EmailSender
 
             $contenido = '<html>';
             $contenido .= "<p>Hola " . $recipientName . ", Has creado tu cuenta en OrtizShop.com. Solo debes confirmarla presionando el siguiente enlace:</p>";
-            $contenido .= "<p>Presiona aqui: <a href='" . BASE_URL . "confirmAccount/" . $this->token . "'>Confirmar Cuenta</a>";
+            $contenido .= "<p>Presiona aqui: <a href='" . BASE_URL . "confirmAccount/" . $token . "'>Confirmar Cuenta</a>";
             $contenido .= "<p>Si tú no solicitaste este cambio, puedes ignorar este mensaje.</p>";
             $contenido .= '</html>';
 
             $this->mail->Body = $contenido;
+
+            // Enviamos el correo
+            return $this->mail->send();
+        } catch (Exception $e) {
+            echo "Error enviando el correo de confirmación: {$this->mail->ErrorInfo}";
+            return false;
+        }
+    }
+
+    public function sendPasswordRecovery($email, $name, $token)
+    {
+        try {
+            $subject = "Recuperación de contraseña";
+            $resetLink = BASE_URL . "reset-password/" . $token;
+            $message = "Hola $name,\n\nHas solicitado restablecer tu contraseña. Por favor, haz clic en el siguiente enlace para crear una nueva contraseña:\n\n$resetLink\n\nSi no has solicitado este cambio, puedes ignorar este correo.\n\nSaludos,\nTu equipo de soporte";
+
+            // Configuramos el remitente y el destinatario
+            $this->mail->setFrom('tienda@online.com', 'Ortiz Shop');
+            $this->mail->addAddress($email, $name);
+            $this->mail->Subject = 'Recupera tu Cuenta';
+
+            // Configuramos el contenido HTML
+            $this->mail->isHTML(true);
+            $this->mail->CharSet = 'UTF-8';
+
+            $this->mail->Body = $message;
 
             // Enviamos el correo
             return $this->mail->send();

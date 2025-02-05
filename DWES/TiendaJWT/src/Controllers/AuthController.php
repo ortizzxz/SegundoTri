@@ -4,6 +4,7 @@ namespace Controllers;
 use Lib\Pages;
 use Models\User;
 use Services\UserService;
+use Services\CartService;
 use Security\Security;
 use Lib\EmailSender;
 use Exception;
@@ -14,6 +15,7 @@ class AuthController
 {
     private Pages $pages;
     private UserService $userService;
+    private CartService $cartService;
     private Security $security;
     private EmailSender $emailSender;
 
@@ -24,6 +26,7 @@ class AuthController
     {
         $this->pages = new Pages();
         $this->userService = new UserService();
+        $this->cartService = new CartService();
         $this->security = new Security();
         $this->emailSender = new EmailSender();
     }
@@ -36,10 +39,20 @@ class AuthController
                 $userEmail = $_POST['data']['email'];
                 $userPassword = $_POST['data']['password'];
 
+
                 if ($this->userService->validateEmail($userEmail)) {
                     $userDB = $this->userService->findByEmail($userEmail);
+
+                    if ($userDB['confirmado'] != 1) {
+                        $_SESSION['confirmado'] = 'fail';
+                        $_SESSION['login'] = 'no-confirmado';
+                        header("Location: " . BASE_URL . '/login'); // Redirigir a la página principal
+                        exit();
+                    }
+
                     if ($userDB) { // password_verify($userPassword, $userDB['password'])
                         if ($this->security->validatePassword($userPassword, $userDB['password'])) {
+                            $this->cartService->transferSessionCartToDatabase($userDB['id']);
                             $_SESSION['login'] = 'success';
                             $_SESSION['identity'] = $userDB; // Usar datos de la BD
                             header("Location: " . BASE_URL); // Redirigir a la página principal
@@ -161,4 +174,68 @@ class AuthController
         header("Location: " . BASE_URL); // Redirigir a la página principal o login
         exit();
     }
+
+    public function forgotPassword()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = $_POST['email'] ?? '';
+
+            if ($this->userService->validateEmail($email)) {
+                $user = $this->userService->findByEmail($email);
+
+                if ($user) {
+                    $token = Security::generateToken($user['email'], $user['nombre']);
+                    $this->emailSender->sendPasswordRecovery($user['email'], $user['nombre'], $token);
+                    $_SESSION['message'] = 'Se ha enviado un correo con instrucciones para recuperar tu contraseña.';
+                } else {
+                    $_SESSION['error'] = 'No existe una cuenta con ese correo electrónico.';
+                }
+            } else {
+                $_SESSION['error'] = 'Por favor, introduce un correo electrónico válido.';
+            }
+        }
+
+        $this->pages->render('Auth/forgotPasswordForm');
+    }
+
+    public function resetPassword($token)
+    {
+        try {
+            $payload = Security::decode($token, Security::secretKey());
+            $email = $payload['data']['email'];
+            error_log("Email from token: " . $email); // Log para depuración
+
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $password = $_POST['password'] ?? '';
+                $confirmPassword = $_POST['confirm_password'] ?? '';
+                error_log("Password: " . $password); // Log para depuración
+
+                if ($password === $confirmPassword) {
+                    $hashedPassword = $this->security->encryptPassword($password);
+                    error_log("Hashed password: " . $hashedPassword); // Log para depuración
+
+                    $result = $this->userService->updatePassword($email, $hashedPassword);
+                    error_log("Update result: " . var_export($result, true)); // Log para depuración
+
+                    if ($result) {
+                        $_SESSION['authsuccess'] = 'success';
+                        header('Location: ' . BASE_URL . 'login');
+                        exit();
+                    } else {
+                        $_SESSION['error'] = 'Hubo un error al actualizar la contraseña.';
+                    }
+                } else {
+                    $_SESSION['error'] = 'Las contraseñas no coinciden.';
+                }
+            }
+
+            $this->pages->render('Auth/resetPasswordForm', ['token' => $token]);
+        } catch (Exception $e) {
+            error_log("Exception: " . $e->getMessage()); // Log para depuración
+            $_SESSION['error'] = 'Token inválido o expirado.';
+            header('Location: ' . BASE_URL . 'login');
+            exit();
+        }
+    }
+
 }

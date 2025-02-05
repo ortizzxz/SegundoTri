@@ -3,6 +3,7 @@ namespace Controllers;
 use Lib\Pages;
 use Services\ProductService;
 use Models\Cart;
+use Services\CartService;
 
 session_start();
 
@@ -10,124 +11,168 @@ class CartController
 {
     private Pages $pages;
     private ProductService $productService;
+    private CartService $cartService;
 
     public function __construct()
     {
         $this->pages = new Pages();
         $this->productService = new ProductService();
+        $this->cartService = new CartService();
     }
 
     public function addProduct($id)
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $product = $this->productService->getById($id);
-
-            if ($product) {
-                if (!isset($_SESSION['cart'])) {
-                    $_SESSION['cart'] = ['items' => [], 'total' => 0];
-                }
-
-                $productInCart = false;
-                foreach ($_SESSION['cart']['items'] as &$item) {
-                    if ($item['id'] == $id) {
-                        $item['quantity']++;
-                        $item['subtotal'] = $item['precio'] * $item['quantity'];
-                        $productInCart = true;
-                        break;
-                    }
-                }
-
-                if (!$productInCart) {
-                    $_SESSION['cart']['items'][] = [
-                        'id' => $id,
-                        'nombre' => $product['nombre'],
-                        'precio' => $product['precio'],
-                        'quantity' => 1,
-                        'subtotal' => $product['precio']
-                    ];
-                }
-
-                $this->recalculateTotal();
-                $_SESSION['success'] = "Producto añadido al carrito correctamente.";
-            } else {
-                $_SESSION['error'] = "No se pudo encontrar el producto.";
-            }
-
-            header("Location: " . BASE_URL . "products");
-            exit();
-        } else { // get
-            header("Location: " . BASE_URL . "products");
-            exit();
+        $product = $this->productService->getById($id);
+        if (!$product) {
+            $_SESSION['error'] = "Product not found.";
+            header('Location: ' . BASE_URL . 'products');
+            exit;
         }
+
+        $userId = $_SESSION['identity']['id'] ?? null;
+        if ($userId) {
+            // User is logged in, add to database cart
+            $cartId = $this->cartService->getCartForUser($userId);
+            $result = $this->cartService->addToCart($cartId, $id, 1, $product['precio']);
+        } else {
+            // User is not logged in, add to session cart
+            if (!isset($_SESSION['cart'])) {
+                $_SESSION['cart'] = [];
+            }
+            $result = $this->addToSessionCart($id, 1, $product['precio']);
+        }
+
+        if ($result) {
+            $_SESSION['success'] = "Producto añadido exitosamente.";
+        } else {
+            $_SESSION['error'] = "Ha ocurrido un error al añadir el producto.";
+        }
+
+        header('Location: ' . BASE_URL . 'products');
+        exit;
+    }
+
+    private function addToSessionCart($productId, $quantity, $price)
+    {
+        if (isset($_SESSION['cart'][$productId])) {
+            $_SESSION['cart'][$productId]['quantity'] += $quantity;
+        } else {
+            $_SESSION['cart'][$productId] = [
+                'quantity' => $quantity,
+                'price' => $price
+            ];
+        }
+        return true;
     }
 
     public function displayCart()
     {
-        $cart = $_SESSION['cart'] ?? ['items' => [], 'total' => 0];
-        $cartItems = $cart['items'] ?? [];
-
-        // Obtener el stock para cada item en el carrito
-        foreach ($cartItems as &$item) {
-            if (isset($item['id'])) {
-                $item['stock'] = $this->productService->getStockById($item['id']);
-            } else {
-                $item['stock'] = 0; // O cualquier otro valor predeterminado
-            }
+        $userId = $_SESSION['identity']['id'] ?? null;
+        if ($userId) {
+            $cartId = $this->cartService->getCartForUser($userId);
+            $cartItems = $this->cartService->getCartItems($cartId);
+            $total = $this->cartService->getCartTotal($cartId);
+        } else {
+            $cartItems = $this->getSessionCartItems();
+            $total = $this->calculateSessionCartTotal();
         }
 
-        $this->pages->render('Cart/display', ['cartItems' => $cartItems, 'total' => $cart['total']]);
+        $this->pages->render('Cart/display', [
+            'cartItems' => $cartItems,
+            'total' => $total
+        ]);
     }
 
-    public function removeProduct($id)
+    private function getSessionCartItems()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_SESSION['cart']['items'])) {
-                foreach ($_SESSION['cart']['items'] as $key => $item) {
-                    if ($item['id'] == $id) {
-                        unset($_SESSION['cart']['items'][$key]);
-                        $_SESSION['success'] = "Producto eliminado del carrito.";
-                        break;
-                    }
-                }
-                $_SESSION['cart']['items'] = array_values($_SESSION['cart']['items']); //reindexar el array
-                $this->recalculateTotal();
-            }
-
-            header("Location: " . BASE_URL . "cart");
-            exit();
+        $cartItems = [];
+        foreach ($_SESSION['cart'] ?? [] as $productId => $item) {
+            $product = $this->productService->getById($productId);
+            $cartItems[] = [
+                'id' => $productId,
+                'nombre' => $product['nombre'],
+                'precio' => $item['price'],
+                'quantity' => $item['quantity'],
+                'subtotal' => $item['price'] * $item['quantity'],
+                'stock' => $product['stock'] // Add this line to include stock information
+            ];
         }
+        return $cartItems;
     }
+
+
+    private function calculateSessionCartTotal()
+    {
+        $total = 0;
+        foreach ($_SESSION['cart'] ?? [] as $item) {
+            $total += $item['price'] * $item['quantity'];
+        }
+        return $total;
+    }
+
+    public function removeProduct($productId)
+    {
+        $userId = $_SESSION['identity']['id'] ?? null;
+
+        if ($userId) {
+            $cartId = $this->cartService->getCartForUser($userId);
+            $result = $this->cartService->removeFromCart($cartId, $productId);
+        } else {
+            unset($_SESSION['cart'][$productId]);
+            $result = true;
+        }
+
+        if ($result) {
+            $_SESSION['success'] = "Producto eliminado del carrito exitosamente.";
+        } else {
+            $_SESSION['error'] = "Ha habido un fallo al eliminar el producto del carrito.";
+        }
+
+        error_log("Final result: " . ($_SESSION['success'] ?? $_SESSION['error']));
+        header('Location: ' . BASE_URL . 'cart');
+        exit;
+    }
+
 
     public function updateQuantity($id)
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $action = $_POST['action'] ?? '';
-            $stock = $this->productService->getStockById($id);
-
-            foreach ($_SESSION['cart']['items'] as &$item) {
-                if ($item['id'] == $id) {
-                    if ($action === 'increase' && $item['quantity'] < $stock) {
-                        $item['quantity']++;
-                    } elseif ($action === 'decrease' && $item['quantity'] > 1) {
-                        $item['quantity']--;
-                    }
-                    $item['subtotal'] = $item['precio'] * $item['quantity'];
-                    break;
-                }
-            }
-
-            $this->recalculateTotal();
-            header("Location: " . BASE_URL . "cart");
-            exit();
+        $action = $_POST['action'] ?? '';
+        if (!in_array($action, ['increase', 'decrease'])) {
+            $_SESSION['error'] = "Invalid action.";
+            header('Location: ' . BASE_URL . 'cart');
+            exit;
         }
+
+        $userId = $_SESSION['identity']['id'] ?? null;
+        if ($userId) {
+            $cartId = $this->cartService->getCartForUser($userId);
+            $result = $this->cartService->updateQuantity($cartId, $id, $action);
+        } else {
+            $result = $this->updateSessionCartQuantity($id, $action);
+        }
+
+        if ($result) {
+            $_SESSION['success'] = "Cart updated successfully.";
+        } else {
+            $_SESSION['error'] = "Failed to update cart.";
+        }
+
+        header('Location: ' . BASE_URL . 'cart');
+        exit;
     }
 
-    private function recalculateTotal()
+    private function updateSessionCartQuantity($productId, $action)
     {
-        $total = 0;
-        foreach ($_SESSION['cart']['items'] as $item) {
-            $total += $item['subtotal'];
+        if (!isset($_SESSION['cart'][$productId])) {
+            return false;
         }
-        $_SESSION['cart']['total'] = $total;
+
+        if ($action === 'increase') {
+            $_SESSION['cart'][$productId]['quantity']++;
+        } elseif ($action === 'decrease') {
+            $_SESSION['cart'][$productId]['quantity'] = max(1, $_SESSION['cart'][$productId]['quantity'] - 1);
+        }
+
+        return true;
     }
 }

@@ -1,0 +1,90 @@
+$primary-color: rgb(113, 91, 91);
+$secondary-color: rgb(98, 43, 43);
+$text-color: #333;
+$background-color: #ecf0f1;
+$contrast-color: white;
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin box-shadow($opacity: 0.1) {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, $opacity);
+}
+
+@mixin reset-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+@mixin base-container {
+  padding: 20px;
+  border-radius: 5px;
+}
+
+body {
+  background-color: $background-color;
+}
+
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  @include base-container;
+  background-color: $primary-color;
+  color: $contrast-color;
+  text-align: center;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.navbar {
+  background-color: $secondary-color;
+  padding: 1rem;
+  margin: 0.5rem;
+
+  ul {
+    @include reset-list;
+    @include flex-center;
+
+    li {
+      margin: 0 10px;
+
+      a {
+        color: $contrast-color;
+        text-decoration: none;
+        transition: all 0.3s ease;
+
+        &:hover {
+          text-decoration: underline;
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+}
+    
+.subcaja {
+  @include base-container;
+  margin: 0.5rem;
+  flex-basis: 100%;
+  background-color: $primary-color;
+  @include box-shadow(0.2);
+
+  h2 {
+    color: $contrast-color;
+  }
+
+  p {
+    color: $contrast-color;
+  }
+}
+

@@ -111,11 +111,7 @@ class Routes
             (new CartController())->displayCart();
         });
         
-        Router::add('POST', '/cart/add/:id', function (int $id) {
-            (new CartController())->addProduct($id);
-        });
-        
-        
+    
         Router::add('POST', '/cart/update/:id', function (int $id) {
             (new CartController())->updateQuantity($id);
         });
@@ -148,6 +144,30 @@ class Routes
             } else {
                 echo 'Invalid or expired token';
             }
+        });
+        
+        Router::add('GET', '/forgot-password', function () {
+            (new AuthController())->forgotPassword();
+        });
+        
+        Router::add('POST', '/forgot-password', function () {
+            (new AuthController())->forgotPassword();
+        });
+        
+        Router::add('GET', '/reset-password/:token', function ($token) {
+            (new AuthController())->resetPassword($token);
+        });
+        
+        Router::add('POST', '/reset-password/:token', function ($token) {
+            (new AuthController())->resetPassword($token);
+        });
+
+        Router::add('GET', '/cart/add/:id', function ($id) {
+            (new CartController())->addProduct($id);
+        });
+        
+        Router::add('POST', '/cart/add/:id', function ($id) {
+            (new CartController())->addProduct($id);
         });
         
         

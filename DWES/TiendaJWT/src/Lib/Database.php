@@ -44,6 +44,17 @@ class Database
         }
     }
 
+    public function lastInsertId()
+    {
+        return $this->conexion->lastInsertId();
+    }
+
+
+    public function escape($string)
+    {
+        return $this->conexion->quote($string);
+    }
+
     public function query(string $consultaSQL): mixed
     {
         try {
@@ -55,6 +66,15 @@ class Database
         }
     }
 
+    public function customQuery($sql, $params = [])
+    {
+        $stmt = $this->conexion->prepare($sql);
+        foreach ($params as $param => $value) {
+            $stmt->bindValue($param, $value);
+        }
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function extractRegister(): mixed
     {
@@ -66,18 +86,13 @@ class Database
         return $this->resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function execute(string $query, array $params): bool
+    public function execute($sql, $params = [])
     {
-        try {
-            $stmt = $this->conexion->prepare($query);
-            $stmt->execute($params);
-            $stmt->closeCursor();
-            return true;
-        } catch (PDOException $e) {
-            echo "Error al ejecutar la query: " . $e->getMessage();
-            return false;
-        }
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->rowCount(); // Return the number of affected rows
     }
+
 
 
     public function queryOne($sql, $params)

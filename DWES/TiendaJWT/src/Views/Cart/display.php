@@ -23,7 +23,9 @@
         echo "<tbody>";
 
         $total = 0;
+        // die(var_dump($cartItems));
         foreach ($cartItems as $item) {
+            $productId = isset($item['product_id']) ? $item['product_id'] : $item['id'];
             $subtotal = $item['precio'] * $item['quantity'];
             $total += $subtotal;
 
@@ -31,18 +33,18 @@
             echo "<td>" . htmlspecialchars($item['nombre']) . "</td>";
             echo "<td>€" . number_format($item['precio'], 2) . "</td>";
             echo "<td>
-                    <form action='" . BASE_URL . "cart/update/" . $item['id'] . "' method='POST' style='display:inline;'>
-                        <button type='submit' name='action' value='decrease' class='quantity-btn' " . ($item['quantity'] <= 1 ? 'disabled' : '') . ">-</button>
-                        <span class='quantity'>" . $item['quantity'] . "</span>
-                        <button type='submit' name='action' value='increase' class='quantity-btn' " . ($item['quantity'] >= $item['stock'] ? 'disabled' : '') . ">+</button>
-                    </form>
-                  </td>";
+            <form action='" . BASE_URL . "cart/update/" . $productId . "' method='POST' style='display:inline;'>
+                <button type='submit' name='action' value='decrease' class='quantity-btn' " . ($item['quantity'] <= 1 ? 'disabled' : '') . ">-</button>
+                <span class='quantity'>" . $item['quantity'] . "</span>
+                <button type='submit' name='action' value='increase' class='quantity-btn' " . ($item['quantity'] >= $item['stock'] ? 'disabled' : '') . ">+</button>
+            </form>
+            </td>";
             echo "<td>€" . number_format($subtotal, 2) . "</td>";
             echo "<td>
-                    <form action='" . BASE_URL . "cart/remove/" . $item['id'] . "' method='POST' style='display:inline;'>
-                        <input type='submit' value='Eliminar' class='remove-btn'>
-                    </form>
-                  </td>";
+            <form action='" . BASE_URL . "cart/remove/" . $productId . "' method='POST' style='display:inline;'>
+                <input type='submit' value='Eliminar' class='remove-btn'>
+            </form>
+            </td>";
             echo "</tr>";
         }
 

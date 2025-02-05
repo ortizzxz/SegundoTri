@@ -1,0 +1,57 @@
+$colors: (
+  primary: #007bff,
+  secondary: #6c757d,
+  success: #28a745,
+  danger: #dc3545,
+  warning: #ffc107,
+  info: #17a2b8,
+  light: #f8f9fa,
+  dark: #343a40
+);
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 100;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  border: 2px solid transparent;
+
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+@each $name, $color in $colors {
+  .btn-#{$name} {
+    background-color: $color;
+    color: if($name == light, #000, #fff); 
+    border-color: $color;
+
+    &:hover {
+      background-color: darken($color, 10%);
+    }
+  }
+}
+
+@each $name, $color in $colors {
+  .btn-outline-#{$name} {
+    background-color: transparent;
+    color: $color;
+    border: 2px solid $color;
+
+    &:hover {
+      background-color: $color;
+      color: if($name == light, #000, #fff);
+    }
+  }
+}
