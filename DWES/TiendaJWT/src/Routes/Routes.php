@@ -146,6 +146,7 @@ class Routes
             }
         });
         
+<<<<<<< HEAD
         Router::add('GET', '/forgot-password', function () {
             (new AuthController())->forgotPassword();
         });
@@ -170,6 +171,8 @@ class Routes
             (new CartController())->addProduct($id);
         });
         
+=======
+>>>>>>> 381a7006baff64be86b8025f8a82287b465a96b8
         
 
         Router::dispatch();

@@ -1,4 +1,5 @@
 <div class="form-container">
+<<<<<<< HEAD
     <?php if (isset($_SESSION['register']) && $_SESSION['register'] == 'success'): ?>
         <p class="success-register">Usuario registrado correctamente</p>
     <?php endif; ?>
@@ -13,6 +14,19 @@
     <?php endif; ?>
 
 
+=======
+<?php if (isset($_SESSION['register']) && $_SESSION['register'] == 'success'): ?>
+        <p class="success-register">Usuario registrado correctamente</p>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['errors']) && is_array($_SESSION['errors'])): ?>
+        <div class="error-messages">
+            <?php foreach ($_SESSION['errors'] as $error): ?>
+                <p class="error"><?= htmlspecialchars($error) ?></p>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+>>>>>>> 381a7006baff64be86b8025f8a82287b465a96b8
     <h3>Iniciar sesión</h3>
     <form action="<?= BASE_URL ?>login" method="POST" class="registration-form">
         <div class="form-group">
