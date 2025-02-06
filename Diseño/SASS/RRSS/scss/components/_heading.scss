@@ -1,0 +1,14 @@
+.heading {
+    grid-column: 3/8;
+    grid-row: 1/2;
+    padding: 2rem;
+    text-align: center;
+
+    &-text {
+        font-size: size(xl);
+        font-family: $font-family;
+        letter-spacing: 0.25rem;
+        color: color(quaternary);
+        font-weight: lighter;
+    }
+}
