@@ -1,26 +1,12 @@
-<h2>Confirmando tu cuenta...</h2>
-<p id="message">Por favor, espera...</p>
+<?php if (isset($_SESSION['confirmation'])): ?>
+    <?php if ($_SESSION['confirmation'] === 'success'): ?>
+        <p style="color: green;">Tu cuenta ha sido exitosamente verificada. Ya puedes iniciar sesión.</p>
+    <?php elseif ($_SESSION['confirmation'] === 'fail'): ?>
+        <p style="color: red;">Ha habido un error confirmando tu cuenta o el token ya ha expirado. Por favor intentalo nuevamente más tarde.</p>
+    <?php endif; ?>
+    <?php unset($_SESSION['confirmation']); ?>
+<?php else: ?>
+    <p>Por favor revise su correo y haga clic en el enlace de confirmación.</p>
+<?php endif; ?>
 
-<script>
-    const token = localStorage.getItem("auth_token");
-
-    if (!token) {
-        document.getElementById("message").innerText = "No hay token disponible.";
-    } else {
-        fetch("http://localhost/proyecto/api/confirmAccount", {
-            method: "POST",
-            headers: {
-                "Authorization": "Bearer " + token,
-                "Content-Type": "application/json"
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("message").innerText = data.message || data.error;
-        })
-        .catch(error => {
-            document.getElementById("message").innerText = "Error en la confirmación.";
-            console.error("Error:", error);
-        });
-    }
-</script>
+<p><a href="<?php echo BASE_URL; ?>">Volver a la página principal</a></p>

@@ -40,6 +40,9 @@
 </div>
 
 <?php
+if (isset($_SESSION['register'])) {
+    unset($_SESSION['register']);
+}
 if (isset($_SESSION['confirmado'])) {
     unset($_SESSION['confirmado']);
 }

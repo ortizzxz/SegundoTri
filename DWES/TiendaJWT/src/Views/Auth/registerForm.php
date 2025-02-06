@@ -65,18 +65,4 @@ if (isset($_SESSION['errors'])) {
 if (isset($_SESSION['register'])) {
     unset($_SESSION['register']);
 }
-
-
 ?>
-
-<script src="./public/js/auth.js"></script>
-<script>
-    document.getElementById("registerForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
-
-        registerUser(email, password, name);
-    });
-</script>

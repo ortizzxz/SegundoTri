@@ -14,6 +14,7 @@ return array(
     'Security\\' => array($baseDir . '/src/Security'),
     'Routes\\' => array($baseDir . '/src/Routes'),
     'Repositories\\' => array($baseDir . '/src/Repositories'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
     'Models\\' => array($baseDir . '/src/Models'),
@@ -22,4 +23,5 @@ return array(
     'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
     'Controllers\\' => array($baseDir . '/src/Controllers'),
+    'Api\\' => array($baseDir . '/src/Api'),
 );

@@ -1,3 +1,11 @@
+<?php if (isset($_SESSION['success'])): ?>
+        <p class="success-message"><?= htmlspecialchars($_SESSION['success']) ?></p>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['error'])): ?>
+        <p class="error"><?= htmlspecialchars($_SESSION['error']) ?></p>
+<?php endif; ?>
+
 <h1>Mis Pedidos</h1>
 
 <?php if (isset($pedidos) && !empty($pedidos)): ?>
@@ -12,7 +20,7 @@
                 <th>Estado</th>
                 <th>Total</th>
                 <?php if ($_SESSION['identity']['rol'] == $_ENV['ADMIN']): ?>
-                    <th>Acción</th> 
+                    <th>Acción</th>
                 <?php endif; ?>
             </tr>
         </thead>
@@ -52,3 +60,10 @@
 <?php else: ?>
     <p>No tienes pedidos.</p>
 <?php endif; ?>
+
+
+<?php
+// Limpiar mensajes de sesión después de mostrarlos
+unset($_SESSION['message']);
+unset($_SESSION['error']);
+?>

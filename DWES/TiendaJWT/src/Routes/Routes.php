@@ -171,7 +171,17 @@ class Routes
         });
         
         
-
+        Router::add('POST', '/order/create', function(){
+           (new OrderController())->createOrder(); 
+        });
+        Router::add('GET', '/order/paypalSuccess', function(){
+           (new OrderController())->paypalSuccess(); 
+        });
+        Router::add('GET', '/order/paypalCancel', function(){
+           (new OrderController())->paypalCancel(); 
+        });
+        
+        
         Router::dispatch();
     }
 }

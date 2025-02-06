@@ -9,6 +9,8 @@ use Services\OrderService;
 use Services\ProductService;
 use Models\Order;
 use Models\User;
+use Services\PayPalServices;
+
 
 session_start();
 
@@ -20,6 +22,7 @@ class OrderController
     private CartService $cartService;
 
     private EmailSender $emailSender;
+    private PayPalServices $paypalService;
 
 
     public function __construct()
@@ -29,6 +32,8 @@ class OrderController
         $this->productService = new ProductService();
         $this->cartService = new CartService();
         $this->emailSender = new EmailSender();
+        $this->paypalService = new PayPalServices();
+
     }
 
     public function createOrder()
@@ -48,14 +53,25 @@ class OrderController
         $cartId = $this->cartService->getCartForUser($userId);
         if ($this->cartService->isEmptyCart($userId)) {
             $_SESSION['error'] = 'El carrito está vacío';
-            header("Location: " . BASE_URL);
+            header("Location: " . BASE_URL . "cart");
             exit();
         }
 
         $cartItems = $this->cartService->getCartItems($cartId);
 
-        if (!$this->checkStockAvailability($cartItems)) {
-            return;
+        // Aquí transformamos los $cartItems al formato adecuado
+        $cartItemsFormatted = ['items' => []];
+        foreach ($cartItems as $item) {
+            $cartItemsFormatted['items'][] = [
+                'id' => $item['product_id'],
+                'quantity' => $item['quantity'],
+            ];
+        }
+
+        if (!$this->checkStockAvailability($cartItemsFormatted['items'])) {
+            $_SESSION['error'] = 'Uno o más productos no tienen suficiente stock.';
+            header("Location: " . BASE_URL . "cart");
+            exit();
         }
 
         $user = User::fromArray($_SESSION['identity']);
@@ -69,22 +85,25 @@ class OrderController
             return;
         }
 
-        $orderSuccessful = $this->orderService->createOrder($order, $cartItems);
-
-        if (!$orderSuccessful) {
-            $_SESSION['error'] = "Ha habido un error con el pedido";
+        // Ahora pasamos los cartItems ya formateados
+        try {
+            $orderId = $this->orderService->createOrder($order, $cartItemsFormatted);
+        } catch (\Exception $e) {
+            $_SESSION['error'] = "Ha habido un error con el pedido: " . $e->getMessage();
             header("Location: " . BASE_URL);
             exit();
         }
 
-        $this->updateProductStock($cartItems);
+        // Actualizar el stock de los productos
+        $this->updateProductStock($cartItemsFormatted['items']);
 
+        // Enviar confirmación por email
         if (
             $this->emailSender->sendEmail(
-                $_SESSION['identity']['email'],
-                $_SESSION['identity']['nombre'],
+                $user->getEmail(),
+                $user->getName(),
                 'Payment Confirmation',
-                $this->getBodySchema($cartItems, $order->getCost())
+                $this->getBodySchema($cartItemsFormatted['items'], $order->getCost())
             )
         ) {
             echo 'Mensaje enviado';
@@ -92,12 +111,23 @@ class OrderController
             echo 'Mensaje no enviado';
         }
 
-        $this->cartService->clearCart($cartId);
-        $_SESSION['success'] = "Pedido realizado con éxito";
-        header("Location: " . BASE_URL);
-        exit();
-    }
+        // Crear el pago con PayPal
+        $paypalUrl = $this->paypalService->createPayment(
+            $order->getCost(),
+            "EUR",
+            BASE_URL . "order/paypalSuccess",
+            BASE_URL . "order/paypalCancel"
+        );
 
+        if ($paypalUrl) {
+            header("Location: " . $paypalUrl);
+            exit();
+        } else {
+            $_SESSION['error'] = "Error al conectar con PayPal.";
+            header("Location: " . BASE_URL . "cart");
+            exit();
+        }
+    }
 
     public function shippingForm()
     {
@@ -192,6 +222,39 @@ class OrderController
         return $body;
     }
 
+
+    public function paypalSuccess()
+    {
+        if (!isset($_GET['paymentId'], $_GET['PayerID'])) {
+            $_SESSION['error'] = "Pago no válido o cancelado.";
+            header("Location: " . BASE_URL . "cart");
+            exit();
+        }
+
+        $paymentId = $_GET['paymentId'];
+        $payerId = $_GET['PayerID'];
+
+        // Verificar el pago con PayPal
+        $paymentVerified = $this->paypalService->executePayment($paymentId, $payerId);
+
+        if ($paymentVerified) {
+            $cartId = $this->cartService->getCartForUser($_SESSION['identity']['id']);
+            $_SESSION['success'] = "Pago realizado con éxito.";
+            $this->cartService->clearCart($cartId);
+            header("Location: " . BASE_URL . "orders");
+        } else {
+            $_SESSION['error'] = "Error al procesar el pago.";
+            header("Location: " . BASE_URL . "cart");
+        }
+        exit();
+    }
+
+
+    public function paypalCancel()
+    {
+        $_SESSION['error'] = "El pago fue cancelado.";
+        header("Location: " . BASE_URL);
+    }
 
 
 }

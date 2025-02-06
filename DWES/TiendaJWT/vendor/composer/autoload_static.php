@@ -32,6 +32,7 @@ class ComposerStaticInit5d4c46e0a1a32581a8154a9b9b828863
         ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
             'PhpOption\\' => 10,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
@@ -58,6 +59,10 @@ class ComposerStaticInit5d4c46e0a1a32581a8154a9b9b828863
         'C' => 
         array (
             'Controllers\\' => 12,
+        ),
+        'A' => 
+        array (
+            'Api\\' => 4,
         ),
     );
 
@@ -94,6 +99,10 @@ class ComposerStaticInit5d4c46e0a1a32581a8154a9b9b828863
         array (
             0 => __DIR__ . '/../..' . '/src/Repositories',
         ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
         'PhpOption\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
@@ -126,6 +135,20 @@ class ComposerStaticInit5d4c46e0a1a32581a8154a9b9b828863
         array (
             0 => __DIR__ . '/../..' . '/src/Controllers',
         ),
+        'Api\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Api',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'P' => 
+        array (
+            'PayPal' => 
+            array (
+                0 => __DIR__ . '/..' . '/paypal/rest-api-sdk-php/lib',
+            ),
+        ),
     );
 
     public static $classMap = array (
@@ -142,6 +165,7 @@ class ComposerStaticInit5d4c46e0a1a32581a8154a9b9b828863
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit5d4c46e0a1a32581a8154a9b9b828863::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit5d4c46e0a1a32581a8154a9b9b828863::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit5d4c46e0a1a32581a8154a9b9b828863::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit5d4c46e0a1a32581a8154a9b9b828863::$classMap;
 
         }, null, ClassLoader::class);
