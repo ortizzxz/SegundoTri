@@ -53,32 +53,34 @@ class EmailSender
     }
 
     public function sendConfirmation(string $recipientEmail, string $recipientName, string $token)
-    {
-        try {
-            // Configuramos el remitente y el destinatario
-            $this->mail->setFrom('tienda@online.com', 'Ortiz Shop');
-            $this->mail->addAddress($recipientEmail, $recipientName);
-            $this->mail->Subject = 'Confirma tu Cuenta';
+{
+    try {
+        $this->mail->setFrom('tienda@online.com', 'Ortiz Shop');
+        $this->mail->addAddress($recipientEmail, $recipientName);
+        $this->mail->Subject = 'Confirma tu Cuenta';
 
-            // Configuramos el contenido HTML
-            $this->mail->isHTML(true);
-            $this->mail->CharSet = 'UTF-8';
+        // Configuramos el contenido HTML
+        $this->mail->isHTML(true);
+        $this->mail->CharSet = 'UTF-8';
 
-            $contenido = '<html>';
-            $contenido .= "<p>Hola " . $recipientName . ", Has creado tu cuenta en OrtizShop.com. Solo debes confirmarla presionando el siguiente enlace:</p>";
-            $contenido .= "<p>Presiona aqui: <a href='" . BASE_URL . "confirmAccount/" . $token . "'>Confirmar Cuenta</a>";
-            $contenido .= "<p>Si tú no solicitaste este cambio, puedes ignorar este mensaje.</p>";
-            $contenido .= '</html>';
+        $contenido = '<html>';
+        $contenido .= "<p>Hola " . $recipientName . ", Has creado tu cuenta en OrtizShop.com. Para confirmar tu cuenta, usa el siguiente token:</p>";
+        $contenido .= "<p><strong>Token:</strong> " . $token . "</p>";
+        $contenido .= "<p>Ingresa a nuestra plataforma y verifica tu cuenta enviando el token en la cabecera como Bearer Token al siguiente endpoint:</p>";
+        $contenido .= "<p><code>POST " . BASE_URL . "api/confirmAccount</code></p>";
+        $contenido .= "<p>Si tú no solicitaste este registro, puedes ignorar este mensaje.</p>";
+        $contenido .= '</html>';
 
-            $this->mail->Body = $contenido;
+        $this->mail->Body = $contenido;
 
-            // Enviamos el correo
-            return $this->mail->send();
-        } catch (Exception $e) {
-            echo "Error enviando el correo de confirmación: {$this->mail->ErrorInfo}";
-            return false;
-        }
+        // Enviamos el correo
+        return $this->mail->send();
+    } catch (Exception $e) {
+        echo "Error enviando el correo de confirmación: {$this->mail->ErrorInfo}";
+        return false;
     }
+}
+
 
     public function sendPasswordRecovery($email, $name, $token)
     {

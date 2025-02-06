@@ -110,7 +110,12 @@ class AuthController
                             $_SESSION['register'] = 'success';
                             $token = Security::generateToken($user->getEmail(), $user->getName());
                             $this->emailSender->sendConfirmation($user->getEmail(), $user->getName(), $token);
-                            header('Location: ' . BASE_URL . 'login');
+
+                            // Enviar la respuesta JSON con el token en lugar de redirigir
+                            echo json_encode([
+                                'message' => 'Registro exitoso, revisa tu email para confirmar tu cuenta.',
+                                'token' => $token
+                            ]);
                             exit();
                         } else {
                             $_SESSION['register'] = 'fail';
@@ -133,39 +138,98 @@ class AuthController
         $this->pages->render('Auth/registerForm'); // Siempre renderizar el formulario al final
     }
 
-    public function confirmAccount($token)
+    public function confirmAccount()
     {
-        try {
-            $payload = Security::decode($token, Security::secretKey());
-            $email = $payload['data']['email'];
+        // Verifica si la petición contiene el header Authorization con un Bearer Token
+        $headers = getallheaders();
 
-            $user = $this->userService->findByEmail($email);
-            if (!$user) {
-                $_SESSION['error'] = 'No existe un usuario con este correo.';
-                $this->pages->render('Auth/confirmation');
-            }
-            if ($user['confirmado'] === TRUE) {
-                $_SESSION['confirmation'] = 'already';
-                header('Location: ' . BASE_URL);
-                exit();
-            }
-
-            if ($this->userService->updateConfirmation($email)) {
-                $_SESSION['confirmation'] = 'success';
-                $this->pages->render('Auth/confirmation');
-                exit();
-            } else {
-                $_SESSION['confirmation'] = 'fail';
-                $this->pages->render('Auth/confirmation');
-                exit();
-            }
-
-        } catch (Exception $e) {
-            $_SESSION['error'] = 'Token inválido o expirado.';
-            header('Location: ' . BASE_URL);
+        if (!isset($headers['Authorization'])) {
+            http_response_code(400);
+            echo json_encode(['error' => 'No se encontró el token en el encabezado']);
             exit();
         }
+
+        // Extraer el token del header (Formato: "Bearer token_aqui")
+        $authHeader = $headers['Authorization'];
+        if (preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
+            $token = $matches[1];
+        } else {
+            http_response_code(400);
+            echo json_encode(['error' => 'Formato de token inválido']);
+            exit();
+        }
+
+        // Validar el token
+        $userEmail = Security::validateJWTToken($token);
+        if (!$userEmail) {
+            http_response_code(401);
+            echo json_encode(['error' => 'Token inválido o expirado']);
+            exit();
+        }
+
+        // Obtener el usuario con ese email
+        $user = $this->userService->findByEmail($userEmail);
+        if (!$user) {
+            http_response_code(404);
+            echo json_encode(['error' => 'Usuario no encontrado']);
+            exit();
+        }
+
+        // Marcar usuario como confirmado
+        $user->setConfirmed(true);
+        if ($this->userService->updateConfirmation($userEmail)) {
+            echo json_encode(['message' => 'Cuenta confirmada exitosamente']);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => 'Error confirmando la cuenta']);
+        }
     }
+
+    public function verifyUser()
+    {
+        $headers = getallheaders();
+
+        if (!isset($headers['Authorization'])) {
+            http_response_code(401);
+            echo json_encode(['error' => 'No autorizado']);
+            exit();
+        }
+
+        // Extraer el token del header
+        if (preg_match('/Bearer\s(\S+)/', $headers['Authorization'], $matches)) {
+            $token = $matches[1];
+        } else {
+            http_response_code(400);
+            echo json_encode(['error' => 'Formato de token inválido']);
+            exit();
+        }
+
+        // Validar el token
+        $userEmail = Security::validateJWTToken($token);
+        if (!$userEmail) {
+            http_response_code(401);
+            echo json_encode(['error' => 'Token inválido o expirado']);
+            exit();
+        }
+
+        // Obtener el usuario con ese email
+        $user = $this->userService->findByEmail($userEmail);
+        if (!$user) {
+            http_response_code(404);
+            echo json_encode(['error' => 'Usuario no encontrado']);
+            exit();
+        }
+
+        echo json_encode([
+            'message' => 'Usuario autenticado correctamente',
+            'user' => [
+                    'email' => $user->getEmail(),
+                    'name' => $user->getName()
+                ]
+        ]);
+    }
+
+
 
 
     public function logout()

@@ -1,19 +1,26 @@
-<?php if (isset($_SESSION['error'])): ?>
-    <p style="color: red;"><?php echo $_SESSION['error']; ?></p>
-    <?php unset($_SESSION['error']); ?>
-<?php endif; ?>
+<h2>Confirmando tu cuenta...</h2>
+<p id="message">Por favor, espera...</p>
 
-<?php if (isset($_SESSION['confirmation'])): ?>
-    <?php if ($_SESSION['confirmation'] === 'success'): ?>
-        <p style="color: green;">Tu cuenta ha sido exitosamente verificada. Ya puedes iniciar sesión.</p>
-    <?php elseif ($_SESSION['confirmation'] === 'already'): ?>
-        <p>Tu cuenta ya ha sido confirmada.</p>
-    <?php else: ?>
-        <p style="color: red;">Ha habido un error confirmando tu cuenta. Por favor intentalo nuevamente más tarde.</p>
-    <?php endif; ?>
-    <?php unset($_SESSION['confirmation']); ?>
-<?php else: ?>
-    <p>Por favor revise su correo y ingrese al enlace recibido.</p>
-<?php endif; ?>
+<script>
+    const token = localStorage.getItem("auth_token");
 
-<p><a href="<?php echo BASE_URL; ?>">Volver a la página principal</a></p>
+    if (!token) {
+        document.getElementById("message").innerText = "No hay token disponible.";
+    } else {
+        fetch("http://localhost/proyecto/api/confirmAccount", {
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer " + token,
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("message").innerText = data.message || data.error;
+        })
+        .catch(error => {
+            document.getElementById("message").innerText = "Error en la confirmación.";
+            console.error("Error:", error);
+        });
+    }
+</script>
