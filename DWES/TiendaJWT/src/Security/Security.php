@@ -6,56 +6,29 @@ use Exception;
 
 class Security
 {
-    private BlacklistedTokenRepository $blacklistedTokenRepo;
+    private static ?BlacklistedTokenRepository $blacklistedTokenRepo = null;
 
     public function __construct()
     {
-        // Creamos una instancia del repositorio
-        $this->blacklistedTokenRepo = new BlacklistedTokenRepository();
+        if (self::$blacklistedTokenRepo === null) {
+            self::$blacklistedTokenRepo = new BlacklistedTokenRepository();
+        }
     }
 
-    // Método para verificar si un token está en la lista negra
-    public function isTokenBlacklisted($token): bool
+    public static function isTokenBlacklisted($token): bool
     {
-        // Accede al repositorio de tokens
-        return $this->blacklistedTokenRepo->isTokenBlacklisted($token);
+        if (self::$blacklistedTokenRepo === null) {
+            self::$blacklistedTokenRepo = new BlacklistedTokenRepository();
+        }
+        return self::$blacklistedTokenRepo->isTokenBlacklisted($token);
     }
 
-    // Método para agregar un token a la lista negra
     public function expireToken($token): void
     {
-        $this->blacklistedTokenRepo->addTokenToBlacklist($token);
-    }
-
-    // Método estático para validar el JWT
-    public static function validateJWTToken($token)
-    {
-        try {
-            // Crear una instancia de la clase Security para acceder a sus métodos
-            $security = new Security();
-
-            // Verificar si el token está en la lista negra
-            if ($security->isTokenBlacklisted($token)) {
-                throw new Exception('Token has been revoked.');
-            }
-
-            $key = self::secretKey();
-            $payload = self::decode($token, $key);
-
-            // Verificar si el token ha expirado
-            if (isset($payload['exp']) && time() > $payload['exp']) {
-                return false;
-            }
-
-            // Verificar si los datos requeridos están presentes
-            if (!isset($payload['data']['email']) || !isset($payload['data']['name'])) {
-                return false;
-            }
-
-            return true;
-        } catch (Exception $e) {
-            return false;
+        if (self::$blacklistedTokenRepo === null) {
+            self::$blacklistedTokenRepo = new BlacklistedTokenRepository();
         }
+        self::$blacklistedTokenRepo->addTokenToBlacklist($token);
     }
 
     // Método estático para generar el token JWT
@@ -73,7 +46,7 @@ class Security
         // Crear el token con los datos del usuario y la clave secreta
         return self::createToken($key, $userData);
     }
-
+    
     // Crear el token JWT
     final public static function createToken(string $key, array $data): string
     {
@@ -86,6 +59,64 @@ class Security
 
         return self::encode($token, $key, 'HS256');
     }
+
+    public static function validateJWTToken($token)
+    {
+        try {
+            if (self::isTokenBlacklisted($token)) {
+                return false;
+            }
+
+            $key = self::secretKey();
+            $payload = self::decode($token);
+
+            if (isset($payload['exp']) && time() > $payload['exp']) {
+                return false;
+            }
+
+            if (!isset($payload['data']['email']) || !isset($payload['data']['name'])) {
+                return false;
+            }
+
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    // ... (rest of the methods remain the same)
+
+    public static function decode(string $jwt)
+    {
+        $parts = explode('.', $jwt);
+        if (count($parts) !== 3) {
+            return false;
+        }
+
+        [$base64Header, $base64Payload, $base64Signature] = $parts;
+
+        $header = json_decode(self::base64UrlDecode($base64Header), true);
+        $payload = json_decode(self::base64UrlDecode($base64Payload), true);
+
+        $signature = self::base64UrlDecode($base64Signature);
+        $validSignature = hash_hmac('sha256', "$base64Header.$base64Payload", self::secretKey(), true);
+
+        if (!hash_equals($validSignature, $signature)) {
+            return false;
+        }
+
+        if (self::isTokenBlacklisted($jwt)) {
+            return false;
+        }
+
+        if (isset($payload['exp']) && time() > $payload['exp']) {
+            return false;
+        }
+
+        return $payload;
+    }
+
+    // ... (rest of the methods remain the same)
 
     // Método privado para codificar el JWT
     private static function encode(array $payload, string $key, string $alg = 'HS256'): string
@@ -128,39 +159,6 @@ class Security
         }
 
         return $_ENV['SECRET_KEY'];  // Retorna la clave secreta
-    }
-
-    // Método para decodificar el JWT
-    public static function decode(string $jwt, string $key): array
-    {
-        // Dividimos el JWT en tres partes: cabecera, payload y firma
-        $parts = explode('.', $jwt);
-        if (count($parts) !== 3) {
-            throw new Exception('El formato del token es inválido.');
-        }
-
-        // Extraemos las partes del token
-        [$base64Header, $base64Payload, $base64Signature] = $parts;
-
-        // Decodificamos la cabecera y la carga útil
-        $header = json_decode(self::base64UrlDecode($base64Header), true);
-        $payload = json_decode(self::base64UrlDecode($base64Payload), true);
-
-        // Verificamos la firma del token
-        $signature = self::base64UrlDecode($base64Signature);
-        $validSignature = hash_hmac('sha256', "$base64Header.$base64Payload", $key, true);
-
-        if (!hash_equals($validSignature, $signature)) {
-            throw new Exception('La firma del token no es válida.');
-        }
-
-        // Verificamos si el token ha expirado
-        if (isset($payload['exp']) && time() > $payload['exp']) {
-            throw new Exception('El token ha expirado.');
-        }
-
-        // Devolvemos la carga útil (payload) del token
-        return $payload;
     }
 
     // Método privado para codificar en base64url

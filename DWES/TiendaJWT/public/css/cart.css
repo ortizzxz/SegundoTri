@@ -52,7 +52,7 @@
     border-radius: 5px;
 }
 
-.error-message {
+.error-message, .error-message-minwidth{
     background-color: #ffcccc;
     border: 1px solid #ff0000;
     color: #ff0000;
@@ -62,4 +62,8 @@
     background-color: #ccffcc;
     border: 1px solid #00ff00;
     color: #008000;
+}
+
+.error-message-minwidth{
+    width: 100%;
 }

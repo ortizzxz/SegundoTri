@@ -137,7 +137,7 @@ class AuthController
     public function confirmAccount($token)
     {
         try {
-            $payload = Security::decode($token, Security::secretKey());
+            $payload = Security::decode($token);
             $email = $payload['data']['email'];
 
             $user = $this->userService->findByEmail($email);
@@ -153,7 +153,7 @@ class AuthController
 
             if ($this->userService->updateConfirmation($email)) {
                 $_SESSION['confirmation'] = 'success';
-                
+
                 // Expiramos el token
                 $this->security->expireToken($token);
 
@@ -206,24 +206,43 @@ class AuthController
     public function resetPassword($token)
     {
         try {
-            $payload = Security::decode($token, Security::secretKey());
+            
+            if(!Security::decode($token)){
+                $_SESSION['error'] = 'El token está revocado o expirado.';
+                header('Location: ' . BASE_URL . 'login');
+                exit();
+            }
+
+            $payload = Security::decode($token);
+
             $email = $payload['data']['email'];
-            error_log("Email from token: " . $email); // Log para depuración
+            error_log("Email from token: " . $email);
+
+            $user = $this->userService->findByEmail($email);
+            if (!$user) {
+                $_SESSION['error'] = 'No existe un usuario con este correo.';
+                header('Location: ' . BASE_URL . 'login');
+                exit();
+            }
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $password = $_POST['password'] ?? '';
                 $confirmPassword = $_POST['confirm_password'] ?? '';
-                error_log("Password: " . $password); // Log para depuración
+                error_log("Password: " . $password);
 
                 if ($password === $confirmPassword) {
                     $hashedPassword = $this->security->encryptPassword($password);
-                    error_log("Hashed password: " . $hashedPassword); // Log para depuración
+                    error_log("Hashed password: " . $hashedPassword);
 
                     $result = $this->userService->updatePassword($email, $hashedPassword);
-                    error_log("Update result: " . var_export($result, true)); // Log para depuración
+                    error_log("Update result: " . var_export($result, true));
 
                     if ($result) {
                         $_SESSION['authsuccess'] = 'success';
+
+                        // Expiramos el token
+                        $this->security->expireToken($token);
+
                         header('Location: ' . BASE_URL . 'login');
                         exit();
                     } else {
@@ -236,11 +255,12 @@ class AuthController
 
             $this->pages->render('Auth/resetPasswordForm', ['token' => $token]);
         } catch (Exception $e) {
-            error_log("Exception: " . $e->getMessage()); // Log para depuración
+            error_log("Exception: " . $e->getMessage());
             $_SESSION['error'] = 'Token inválido o expirado.';
             header('Location: ' . BASE_URL . 'login');
             exit();
         }
     }
+
 
 }
