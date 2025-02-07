@@ -23,5 +23,5 @@ return array(
     'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
     'Controllers\\' => array($baseDir . '/src/Controllers'),
-    'Api\\' => array($baseDir . '/src/Api'),
+    'APIServices\\' => array($baseDir . '/src/APIServices'),
 );

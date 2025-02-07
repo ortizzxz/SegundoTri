@@ -62,7 +62,7 @@ class ComposerStaticInit5d4c46e0a1a32581a8154a9b9b828863
         ),
         'A' => 
         array (
-            'Api\\' => 4,
+            'APIServices\\' => 12,
         ),
     );
 
@@ -135,9 +135,9 @@ class ComposerStaticInit5d4c46e0a1a32581a8154a9b9b828863
         array (
             0 => __DIR__ . '/../..' . '/src/Controllers',
         ),
-        'Api\\' => 
+        'APIServices\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src/Api',
+            0 => __DIR__ . '/../..' . '/src/APIServices',
         ),
     );
 

@@ -1,5 +1,5 @@
 <?php
-namespace Repository;
+namespace Service;
 use Repositories\BlacklistedTokenRepository;
 
 

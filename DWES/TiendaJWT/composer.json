@@ -13,7 +13,7 @@
             "Views\\": "./src/Views",
             "Routes\\": "./src/Routes",
             "Security\\": "./src/Security",
-            "Api\\": "./src/Api"
+            "APIServices\\": "./src/APIServices"
         }
     },
     "authors": [
