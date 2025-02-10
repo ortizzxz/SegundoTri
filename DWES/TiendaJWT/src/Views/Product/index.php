@@ -37,10 +37,15 @@
             echo "<p class='product-offer'>" .
                 (empty($product['oferta']) ? 'No hay oferta' : 'Oferta: ' . htmlspecialchars($product['oferta']) . '%') .
                 "</p>";
-            echo "<form action='" . BASE_URL . "cart/add/" . htmlspecialchars($product['id']) . "' method='POST'>";
-            echo "<input type='hidden' name='id' value='" . htmlspecialchars($product['id']) . "'>";
-            echo "<input type='submit' value='Añadir al carrito' class='add-to-cart-btn'>";
-            echo "</form>";
+                if ($product['stock'] > 0) {
+                    echo "<form action='" . BASE_URL . "cart/add/" . htmlspecialchars($product['id']) . "' method='POST'>";
+                    echo "<input type='hidden' name='id' value='" . htmlspecialchars($product['id']) . "'>";
+                    echo "<input type='submit' value='Añadir al carrito' class='add-to-cart-btn'>";
+                    echo "</form>";
+                } else {
+                    echo "<p class='out-of-stock'>Sin stock disponible</p>";
+                }
+                
             echo "</div>";
         }
         

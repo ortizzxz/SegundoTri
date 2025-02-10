@@ -4,6 +4,7 @@ use Models\Product;
 use Lib\Pages;
 use Services\ProductService;
 use Services\CategoryService;
+use APIServices\ApiProductController;
 
 session_start();
 
@@ -13,10 +14,12 @@ class ProductController
     private Pages $pages;
     private ProductService $productService;
     private CategoryService $categoryService;
+    private ApiProductController $apiClient;
 
 
     public function __construct()
     {
+        $this->apiClient = new ApiProductController(); 
         $this->pages = new Pages();
         $this->productService = new ProductService();
         $this->categoryService = new CategoryService();
@@ -24,17 +27,28 @@ class ProductController
 
     public function index()
     {
-        $data = $this->productService->getAll();
-        $categories = $this->productService->getCategories();
-
-        // Verificar si el usuario está autenticado y es admin
+        $data = $this->apiClient->get('api/products');
+        $categories = $this->apiClient->get('api/categories');
+        if ($data === null) {
+            error_log("Failed to fetch products from API");
+            $data = []; // Set to empty array to avoid null issues
+        }
+    
+        if ($categories === null) {
+            error_log("Failed to fetch categories from API");
+            $categories = []; // Set to empty array to avoid null issues
+        }
+    
+        // Check if the user is an admin or a normal user
         if (!isset($_SESSION['identity']) || $_SESSION['identity']['rol'] !== 'admin') {
+            // Render the product index page for regular users
             $this->pages->render('Product/index', ['data' => $data]);
         } else {
+            // Render the product management page for admin users
             $this->pages->render('Product/management', ['data' => $data, 'categories' => $categories]);
         }
-
     }
+    
 
     public function addProduct()
     {

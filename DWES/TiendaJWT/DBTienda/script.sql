@@ -126,3 +126,10 @@ CREATE TABLE cart_items (
     FOREIGN KEY (cart_id) REFERENCES carts(id),
     FOREIGN KEY (product_id) REFERENCES productos(id)
 );
+
+
+CREATE TABLE blacklisted_tokens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    token VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

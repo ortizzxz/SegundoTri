@@ -129,6 +129,7 @@ class Product {
     public function getImagen(): string { return $this->imagen; }
 
     // Setters
+    public function setId(int $id): void { $this->id = $id; }
     public function setCategoriaId(int $categoria_id): void { $this->categoria_id = $categoria_id; }
     public function setNombre(string $nombre): void { $this->nombre = $nombre; }
     public function setDescripcion(string $descripcion): void { $this->descripcion = $descripcion; }

@@ -8,6 +8,7 @@ use Controllers\AuthController;
 use Controllers\OrderController;
 use Lib\Router;
 use Security\Security;
+use APIServices\ApiProductController;
 
 
 class Routes
@@ -106,6 +107,35 @@ class Routes
             (new CategoryController())->showProducts($id);
         });
 
+        Router::add('GET', '/api/products', function () {
+            (new ApiProductController())->getProducts();
+        });
+        
+        
+        Router::add('GET', '/api/products/{id}', function ($id) {
+            (new ApiProductController())->getProduct($id);
+        });
+        
+        Router::add('POST', '/api/products', function () {
+            (new ApiProductController())->addProduct();
+        });
+        
+        Router::add('PUT', '/api/products/{id}', function ($id) {
+            (new ApiProductController())->updateProduct($id);
+        });
+        
+        Router::add('DELETE', '/api/products/{id}', function ($id) {
+            (new ApiProductController())->deleteProduct($id);
+        });
+        
+        Router::add('GET', '/api/categories', function () {
+            (new ApiProductController())->getCategories();
+        });
+        
+        // Añade aquí otras rutas API...
+        
+        
+
         /* CART */
         Router::add('GET', '/cart', function () {
             (new CartController())->displayCart();
@@ -171,7 +201,17 @@ class Routes
         });
         
         
-
+        Router::add('POST', '/order/create', function(){
+           (new OrderController())->createOrder(); 
+        });
+        Router::add('GET', '/order/paypalSuccess', function(){
+           (new OrderController())->paypalSuccess(); 
+        });
+        Router::add('GET', '/order/paypalCancel', function(){
+           (new OrderController())->paypalCancel(); 
+        });
+        
+        
         Router::dispatch();
     }
 }

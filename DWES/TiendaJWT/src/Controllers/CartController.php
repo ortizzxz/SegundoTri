@@ -24,33 +24,46 @@ class CartController
     {
         $product = $this->productService->getById($id);
         if (!$product) {
-            $_SESSION['error'] = "Product not found.";
+            $_SESSION['error'] = "Producto no encontrado.";
+            header('Location: ' . BASE_URL . 'products');
+            exit;
+        }
+
+        if ($product['stock'] <= 0) {
+            $_SESSION['error'] = "Este producto está agotado.";
             header('Location: ' . BASE_URL . 'products');
             exit;
         }
 
         $userId = $_SESSION['identity']['id'] ?? null;
         if ($userId) {
-            // User is logged in, add to database cart
+            // Usuario autenticado, obtener carrito de la BD
             $cartId = $this->cartService->getCartForUser($userId);
+            $currentQuantity = $this->cartService->getCartProductQuantity($cartId, $id);
+        } else {
+            // Usuario no autenticado, obtener carrito de sesión
+            $currentQuantity = $_SESSION['cart'][$id]['quantity'] ?? 0;
+        }
+
+        // si la cantidad nueva supera el stock
+        if (($currentQuantity + 1) > $product['stock']) {
+            $_SESSION['error'] = "No puedes añadir más unidades de este producto, stock insuficiente.";
+            header('Location: ' . BASE_URL . 'products');
+            exit;
+        }
+
+        // si hay stock suficiente, añadir el producto
+        if ($userId) {
             $result = $this->cartService->addToCart($cartId, $id, 1, $product['precio']);
         } else {
-            // User is not logged in, add to session cart
-            if (!isset($_SESSION['cart'])) {
-                $_SESSION['cart'] = [];
-            }
             $result = $this->addToSessionCart($id, 1, $product['precio']);
         }
 
-        if ($result) {
-            $_SESSION['success'] = "Producto añadido exitosamente.";
-        } else {
-            $_SESSION['error'] = "Ha ocurrido un error al añadir el producto.";
-        }
-
+        $_SESSION['success'] = $result ? "Producto añadido exitosamente." : "Error al añadir producto.";
         header('Location: ' . BASE_URL . 'products');
         exit;
     }
+
 
     private function addToSessionCart($productId, $quantity, $price)
     {
@@ -135,31 +148,48 @@ class CartController
 
 
     public function updateQuantity($id)
-    {
-        $action = $_POST['action'] ?? '';
-        if (!in_array($action, ['increase', 'decrease'])) {
-            $_SESSION['error'] = "Invalid action.";
-            header('Location: ' . BASE_URL . 'cart');
-            exit;
-        }
-
-        $userId = $_SESSION['identity']['id'] ?? null;
-        if ($userId) {
-            $cartId = $this->cartService->getCartForUser($userId);
-            $result = $this->cartService->updateQuantity($cartId, $id, $action);
-        } else {
-            $result = $this->updateSessionCartQuantity($id, $action);
-        }
-
-        if ($result) {
-            $_SESSION['success'] = "Cart updated successfully.";
-        } else {
-            $_SESSION['error'] = "Failed to update cart.";
-        }
-
+{
+    $action = $_POST['action'] ?? '';
+    if (!in_array($action, ['increase', 'decrease'])) {
+        $_SESSION['error'] = "Acción inválida.";
         header('Location: ' . BASE_URL . 'cart');
         exit;
     }
+
+    $product = $this->productService->getById($id);
+    if (!$product) {
+        $_SESSION['error'] = "Producto no encontrado.";
+        header('Location: ' . BASE_URL . 'cart');
+        exit;
+    }
+
+    $userId = $_SESSION['identity']['id'] ?? null;
+    if ($userId) {
+        $cartId = $this->cartService->getCartForUser($userId);
+        $currentQuantity = $this->cartService->getCartProductQuantity($cartId, $id);
+    } else {
+        $currentQuantity = $_SESSION['cart'][$id]['quantity'] ?? 0;
+    }
+
+    if ($action === 'increase') {
+        if ($currentQuantity + 1 > $product['stock']) {
+            $_SESSION['error'] = "No puedes añadir más unidades, stock insuficiente.";
+            header('Location: ' . BASE_URL . 'cart');
+            exit;
+        }
+    }
+
+    if ($userId) {
+        $result = $this->cartService->updateQuantity($cartId, $id, $action);
+    } else {
+        $result = $this->updateSessionCartQuantity($id, $action);
+    }
+
+    $_SESSION['success'] = $result ? "Carrito actualizado correctamente." : "Error al actualizar carrito.";
+    header('Location: ' . BASE_URL . 'cart');
+    exit;
+}
+
 
     private function updateSessionCartQuantity($productId, $action)
     {

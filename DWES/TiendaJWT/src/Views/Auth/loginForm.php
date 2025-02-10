@@ -2,8 +2,11 @@
     <?php if (isset($_SESSION['register']) && $_SESSION['register'] == 'success'): ?>
         <p class="success-register">Usuario registrado correctamente</p>
     <?php endif; ?>
-
-
+    <?php if (isset($_SESSION['error'])): ?>
+        <p class="error-message-minwidth">
+            <?php echo htmlspecialchars($_SESSION['error']); ?>
+        </p>
+    <?php endif; ?>
     <?php if (isset($_SESSION['authsuccess']) && $_SESSION['authsuccess'] == 'success'): ?>
         <p class="success-register">Contraseña actualizada. Ingrese en su cuenta.</p>
     <?php endif; ?>
@@ -40,6 +43,9 @@
 </div>
 
 <?php
+if (isset($_SESSION['register'])) {
+    unset($_SESSION['register']);
+}
 if (isset($_SESSION['confirmado'])) {
     unset($_SESSION['confirmado']);
 }
@@ -49,7 +55,10 @@ if (isset($_SESSION['login'])) {
 if (isset($_SESSION['errors'])) {
     unset($_SESSION['errors']);
 }
-if (isset($_SESSION['authsuccess'])){
+if (isset($_SESSION['authsuccess'])) {
     unset($_SESSION['authsuccess']);
+}
+if (isset($_SESSION['error'])) {
+    unset($_SESSION['error']);
 }
 ?>
