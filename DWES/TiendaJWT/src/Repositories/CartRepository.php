@@ -122,4 +122,16 @@ class CartRepository
         }
     }
 
+
+    public function getCartProductQuantity($cartId, $productId)
+    {
+        $sql = "SELECT quantity FROM cart_items WHERE cart_id = :cart_id AND product_id = :product_id";
+        $params = [':cart_id' => $cartId, ':product_id' => $productId];
+    
+        $result = $this->database->queryOne($sql, $params);
+    
+        return $result['quantity'] ?? 0; //  no hay resultado, devuelve 0
+    }
+    
+
 }

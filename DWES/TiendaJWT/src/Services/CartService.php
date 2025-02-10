@@ -87,4 +87,9 @@ class CartService
     public function clearCart($cartId){
         $cart = $this->cartRepository->clearCart($cartId);
     }
+
+
+    public function getCartProductQuantity($cartId, $id){
+        return $this->cartRepository->getCartProductQuantity($cartId, $id);
+    }
 }
