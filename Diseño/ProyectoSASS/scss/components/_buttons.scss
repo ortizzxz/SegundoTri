@@ -1,0 +1,9 @@
+// _buttons.scss
+
+.btn-primary {
+    @include button-style($primary-color, $white);
+}
+
+.btn-secondary {
+    @include button-style($secondary-color, $white);
+}

@@ -1,0 +1,245 @@
+.header {
+  background: url("../../img/villamar.jpg") no-repeat center center;
+  background-size: cover;
+  color: #fff;
+  text-align: center;
+  padding: 80px 0;
+  color: black;
+  min-height: 65dvh;
+}
+.header .header-content {
+  margin: 0 auto;
+}
+.header .header-content h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+.header .header-content p {
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+}
+.header .header-content .btn-primary {
+  background-color: #e9c46a;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 1.125rem;
+  padding: 12px 24px;
+  border-radius: 50px;
+}
+.header .header-content .btn-primary:hover {
+  background-color: rgb(226.4385964912, 178.4035087719, 61.5614035088);
+}
+
+footer {
+  background-color: #333333;
+  color: #fff;
+  text-align: center;
+  padding: 30px 0;
+}
+footer p {
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 400;
+}
+footer a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 10px;
+  display: inline-block;
+  transition: color 0.3s;
+}
+footer a:hover {
+  color: #2a9d8f;
+}
+
+.btn-primary {
+  background-color: #2a9d8f;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.btn-primary:hover {
+  background-color: rgb(31.2361809045, 116.7638190955, 106.351758794);
+}
+
+.btn-secondary {
+  background-color: #e9c46a;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.btn-secondary:hover {
+  background-color: rgb(226.4385964912, 178.4035087719, 61.5614035088);
+}
+
+.cards {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+.cards .card {
+  width: 48%;
+  border: 1px solid #f4f4f4;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #fff;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.cards .card img {
+  width: 100%;
+  border-radius: 8px;
+}
+.cards .card h3 {
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+.cards .card a {
+  color: #2a9d8f;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 10px;
+  display: inline-block;
+  transition: color 0.3s;
+}
+.cards .card a:hover {
+  color: #e9c46a;
+}
+.cards .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+  background-color: #2a9d8f;
+  padding: 1.5rem 2vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+.navbar .navbar-logo {
+  color: #fff;
+  font-size: 1.75rem;
+  font-weight: bold;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.navbar .navbar-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+.navbar .navbar-links li {
+  margin-left: 2vw;
+}
+.navbar .navbar-links a {
+  color: #fff;
+  font-size: 1.25rem;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.navbar .navbar-links a:hover {
+  color: #e9c46a;
+}
+@media (max-width: 576px) {
+  .navbar .navbar-logo {
+    font-size: 1.5rem;
+  }
+  .navbar .navbar-links {
+    display: none;
+  }
+}
+
+.reviews {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+.reviews .review {
+  width: 45%;
+  text-align: center;
+  font-size: 1rem;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 10px;
+}
+.reviews .review h4 {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.categories {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+.categories .category {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+.categories .category i {
+  font-size: 3rem;
+  color: #2a9d8f;
+}
+.categories .category:hover {
+  transform: scale(1.05);
+}
+
+#advertisement {
+  background-color: #2a9d8f;
+  color: #fff;
+  text-align: center;
+  padding: 50px 0;
+}
+#advertisement i {
+  font-size: 3rem;
+  margin-right: 10px;
+}
+#advertisement p {
+  font-size: 1.2rem;
+  margin-top: 20px;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  color: #333;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Poppins", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #2a9d8f;
+  transition: color 0.3s;
+}
+a:hover {
+  color: #e9c46a;
+}
+
+/*# sourceMappingURL=main.css.map */

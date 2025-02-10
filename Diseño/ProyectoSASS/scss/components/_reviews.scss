@@ -1,0 +1,22 @@
+// _reviews.scss
+
+.reviews {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+    
+    .review {
+      width: 45%;
+      text-align: center;
+      font-size: 1rem;
+      background-color: $light-grey;
+      padding: 20px;
+      border-radius: 10px;
+      
+      h4 {
+        margin-top: 15px;
+        font-weight: bold;
+      }
+    }
+  }
+  

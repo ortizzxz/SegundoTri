@@ -1,0 +1,37 @@
+// _mixins.scss
+
+// Mixin para establecer la fuente
+@mixin font($font-family, $font-size, $font-weight: normal) {
+    font-family: $font-family;
+    font-size: $font-size;
+    font-weight: $font-weight;
+}
+
+// Mixin para centrado
+@mixin center() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// Mixin para un botón estilizado
+@mixin button-style($background-color, $color) {
+    background-color: $background-color;
+    color: $color;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: darken($background-color, 10%);
+    }
+}
+
+// Mixin para hacer elementos responsive
+@mixin responsive($breakpoint) {
+    @media (max-width: $breakpoint) {
+        @content;
+    }
+}

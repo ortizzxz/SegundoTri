@@ -1,0 +1,56 @@
+// Barra de navegación
+.navbar {
+  background-color: $primary-color; // Color de fondo de la barra de navegación
+  padding: 1.5rem 2vw; // Padding con unidades relativas
+  display: flex; // Flexbox para la alineación
+  justify-content: space-between; // Asegura que haya espacio entre el logo y los enlaces
+  align-items: center; // Centra los elementos verticalmente
+  width: 100%; // Asegura que ocupe todo el ancho disponible
+  box-sizing: border-box; // Para que el padding no afecte el ancho total
+
+  // Logo de la barra
+  .navbar-logo {
+    color: $white; // Color del logo
+    font-size: 1.75rem; // Tamaño de la fuente del logo en rem (relativo)
+    font-weight: bold; // Peso de la fuente
+    text-decoration: none; // Eliminar subrayado
+    flex-shrink: 0; // Evita que el logo se encoja cuando hay poco espacio
+  }
+
+  // Enlaces de navegación
+  .navbar-links {
+    list-style: none; // Elimina los puntos de la lista
+    display: flex; // Muestra los enlaces en una fila
+    margin: 0; // Elimina márgenes por defecto
+    padding: 0; // Elimina padding por defecto
+    flex-grow: 1; // Hace que los enlaces ocupen el espacio restante
+    justify-content: flex-end; // Alinea los enlaces a la derecha
+
+    // Estilo de cada elemento de la lista
+    li {
+      margin-left: 2vw; // Espacio entre los enlaces en unidades relativas
+    }
+
+    a {
+      color: $white; // Color de los enlaces
+      font-size: 1.25rem; // Tamaño de los enlaces en rem (relativo)
+      text-decoration: none; // Eliminar subrayado
+      transition: color 0.3s; // Transición suave al hacer hover
+
+      &:hover {
+        color: $secondary-color; // Color de los enlaces al pasar el ratón
+      }
+    }
+  }
+
+  // Responsividad
+  @include responsive($breakpoint-mobile) {
+    .navbar-logo {
+      font-size: 1.5rem; // Reducir tamaño de fuente en dispositivos móviles
+    }
+
+    .navbar-links {
+      display: none; // Esconde los enlaces en pantallas pequeñas
+    }
+  }
+}

@@ -1,0 +1,28 @@
+// _footer.scss
+
+footer {
+    background-color: $dark-grey;
+    color: $white;
+    text-align: center;
+    padding: 30px 0;
+    
+    p {
+      font-size: 1rem;
+      margin: 0;
+      font-weight: 400;
+    }
+    
+    a {
+      color: $white;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 10px;
+      display: inline-block;
+      transition: color 0.3s;
+      
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+  

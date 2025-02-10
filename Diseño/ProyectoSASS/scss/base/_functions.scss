@@ -1,0 +1,12 @@
+// _functions.scss
+
+// Función para convertir hex a rgb
+@function hex-to-rgb($color) {
+    @if (str-length($color) == 7) {
+        $r: red($color);
+        $g: green($color);
+        $b: blue($color);
+        @return $r, $g, $b;
+    }
+    @return null;
+}

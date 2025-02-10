@@ -1,0 +1,41 @@
+// main.scss
+
+// Importar variables y mixins
+@import 'base/variables';
+@import 'base/mixins';
+@import 'base/functions';
+
+// Importar layout y componentes
+@import 'layout/header';
+@import 'layout/footer';
+@import 'components/buttons';
+@import 'components/cards';
+@import 'components/navigation';
+@import 'components/hero';
+@import 'components/reviews';
+@import 'components/categories';
+@import 'components/advertisement';
+
+// Estilos generales
+body {
+    font-family: $font-primary;
+    font-size: $font-size-base;
+    color: $text-color;
+    background-color: $background-color;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4 {
+    font-family: $font-secondary;
+}
+
+a {
+    text-decoration: none;
+    color: $primary-color;
+    transition: color 0.3s;
+
+    &:hover {
+        color: $secondary-color;
+    }
+}

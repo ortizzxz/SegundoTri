@@ -1,0 +1,46 @@
+// _cards.scss
+
+.cards {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    
+    .card {
+      width: 48%;
+      border: 1px solid $light-grey;
+      border-radius: 10px;
+      padding: 15px;
+      background-color: $white;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      
+      img {
+        width: 100%;
+        border-radius: 8px;
+      }
+      
+      h3 {
+        font-size: 1.5rem;
+        margin-top: 10px;
+      }
+      
+      a {
+        color: $primary-color;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 10px;
+        display: inline-block;
+        transition: color 0.3s;
+        
+        &:hover {
+          color: $secondary-color;
+        }
+      }
+      
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+  
