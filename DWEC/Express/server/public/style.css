@@ -1,0 +1,223 @@
+/** GLOBAL CONFIGS **/
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Oswald:wght@200..700&family=Permanent+Marker&display=swap");
+:root {
+  --transparente: #000000da;
+  --fuente-titulos: "Orbitron", serif;
+}
+
+body {
+  font-family: var(--fuente-titulos);
+}
+
+.background-video {
+  background-color: #000;
+}
+
+.hero {
+  background-image: url("./img/displayGarage.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+}
+
+.hero h1 {
+  background-color: var(--transparente);
+  font-family: var(--fuente-titulos);
+  border-radius: 1rem;
+  margin-top: 1rem;
+  padding: 0.80rem 1.5rem;
+  color: #ef0808;
+}
+
+/** CAR CARDS **/
+.card-fix-height {
+  height: 30rem;
+  width: 50rem;
+  overflow: hidden;
+  margin: 0;
+}
+
+.card-img-top {
+  object-fit: cover;
+  height: 70%;
+  width: 100%;
+}
+
+.card-body-fixed {
+  height: 30%;
+  overflow-y: auto;
+}
+
+/** CAROUSEL **/
+.carousel-item img {
+  height: 55vh;
+  width: 100%;
+  object-fit: cover;
+}
+
+/** LINK BUTTONS **/
+.nav-link {
+  color: black;
+  background: rgb(167, 115, 66);
+  background: linear-gradient(
+    90deg,
+    rgba(167, 115, 66, 1) 0%,
+    rgba(118, 192, 155, 1) 100%
+  );
+  margin: 0 0.2rem;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #e05138 !important;
+}
+
+.nav-link:hover {
+  background-color: rgba(118, 192, 155, 0.8);
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+
+.video-main-div {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 1rem;
+}
+
+#carContent {
+  color: white;
+}
+
+.collapse {
+  transition: all 0.3s ease-in-out;
+}
+
+.container-fluid-II {
+  min-height: 100dvh;
+}
+
+/** RESPONSIVE STYLES **/
+@media (max-width: 1200px) {
+  .card-fix-height {
+    height: 30rem;
+    width: 100%;
+  }
+
+  .carousel-item img {
+    height: 50vh;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .card-fix-height {
+    height: 30rem;
+    width: 100%;
+  }
+
+  .nav-pills .nav-link {
+    font-size: 0.9rem;
+  }
+
+  .carousel-item img {
+    height: 40vh;
+  }
+
+  .container-fluid.hero {
+    padding: 0.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    background-size: contain;
+    height: 80vh;
+  }
+
+  .hero h1 {
+    font-size: 1.6rem;
+    padding: 0.20rem 0.40rem;
+  }
+
+  .card-fix-height {
+    height: 25rem;
+    width: 100%;
+  }
+
+  .carousel-item img {
+    height: 40vh;
+  }
+
+  .accordion-button {
+    font-size: 1rem;
+  }
+
+  .col-md-6 {
+    width: 100%;
+    padding: 0.2rem;
+  }
+
+  #carouselExampleControls {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero h1 {
+    font-size: 1.4rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .card-fix-height {
+    height: 20rem;
+    width: 100%;
+  }
+
+  .carousel-item img {
+    height: 35vh;
+  }
+
+  .nav-pills .nav-link {
+    font-size: 0.8rem;
+  }
+
+  .container-fluid.py-5 {
+    padding: 0.5rem;
+  }
+
+  .col-md-4,
+  .col-md-8 {
+    width: 100%;
+    padding: 0.8rem;
+  }
+
+  .carousel-item img {
+    height: 30vh;
+  }
+
+  .form-control,
+  .form-select {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 60vh;
+  }
+
+  .hero h1 {
+    font-size: 1.2rem;
+  }
+
+  .carousel-item img {
+    height: 30vh;
+  }
+}

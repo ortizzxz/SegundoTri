@@ -1,0 +1,44 @@
+// Estilos generales
+
+/// Estilo global para el cuerpo de la página
+/// Define la fuente principal, el tamaño base del texto, el color de texto y el color de fondo.
+///
+/// @font-family Usa la fuente primaria definida en las variables
+/// @font-size Tamaño base definido en las variables
+/// @color Color de texto global definido en las variables
+/// @background-color Fondo general definido en las variables
+body {
+    font-family: $font-primary; // Fuente principal para todo el cuerpo
+    font-size: $font-size-base; // Tamaño base de la fuente
+    color: $text-color; // Color global del texto
+    background-color: $background-color; // Fondo global de la página
+    margin: 0; // Elimina márgenes predeterminados del navegador
+    padding: 0; // Elimina rellenos predeterminados del navegador
+}
+
+/// Estilo global para encabezados (h1, h2, h3, h4)
+/// Aplica una fuente secundaria a todos los niveles de encabezados.
+///
+/// @font-family Usa la fuente secundaria definida en las variables
+h1, h2, h3, h4 {
+    font-family: $font-secondary; // Fuente secundaria específica para encabezados
+}
+
+/// Estilo global para enlaces (a)
+/// Define estilos básicos para los enlaces, incluyendo transiciones suaves y efectos hover.
+///
+/// @text-decoration Sin subrayado por defecto en los enlaces
+/// @color Usa el color primario definido en las variables por defecto
+/// @hover Cambia al color secundario al pasar el cursor sobre un enlace
+a {
+    text-decoration: none; // Elimina subrayado predeterminado en los enlaces
+    color: $primary-color; // Color primario por defecto
+
+    transition: color 0.3s; // Transición suave al cambiar el color
+
+    /// Efecto hover para enlaces
+    /// Cambia el color del enlace al color secundario al pasar el cursor.
+    &:hover {
+        color: $secondary-color; // Cambia al color secundario al pasar el cursor sobre un enlace
+    }
+}
