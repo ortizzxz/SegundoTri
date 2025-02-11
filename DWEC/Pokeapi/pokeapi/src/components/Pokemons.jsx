@@ -200,18 +200,18 @@ function Pokemons() {
             </div>
           )}
 
-          {/* Error message */}
+          {/* Error */}
           {searchError && (
             <p className="text-center text-danger">{searchError}</p>
           )}
 
-          {/* Pokémon List */}
+          {/* Lista pokemon */}
           <div className="row">
             {pokemonCards}
             {loadingIndicator}
           </div>
 
-          {/* Load more button */}
+          {/* cargar más */}
           <div className="row">
             <div className="col-12 text-center">
               <button onClick={loadPokemonData} className="btn custom-load-btn">

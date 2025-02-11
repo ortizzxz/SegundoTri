@@ -12,15 +12,15 @@ function Leaderboard() {
   function loadLeaderboard() {
       const pokeapiDB = collection(db, "pokeapi");
 
-      getDocs(pokeapiDB).then((snapshot) => {
-          const leaderboardData = snapshot.docs.map(doc => ({
+      getDocs(pokeapiDB).then((event) => {
+          const leaderboardData = event.docs.map(doc => ({
               id: doc.id,
               ...doc.data(),
           }));
 
           leaderboardData.sort((a, b) => b.puntuation - a.puntuation);
 
-          setLeaderboard(leaderboardData.slice(0, 5));
+          setLeaderboard(leaderboardData.slice(0, 3));
       }).catch((error) => {
           console.error("Error fetching leaderboard data:", error);
       });
@@ -122,11 +122,11 @@ function Game() {
         const user = auth.currentUser;
         if (user) {
             const userId = user.uid;
-            const userRef = doc(db, "pokeapi", userId);
+            const userRef = doc(db, "pokeapi", userId); // doc(from ExportConst Firebase, "nameddbb, primaryKey)
 
             getDoc(userRef).then((snapshot) => {
                 if (snapshot.exists()) {
-                    setBestPuntuation(snapshot.data().puntuation);
+                    setBestPuntuation(snapshot.data().puntuation); // getDoc para acceder a la bbdd
                 } else {
                     setBestPuntuation(0);
                 }
@@ -138,8 +138,7 @@ function Game() {
 
     function initGame() {
         cargarPokemons().then((pokemons) => {
-            solution = pokemons[Math.floor(Math.random() * pokemons.length)];
-
+            solution = pokemons[Math.floor(Math.random() * pokemons.length)]; // sacar pokemones random
             setPokemonMaquetado(
                 <div className="col-12 text-center">
                   {/* Image */}

@@ -96,10 +96,10 @@ function Header() {
                   <img
                     src="./src/assets/images/logo.png"
                     alt=""
-                    style={{ width: "158px" }}
+                    style={{ width: "70px", borderRadius: "50%" }}
                   />
                 </a>
-                {nav}
+                {nav} {/* NAVIGATION */}
               </nav>
             </div>
           </div>
