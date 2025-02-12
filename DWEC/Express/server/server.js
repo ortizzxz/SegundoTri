@@ -1,37 +1,30 @@
-// const http = require('node:http');
-
-// const hostname = '127.0.0.1';
-// const port = 3000;
-
-// const server = http.createServer((req, res) => {
-//   res.statusCode = 200;
-//   res.setHeader('Content-Type', 'text/plain');
-//   res.end('OOOOOOOOOOOOOOOOOOOOOOOOOO\n');
-// });
-
-// server.listen(port, hostname, () => {
-//   console.log(Server running at http://${hostname}:${port}/);
-// });
-
-const express = require('express')
-const { createServer } = require('node:http');
-const app = express()
+const express = require("express"); // Aplicacion de Express que utiliza node
+const { createServer } = require("node:http");
+const app = express();
 const server = createServer(app);
-const port = 3000
-const path = require('path')
-const { Server } = require('socket.io');
+const port = 3000;
+const path = require("path");
+const { Server } = require("socket.io");
 const io = new Server(server);
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/public/api.html'));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "/public/index.html"));
+});
+
+io.on("connection", (socket) => {
+  console.log("A user connected, total users connected: " + io.engine.clientsCount);
+
+  socket.on('message', (data) =>{
+    socket.broadcast.emit('messageServidor', data);
   });
 
-io.on('connection', (socket) => {
-    console.log('a user connected');
+  socket.on("disconnect", () => {
+    console.log("A user disconnected, total users connected: " + io.engine.clientsCount);
   });
+});
 
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, "public")));
 
 server.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(`Example app listening on port ${port}`);
+});
