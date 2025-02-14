@@ -1,22 +1,62 @@
-// _reviews.scss
+#reviews {
+  @include section-header;
+}
 
 .reviews {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 50px;
-    
-    .review {
-      width: 45%;
-      text-align: center;
-      font-size: 1rem;
-      background-color: $light-grey;
-      padding: 20px;
-      border-radius: 10px;
-      
-      h4 {
-        margin-top: 15px;
-        font-weight: bold;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px; 
+  margin: 0.5rem 0.3rem;
+
+  .review {
+    background-color: $light-grey;
+    padding: 25px;
+    border-radius: 10px;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    border: 1px solid $primary-color;
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    .review-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+
+      .review-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 15px;
+      }
+
+      .review-info {
+        h4 {
+          margin: 0 0 5px;
+          font-weight: bold;
+        }
+
+        .review-rating {
+          color: $primary-color;
+          font-size: 0.9rem;
+        }
       }
     }
+
+    p {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    .review-date {
+      display: block;
+      font-size: 0.8rem;
+      color: $secondary-color;
+      text-align: right;
+      font-style: italic;
+    }
   }
-  
+}

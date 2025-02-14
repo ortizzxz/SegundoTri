@@ -1,26 +1,48 @@
 // _categories.scss
+#categories {
+  @include section-header;
+}
 
 .categories {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+  
+  .category {
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 1.25rem;
+    background-color: $light-grey;
+    border-radius: 0.625rem;
+    transition: transform 0.3s, box-shadow 0.3s;
     
-    .category {
-      text-align: center;
-      font-size: 1.2rem;
-      padding: 20px;
-      background-color: $light-grey;
-      border-radius: 10px;
-      transition: transform 0.3s;
-      
-      i {
-        font-size: 3rem;
-        color: $primary-color;
-      }
-      
-      &:hover {
-        transform: scale(1.05);
-      }
+    i {
+      font-size: 3rem;
+      color: $primary-color;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    
+    h3 {
+      margin-top: 0.5rem;
+    }
+    
+    &:hover {
+      transform: translateY(-0.3125rem);
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
     }
   }
-  
+}
+
+@media (max-width: 48rem) {
+  .categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 30rem) {
+  .categories {
+    grid-template-columns: 1fr;
+  }
+}

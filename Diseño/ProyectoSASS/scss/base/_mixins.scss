@@ -7,6 +7,19 @@
     font-weight: $font-weight;
 }
 
+ 
+// Mixin para centrado de titulo en las secciones
+@mixin section-header {
+    text-align: center;
+  
+    h2 {
+      font-size: xx-large;
+      font-weight: 400;
+      margin-bottom: 0.3rem;
+    }
+  }
+  
+
 // Mixin para centrado
 @mixin center() {
     display: flex;
@@ -25,7 +38,7 @@
     transition: background-color 0.3s;
 
     &:hover {
-        background-color: darken($background-color, 10%);
+        background-color: darken($global-background-color, 10%);
     }
 }
 

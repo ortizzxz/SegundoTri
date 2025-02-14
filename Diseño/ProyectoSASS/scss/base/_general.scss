@@ -11,7 +11,7 @@ body {
     font-family: $font-primary; // Fuente principal para todo el cuerpo
     font-size: $font-size-base; // Tamaño base de la fuente
     color: $text-color; // Color global del texto
-    background-color: $background-color; // Fondo global de la página
+    background-color: $global-background-color; // Fondo global de la página
     margin: 0; // Elimina márgenes predeterminados del navegador
     padding: 0; // Elimina rellenos predeterminados del navegador
 }
