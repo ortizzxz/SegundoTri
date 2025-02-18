@@ -5,7 +5,16 @@ const server = createServer(app);
 const port = 3000;
 const path = require("path");
 const { Server } = require("socket.io");
-const io = new Server(server);
+const cors = require('cors'); 
+
+app.use(cors());
+
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5173", // Your Vue.js app's URL
+    methods: ["GET", "POST"]
+  }
+});
 
 // lista para almacenar los nombres de usuario por ID de socket
 const users = {};
@@ -38,6 +47,6 @@ io.on("connection", (socket) => {
 });
 app.use(express.static(path.join(__dirname, "public")));
 
-server.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+server.listen(port, '0.0.0.0', () => {
+  console.log(`Server listening on http://localhost:${port}`);
 });
