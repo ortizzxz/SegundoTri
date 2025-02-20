@@ -13,7 +13,7 @@ function PrivateRoute({ children }) {
             setLoading(false);
         });
 
-        return () => unsubscribe(); // el unsubscribe detiene el listener de autenticación cuando ya no hace falta
+        return () => unsubscribe(); 
     }, []);
 
     if (loading) {

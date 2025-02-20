@@ -7,6 +7,7 @@ import Detail from './components/Detail'
 import Game from './components/Game'
 import Error from './components/Error'
 import Footer from './components/Footer'
+import Defensa from './components/Defensa'
 import { Outlet } from 'react-router-dom'
 import PrivateRoute from './components/PrivateRoute'
 import { useEffect } from 'react';
@@ -94,6 +95,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "defensa/:id",
+        element: (
+          <>
+            <Defensa></Defensa>
+          </>
+        ),
+      },
+      {
         path: "register",
         element: (
           <>
@@ -102,7 +111,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "game", // nuesra ruta protegida con PrivateRoute
+        path: "game", // nuestra ruta protegida con PrivateRoute
         element: (
           <>
             <PrivateRoute>

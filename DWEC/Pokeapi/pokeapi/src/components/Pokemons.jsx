@@ -45,11 +45,12 @@ function Pokemons() {
   function searchPokemon() {
     const query = searchTerm.trim().toLowerCase();
 
+    //vacio borra busquedas y pone la lista nueva
     if (query === "") {
       loadPokemonData();
       setSearchedPokemon(null);
       setSearchError(null);
-      return; 
+      return;
     }
 
     setLoadingIndicator(
@@ -70,23 +71,22 @@ function Pokemons() {
       .then((data) => {
         setPokemonList([]); //limpiar lista
         setSearchedPokemon(data);
-        setSearchError(null); 
-        setLoadingIndicator(null);  
+        setSearchError(null);
+        setLoadingIndicator(null);
       })
       .catch(() => {
-        setSearchedPokemon(null); // no hay pokemon ? 
+        setSearchedPokemon(null); // no hay pokemon ?
         setSearchError("Pokémon no encontrado.");
         setLoadingIndicator(null);
       });
   }
 
-  function deleteFilters(){
-      setSearchTerm("");
-      loadPokemonData();
-      setSearchedPokemon(null);
-      setSearchError(null);
+  function deleteFilters() {
+    setSearchTerm("");
+    loadPokemonData();
+    setSearchedPokemon(null);
+    setSearchError(null);
   }
-
 
   const pokemonCards = pokemonList.map((pokemon) => (
     <div
@@ -137,14 +137,14 @@ function Pokemons() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)} //termino de busqueda
           onKeyDown={(e) => {
-            if (e.key === "Enter") { 
+            if (e.key === "Enter") {
               searchPokemon(); // con ( )
             }
           }}
         />
         <span
           className="p-2 mx-1 rounded custom-search"
-          onClick={searchPokemon}  
+          onClick={searchPokemon}
         >
           🔍
         </span>

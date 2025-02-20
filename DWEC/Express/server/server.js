@@ -1,52 +1,81 @@
-const express = require("express"); // Aplicacion de Express que utiliza node
+const express = require("express");
 const { createServer } = require("node:http");
 const app = express();
 const server = createServer(app);
 const port = 3000;
 const path = require("path");
 const { Server } = require("socket.io");
-const cors = require('cors'); 
+const cors = require("cors");
 
 app.use(cors());
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173", // Your Vue.js app's URL
-    methods: ["GET", "POST"]
-  }
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
+  },
 });
 
-// lista para almacenar los nombres de usuario por ID de socket
-const users = {};
+const users = {}; // { nombreUsuario: socketId }
+const sockets = {}; // { socketId: nombreUsuario }
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/public/index.html"));
 });
 
 io.on("connection", (socket) => {
-  console.log("A user connected, total users connected: " + io.engine.clientsCount);
+  console.log(
+    "A user connected, total users connected: " + io.engine.clientsCount
+  );
 
-  socket.on('message', (data) =>{
-    socket.broadcast.emit('messageServidor', data);
+  // gguarda el nombre del usuario y su socket ID
+  socket.on("name", (name) => {
+    const userId = socket.id; // Usamos el ID único del socket
+    users[userId] = { name, id: userId }; // Guardamos ID y nombre
+    sockets[socket.id] = userId; // Relacionamos el socket con el usuario
+
+    io.emit("usersConnected", Object.values(users)); // Enviamos toda la lista de usuarios
+    socket.broadcast.emit("usernameConnected", { name, id: userId });
   });
 
-  socket.on('name', (name) =>{
-    console.log(name);
-    users[socket.id] = name; // Almacena el nombre del usuario
-    socket.broadcast.emit('usernameConnected', name);
+  socket.on("message", (data) => {
+    socket.broadcast.emit("messageServidor", data);
+  });
+
+  socket.on("typing", (name) => {
+    socket.broadcast.emit("userTyping", name);
+  });
+
+  socket.on("stopTyping", () => {
+    socket.broadcast.emit("userStoppedTyping");
+  });
+
+  socket.on("privateMessage", ({ from, name, to, data }) => {
+    console.log(from + ", " + name + ", " + to + ", " + data)
+    const receiverSocketId = to;
+
+    if (io.sockets.sockets.get(receiverSocketId)) {
+      io.to(receiverSocketId).emit("privateMessage", { from, name, data });
+    } else {
+      console.log(`Usuario con ID ${to} no encontrado.`);
+    }
   });
 
   socket.on("disconnect", () => {
-    console.log("A user disconnected, total users connected: " + io.engine.clientsCount);
-    const disconnectedUser = users[socket.id];
-    if (disconnectedUser) {
-      delete users[socket.id];
-      socket.broadcast.emit('usernameDisconnected', disconnectedUser);
+    const userId = sockets[socket.id];
+    if (userId) {
+      const disconnectedUser = users[userId];
+      delete users[userId];
+      delete sockets[socket.id];
+
+      socket.broadcast.emit("usernameDisconnected", disconnectedUser);
+      io.emit("usersConnected", Object.values(users));
     }
   });
 });
+
 app.use(express.static(path.join(__dirname, "public")));
 
-server.listen(port, '0.0.0.0', () => {
+server.listen(port, "0.0.0.0", () => {
   console.log(`Server listening on http://localhost:${port}`);
 });

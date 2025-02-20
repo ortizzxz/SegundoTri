@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
+import JoseMajo from './JoseMajo';
 
 function Home() {
   return (
     <div className="container mt-5">
+      <div>
+        {/*DEFENDA JOSE */}
+        <JoseMajo></JoseMajo>
+      </div>
       {/* Header */}
       <div className="jumbotron bg-light text-center p-5 rounded border-custom">
         <h1 className="display-4">¡Bienvenido al Explorador PokeAPI!</h1>
