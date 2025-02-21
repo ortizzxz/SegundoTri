@@ -1,28 +1,30 @@
-// _footer.scss
-
+/// Estilos para el pie de página
+/// @group Layout
 footer {
-    background-color: $dark-grey;
-    color: $white;
-    text-align: center;
-    padding: 30px 0;
-    
-    p {
-      font-size: 1rem;
-      margin: 0;
-      font-weight: 400;
-    }
-    
-    a {
-      color: $white;
-      text-decoration: none;
-      font-weight: 600;
-      margin-top: 10px;
-      display: inline-block;
-      transition: color 0.3s;
-      
-      &:hover {
-        color: $primary-color;
-      }
-    }
+  background-color: $dark-grey;
+  color: $white;
+  text-align: center;
+  padding: 30px 0;
+  
+  /// Estilos para el texto del pie de página
+  p {
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 400;
   }
   
+  /// Estilos para los enlaces en el pie de página
+  a {
+    color: $white;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 10px;
+    display: inline-block;
+    transition: color 0.3s;
+    
+    /// Estado hover de los enlaces
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}

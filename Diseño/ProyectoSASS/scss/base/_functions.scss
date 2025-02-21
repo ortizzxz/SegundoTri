@@ -1,6 +1,11 @@
-// _functions.scss
-
-// Función para convertir hex a rgb
+/// Convierte un color hexadecimal a valores RGB
+/// @group Color
+/// @param {Color} $color - El color hexadecimal a convertir
+/// @return {List} - Lista de valores RGB (red, green, blue)
+/// @return {Null} - Si el color proporcionado no es un valor hexadecimal válido
+/// @example scss
+///   $rgb-values: hex-to-rgb(#ff0000);
+///   // Resultado: 255, 0, 0
 @function hex-to-rgb($color) {
     @if (str-length($color) == 7) {
         $r: red($color);

@@ -1,14 +1,24 @@
-// _mixins.scss
-
-// Mixin para establecer la fuente
+/// Establece la fuente de un elemento
+/// @group Typography
+/// @param {String} $font-family - La familia de fuentes a utilizar
+/// @param {Length} $font-size - El tamaño de la fuente
+/// @param {String} $font-weight [normal] - El peso de la fuente
+/// @example scss
+///   .element {
+///     @include font('Arial', 16px, bold);
+///   }
 @mixin font($font-family, $font-size, $font-weight: normal) {
     font-family: $font-family;
     font-size: $font-size;
     font-weight: $font-weight;
 }
 
- 
-// Mixin para centrado de titulo en las secciones
+/// Centra y estiliza el encabezado de una sección
+/// @group Layout
+/// @example scss
+///   .section {
+///     @include section-header;
+///   }
 @mixin section-header {
     text-align: center;
   
@@ -17,17 +27,28 @@
       font-weight: 400;
       margin-bottom: 0.3rem;
     }
-  }
-  
+}
 
-// Mixin para centrado
+/// Centra un elemento usando flexbox
+/// @group Layout
+/// @example scss
+///   .centered-element {
+///     @include center;
+///   }
 @mixin center() {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-// Mixin para un botón estilizado
+/// Aplica estilos de botón personalizados
+/// @group Components
+/// @param {Color} $background-color - El color de fondo del botón
+/// @param {Color} $color - El color del texto del botón
+/// @example scss
+///   .button {
+///     @include button-style(#007bff, #ffffff);
+///   }
 @mixin button-style($background-color, $color) {
     background-color: $background-color;
     color: $color;
@@ -42,7 +63,16 @@
     }
 }
 
-// Mixin para hacer elementos responsive
+/// Aplica estilos responsivos basados en un punto de quiebre
+/// @group Responsive
+/// @param {Length} $breakpoint - El punto de quiebre para aplicar los estilos
+/// @content [Estilos a aplicar cuando se alcance el punto de quiebre]
+/// @example scss
+///   @include responsive(768px) {
+///     .element {
+///       font-size: 14px;
+///     }
+///   }
 @mixin responsive($breakpoint) {
     @media (max-width: $breakpoint) {
         @content;

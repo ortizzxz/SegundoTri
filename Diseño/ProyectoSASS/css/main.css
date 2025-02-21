@@ -1,3 +1,25 @@
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  color: #333;
+  background-color: #eaeaea;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Poppins", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #2a9d8f;
+  transition: color 0.3s;
+}
+a:hover {
+  color: #9c8038;
+}
+
 .header {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../img/villamar.jpg") no-repeat center center;
   background-size: cover;
@@ -27,7 +49,7 @@
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 .header .header-content .btn-primary {
-  background-color: #9c8038;
+  background-color: #2a9d8f;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -43,11 +65,12 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 .header .header-content .btn-primary:hover {
-  background-color: rgb(218.5, 218.5, 218.5);
+  background-color: rgb(208.5, 208.5, 208.5);
 }
 .header .header-content .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  background-color: rgb(9.7085427136, 36.2914572864, 33.0552763819);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 @media (max-width: 576px) {
   .header {
@@ -95,7 +118,7 @@ footer a:hover {
   transition: background-color 0.3s;
 }
 .btn-primary:hover {
-  background-color: rgb(218.5, 218.5, 218.5);
+  background-color: rgb(208.5, 208.5, 208.5);
 }
 
 .btn-secondary {
@@ -108,7 +131,7 @@ footer a:hover {
   transition: background-color 0.3s;
 }
 .btn-secondary:hover {
-  background-color: rgb(218.5, 218.5, 218.5);
+  background-color: rgb(208.5, 208.5, 208.5);
 }
 
 #featured {
@@ -122,7 +145,7 @@ footer a:hover {
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
   gap: 1rem;
   margin: 0 0.5rem;
 }
@@ -136,6 +159,8 @@ footer a:hover {
 }
 .cards .card img {
   width: 100%;
+  height: 60%;
+  object-fit: cover;
   border-radius: 0.5rem;
 }
 .cards .card h3 {
@@ -143,12 +168,14 @@ footer a:hover {
   margin-top: 0.625rem;
 }
 .cards .card p {
+  font-size: 1.5rem;
   margin: 0.5rem 0;
 }
 .cards .card a {
   color: #2a9d8f;
   text-decoration: none;
   font-weight: bold;
+  font-size: 1.25rem;
   margin-top: 0.625rem;
   display: inline-block;
   transition: color 0.3s;
@@ -164,6 +191,22 @@ footer a:hover {
 @media (max-width: 48rem) {
   .cards {
     grid-template-columns: 1fr;
+    margin: 0.8rem 0.5rem;
+  }
+  .cards .card {
+    height: 45vh;
+    margin-bottom: 1rem;
+  }
+  .cards .card img {
+    height: 45%;
+  }
+  .cards .card h3 {
+    font-size: 1.5rem;
+    margin-top: 0.625rem;
+  }
+  .cards .card p {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
   }
 }
 .navbar {
@@ -179,13 +222,14 @@ footer a:hover {
 .navbar .navbar-logo {
   color: #fff;
   font-size: 1.75rem;
-  font-weight: bold;
+  font-weight: 400;
   text-decoration: none;
   flex-shrink: 0;
   transition: transform 0.3s ease;
 }
 .navbar .navbar-logo:hover {
   transform: scale(1.05);
+  animation: bounce 0.8s ease infinite;
 }
 .navbar .menu-toggle {
   display: none;
@@ -380,6 +424,7 @@ footer a:hover {
 
 #categories {
   text-align: center;
+  text-align: center;
 }
 #categories h2 {
   font-size: xx-large;
@@ -389,40 +434,71 @@ footer a:hover {
 
 .categories {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
   margin-top: 3rem;
+  padding: 1rem;
 }
 .categories .category {
   text-align: center;
   font-size: 1.2rem;
-  padding: 1.25rem;
-  background-color: #f4f4f4;
-  border-radius: 0.625rem;
-  transition: transform 0.3s, box-shadow 0.3s;
+  padding: 1.5rem;
+  background: linear-gradient(to bottom, white, #f4f4f4);
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+.categories .category:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(42, 157, 143, 0.05);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 .categories .category i {
   font-size: 3rem;
   color: #2a9d8f;
   margin-bottom: 0.5rem;
   display: block;
+  transition: color 0.3s ease;
 }
 .categories .category h3 {
   margin-top: 0.5rem;
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
 .categories .category:hover {
-  transform: translateY(-0.3125rem);
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  background: rgb(170.5829145729, 232.4170854271, 224.8894472362);
+}
+.categories .category:hover:before {
+  opacity: 1;
+}
+.categories .category:hover i {
+  color: rgb(31.2361809045, 116.7638190955, 106.351758794);
+}
+.categories .category:hover h3 {
+  color: rgb(25.8542713568, 96.6457286432, 88.027638191);
 }
 
 @media (max-width: 48rem) {
   .categories {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 }
 @media (max-width: 30rem) {
   .categories {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .category {
+    padding: 1rem;
   }
 }
 #advertisement {
@@ -438,28 +514,6 @@ footer a:hover {
 #advertisement p {
   font-size: 1.2rem;
   margin-top: 20px;
-}
-
-body {
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  color: #333;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
-}
-
-h1, h2, h3, h4 {
-  font-family: "Poppins", sans-serif;
-}
-
-a {
-  text-decoration: none;
-  color: #2a9d8f;
-  transition: color 0.3s;
-}
-a:hover {
-  color: #9c8038;
 }
 
 /*# sourceMappingURL=main.css.map */

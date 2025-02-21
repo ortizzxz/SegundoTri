@@ -1,0 +1,1013 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Proyectosass - v1.0.0</title><link rel="stylesheet" href="assets/css/main.css"><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,700" rel="stylesheet" type="text/css"><meta name="viewport" content="width=device-width"><meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible"><!-- Open Graph tags --><meta property="og:title" content="Proyectosass - SassDoc"><meta property="og:type" content="website"><meta property="og:description" content="Release the docs!"><!-- Thanks to Sass-lang.com for the icons --><link href="assets/images/favicon.png" rel="shortcut icon"></head><body><aside class="sidebar" role="nav"><div class="sidebar__header"><h1 class="sidebar__title">Proyectosass - 1.0.0</h1></div><div class="sidebar__body"><button type="button" class="btn-toggle js-btn-toggle" data-alt="Open all">Close all</button><p class="sidebar__item sidebar__item--heading" data-slug="color"><a href="#color">color</a></p><div><p class="sidebar__item sidebar__item--sub-heading" data-slug="color-function"><a href="#color-function">functions</a></p><ul class="list-unstyled"><li class="sidebar__item sassdoc__item" data-group="color" data-name="hex-to-rgb" data-type="function"><a href="#color-function-hex-to-rgb">hex-to-rgb</a></li></ul></div><p class="sidebar__item sidebar__item--heading" data-slug="components"><a href="#components">components</a></p><div><p class="sidebar__item sidebar__item--sub-heading" data-slug="components-mixin"><a href="#components-mixin">mixins</a></p><ul class="list-unstyled"><li class="sidebar__item sassdoc__item" data-group="components" data-name="button-style" data-type="mixin"><a href="#components-mixin-button-style">button-style</a></li></ul><p class="sidebar__item sidebar__item--sub-heading" data-slug="components-css"><a href="#components-css">css</a></p><ul class="list-unstyled"><li class="sidebar__item sassdoc__item" data-group="components" data-name="#advertisement" data-type="css"><a href="#components-css-#advertisement">#advertisement</a></li><li class="sidebar__item sassdoc__item" data-group="components" data-name=".btn-primary" data-type="css"><a href="#components-css-.btn-primary">.btn-primary</a></li><li class="sidebar__item sassdoc__item" data-group="components" data-name="#featured" data-type="css"><a href="#components-css-#featured">#featured</a></li><li class="sidebar__item sassdoc__item" data-group="components" data-name=".cards" data-type="css"><a href="#components-css-.cards">.cards</a></li><li class="sidebar__item sassdoc__item" data-group="components" data-name="#categories" data-type="css"><a href="#components-css-#categories">#categories</a></li><li class="sidebar__item sassdoc__item" data-group="components" data-name=".categories" data-type="css"><a href="#components-css-.categories">.categories</a></li><li class="sidebar__item sassdoc__item" data-group="components" data-name="#reviews" data-type="css"><a href="#components-css-#reviews">#reviews</a></li><li class="sidebar__item sassdoc__item" data-group="components" data-name=".reviews" data-type="css"><a href="#components-css-.reviews">.reviews</a></li></ul></div><p class="sidebar__item sidebar__item--heading" data-slug="layout"><a href="#layout">layout</a></p><div><p class="sidebar__item sidebar__item--sub-heading" data-slug="layout-mixin"><a href="#layout-mixin">mixins</a></p><ul class="list-unstyled"><li class="sidebar__item sassdoc__item" data-group="layout" data-name="section-header" data-type="mixin"><a href="#layout-mixin-section-header">section-header</a></li><li class="sidebar__item sassdoc__item" data-group="layout" data-name="center" data-type="mixin"><a href="#layout-mixin-center">center</a></li></ul><p class="sidebar__item sidebar__item--sub-heading" data-slug="layout-css"><a href="#layout-css">css</a></p><ul class="list-unstyled"><li class="sidebar__item sassdoc__item" data-group="layout" data-name="footer" data-type="css"><a href="#layout-css-footer">footer</a></li><li class="sidebar__item sassdoc__item" data-group="layout" data-name=".header" data-type="css"><a href="#layout-css-.header">.header</a></li></ul></div><p class="sidebar__item sidebar__item--heading" data-slug="navigation"><a href="#navigation">navigation</a></p><div><p class="sidebar__item sidebar__item--sub-heading" data-slug="navigation-css"><a href="#navigation-css">css</a></p><ul class="list-unstyled"><li class="sidebar__item sassdoc__item" data-group="navigation" data-name=".navbar" data-type="css"><a href="#navigation-css-.navbar">.navbar</a></li></ul></div><p class="sidebar__item sidebar__item--heading" data-slug="responsive"><a href="#responsive">responsive</a></p><div><p class="sidebar__item sidebar__item--sub-heading" data-slug="responsive-mixin"><a href="#responsive-mixin">mixins</a></p><ul class="list-unstyled"><li class="sidebar__item sassdoc__item" data-group="responsive" data-name="responsive" data-type="mixin"><a href="#responsive-mixin-responsive">responsive</a></li></ul></div><p class="sidebar__item sidebar__item--heading" data-slug="typography"><a href="#typography">typography</a></p><div><p class="sidebar__item sidebar__item--sub-heading" data-slug="typography-mixin"><a href="#typography-mixin">mixins</a></p><ul class="list-unstyled"><li class="sidebar__item sassdoc__item" data-group="typography" data-name="font" data-type="mixin"><a href="#typography-mixin-font">font</a></li></ul></div><p class="sidebar__item sidebar__item--heading" data-slug="undefined"><a href="#undefined">General</a></p><div><p class="sidebar__item sidebar__item--sub-heading" data-slug="undefined-css"><a href="#undefined-css">css</a></p><ul class="list-unstyled"><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="body" data-type="css"><a href="#undefined-css-body">body</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="h1, h2, h3, h4" data-type="css"><a href="#undefined-css-h1, h2, h3, h4">h1, h2, h3, h4</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="a" data-type="css"><a href="#undefined-css-a">a</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="&amp;:hover" data-type="css"><a href="#undefined-css-&amp;:hover">&amp;:hover</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="i" data-type="css"><a href="#undefined-css-i">i</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="p" data-type="css"><a href="#undefined-css-p">p</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name=".btn-secondary" data-type="css"><a href="#undefined-css-.btn-secondary">.btn-secondary</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name=".card" data-type="css"><a href="#undefined-css-.card">.card</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="img" data-type="css"><a href="#undefined-css-img">img</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="h3" data-type="css"><a href="#undefined-css-h3">h3</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="p" data-type="css"><a href="#undefined-css-p">p</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="a" data-type="css"><a href="#undefined-css-a">a</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="&amp;:hover" data-type="css"><a href="#undefined-css-&amp;:hover">&amp;:hover</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="&amp;:hover" data-type="css"><a href="#undefined-css-&amp;:hover">&amp;:hover</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name=".category" data-type="css"><a href="#undefined-css-.category">.category</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="&amp;:before" data-type="css"><a href="#undefined-css-&amp;:before">&amp;:before</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="i" data-type="css"><a href="#undefined-css-i">i</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="h3" data-type="css"><a href="#undefined-css-h3">h3</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="&amp;:hover" data-type="css"><a href="#undefined-css-&amp;:hover">&amp;:hover</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name=".navbar-logo" data-type="css"><a href="#undefined-css-.navbar-logo">.navbar-logo</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name=".menu-toggle" data-type="css"><a href="#undefined-css-.menu-toggle">.menu-toggle</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name=".navbar-links" data-type="css"><a href="#undefined-css-.navbar-links">.navbar-links</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name=".review" data-type="css"><a href="#undefined-css-.review">.review</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="&amp;:hover" data-type="css"><a href="#undefined-css-&amp;:hover">&amp;:hover</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name=".review-header" data-type="css"><a href="#undefined-css-.review-header">.review-header</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name=".review-avatar" data-type="css"><a href="#undefined-css-.review-avatar">.review-avatar</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name=".review-info" data-type="css"><a href="#undefined-css-.review-info">.review-info</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name=".review-rating" data-type="css"><a href="#undefined-css-.review-rating">.review-rating</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="p" data-type="css"><a href="#undefined-css-p">p</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name=".review-date" data-type="css"><a href="#undefined-css-.review-date">.review-date</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="p" data-type="css"><a href="#undefined-css-p">p</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="a" data-type="css"><a href="#undefined-css-a">a</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="&amp;:hover" data-type="css"><a href="#undefined-css-&amp;:hover">&amp;:hover</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name=".header-content" data-type="css"><a href="#undefined-css-.header-content">.header-content</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="h1" data-type="css"><a href="#undefined-css-h1">h1</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="p" data-type="css"><a href="#undefined-css-p">p</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name=".btn-primary" data-type="css"><a href="#undefined-css-.btn-primary">.btn-primary</a></li></ul><p class="sidebar__item sidebar__item--sub-heading" data-slug="undefined-variable"><a href="#undefined-variable">variables</a></p><ul class="list-unstyled"><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="primary-color" data-type="variable"><a href="#undefined-variable-primary-color">primary-color</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="secondary-color" data-type="variable"><a href="#undefined-variable-secondary-color">secondary-color</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="dark-grey" data-type="variable"><a href="#undefined-variable-dark-grey">dark-grey</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="light-grey" data-type="variable"><a href="#undefined-variable-light-grey">light-grey</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="white" data-type="variable"><a href="#undefined-variable-white">white</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="text-color" data-type="variable"><a href="#undefined-variable-text-color">text-color</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="global-background-color" data-type="variable"><a href="#undefined-variable-global-background-color">global-background-color</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="font-primary" data-type="variable"><a href="#undefined-variable-font-primary">font-primary</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="font-secondary" data-type="variable"><a href="#undefined-variable-font-secondary">font-secondary</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="font-size-base" data-type="variable"><a href="#undefined-variable-font-size-base">font-size-base</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="font-size-xlg" data-type="variable"><a href="#undefined-variable-font-size-xlg">font-size-xlg</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="font-size-lg" data-type="variable"><a href="#undefined-variable-font-size-lg">font-size-lg</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="font-size-sm" data-type="variable"><a href="#undefined-variable-font-size-sm">font-size-sm</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="breakpoint-mobile" data-type="variable"><a href="#undefined-variable-breakpoint-mobile">breakpoint-mobile</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="breakpoint-tablet" data-type="variable"><a href="#undefined-variable-breakpoint-tablet">breakpoint-tablet</a></li><li class="sidebar__item sassdoc__item" data-group="undefined" data-name="breakpoint-desktop" data-type="variable"><a href="#undefined-variable-breakpoint-desktop">breakpoint-desktop</a></li></ul></div></div></aside><article class="main" role="main"><header class="header" role="banner"><div class="container"><div class="sassdoc__searchbar searchbar"><label for="js-search-input" class="visually-hidden">Search</label><div class="searchbar__form" id="js-search"><input name="search" type="search" class="searchbar__field" autocomplete="off" autofocus id="js-search-input" placeholder="Search"><ul class="searchbar__suggestions" id="js-search-suggestions"></ul></div></div></div></header><section class="main__section"><h1 class="main__heading" id="color"><div class="container">color</div></h1><section class="main__sub-section" id="color-function"><h2 class="main__heading--secondary"><div class="container">functions</div></h2><section class="main__item container item" id="color-function-hex-to-rgb"><h3 class="item__heading"><a class="item__name" href="#color-function-hex-to-rgb">hex-to-rgb</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="@function hex-to-rgb($color) { 
+    @if (str-length($color) == 7) {
+        $r: red($color);
+        $g: green($color);
+        $b: blue($color);
+        @return $r, $g, $b;
+    }
+    @return null;
+ }" data-collapsed="@function hex-to-rgb($color) { ... }"><code>@function hex-to-rgb($color) { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Convierte un color hexadecimal a valores RGB</p></div><h3 class="item__sub-heading">Parameters</h3><table class="item__parameters"><thead><tr><th scope="col"><span class="visually-hidden">parameter </span>Name</th><th scope="col"><span class="visually-hidden">parameter </span>Description</th><th scope="col"><span class="visually-hidden">parameter </span>Type</th><th scope="col"><span class="visually-hidden">parameter </span>Default value</th></tr></thead><tbody><tr class="item__parameter"><th scope="row" data-label="name"><code>$color</code></th><td data-label="desc"><p>El color hexadecimal a convertir</p></td><td data-label="type"><code>Color</code></td><td data-label="default">&mdash;<span class="visually-hidden"> none</span></td></tr></tbody></table><h3 class="item__sub-heading">Returns</h3><div class="item__description item__description--inline"><code>List</code> &mdash;<p>Lista de valores RGB (red, green, blue)</p></div><h3 class="item__sub-heading">Example</h3><div class="item__example example"><pre class="example__code language-scss"><code>$rgb-values: hex-to-rgb(#ff0000);
+// Resultado: 255, 0, 0</code></pre></div></section></section></section><section class="main__section"><h1 class="main__heading" id="components"><div class="container">components</div></h1><div class="main__description"><div class="container"><p>Se utiliza para acciones principales dentro de la interfaz.</p></div></div><section class="main__sub-section" id="components-mixin"><h2 class="main__heading--secondary"><div class="container">mixins</div></h2><section class="main__item container item" id="components-mixin-button-style"><h3 class="item__heading"><a class="item__name" href="#components-mixin-button-style">button-style</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="@mixin button-style($background-color, $color) { 
+    background-color: $background-color;
+    color: $color;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &amp;:hover {
+        background-color: darken($global-background-color, 10%);
+    }
+ }" data-collapsed="@mixin button-style($background-color, $color) { ... }"><code>@mixin button-style($background-color, $color) { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Aplica estilos de botón personalizados</p></div><h3 class="item__sub-heading">Parameters</h3><table class="item__parameters"><thead><tr><th scope="col"><span class="visually-hidden">parameter </span>Name</th><th scope="col"><span class="visually-hidden">parameter </span>Description</th><th scope="col"><span class="visually-hidden">parameter </span>Type</th><th scope="col"><span class="visually-hidden">parameter </span>Default value</th></tr></thead><tbody><tr class="item__parameter"><th scope="row" data-label="name"><code>$background-color</code></th><td data-label="desc"><p>El color de fondo del botón</p></td><td data-label="type"><code>Color</code></td><td data-label="default">&mdash;<span class="visually-hidden"> none</span></td></tr><tr class="item__parameter"><th scope="row" data-label="name"><code>$color</code></th><td data-label="desc"><p>El color del texto del botón</p></td><td data-label="type"><code>Color</code></td><td data-label="default">&mdash;<span class="visually-hidden"> none</span></td></tr></tbody></table><h3 class="item__sub-heading">Example</h3><div class="item__example example"><pre class="example__code language-scss"><code>.button {
+  @include button-style(#007bff, #ffffff);
+}</code></pre></div><h3 class="item__sub-heading">Requires</h3><ul class="list-unstyled"><li class="item__description item__description--inline"><span class="item__cross-type">[variable]</span> <a href="#undefined-variable-global-background-color"><code>global-background-color</code></a></li></ul></section></section><section class="main__sub-section" id="components-css"><h2 class="main__heading--secondary"><div class="container">css</div></h2><section class="main__item container item" id="components-css-#advertisement"><h3 class="item__heading"><a class="item__name" href="#components-css-#advertisement">#advertisement</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>#advertisement {
+  background-color: $primary-color;
+  color: $white;
+  text-align: center;
+  padding: 50px 0;
+  
+  /// Estilos para los iconos dentro del anuncio
+  /// @example scss
+  ///   #advertisement i {
+  ///     font-size: 3rem;
+  ///     margin-right: 10px;
+  ///   }
+  i {
+    font-size: 3rem;
+    margin-right: 10px;
+  }
+  
+  /// Estilos para los párrafos dentro del anuncio
+  /// @example scss
+  ///   #advertisement p {
+  ///     font-size: 1.2rem;
+  ///     margin-top: 20px;
+  ///   }
+  p {
+    font-size: 1.2rem;
+    margin-top: 20px;
+  }
+}</code>" data-collapsed="#advertisement { ... }"><code>#advertisement { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Sección de anuncio o promoción</p></div><h3 class="item__sub-heading">Example</h3><div class="item__example example"><pre class="example__code language-scss"><code>#advertisement {
+  background-color: $primary-color;
+  color: $white;
+  text-align: center;
+}</code></pre></div></section><section class="main__item container item" id="components-css-.btn-primary"><h3 class="item__heading"><a class="item__name" href="#components-css-.btn-primary">.btn-primary</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>.btn-primary {
+  @include button-style($primary-color, $white);
+}</code>" data-collapsed=".btn-primary { ... }"><code>.btn-primary { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilos para el botón primario.</p></div><h3 class="item__sub-heading">Example</h3><div class="item__example example"><div class="example__description"><p>Uso</p></div><pre class="example__code language-scss"><code>.btn-primary {
+  @include button-style($primary-color, $white);
+}</code></pre></div></section><section class="main__item container item" id="components-css-#featured"><h3 class="item__heading"><a class="item__name" href="#components-css-#featured">#featured</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>#featured {
+  @include section-header;
+}</code>" data-collapsed="#featured { ... }"><code>#featured { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilos para la sección de características destacadas</p></div></section><section class="main__item container item" id="components-css-.cards"><h3 class="item__heading"><a class="item__name" href="#components-css-.cards">.cards</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 1rem;
+  margin: 0 0.5rem;
+
+  /// Estilos individuales de tarjeta
+  /// @group Components
+  .card {
+    border: 1px solid $light-grey;
+    border-radius: 0.625rem;
+    padding: 1rem;
+    background-color: $white;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    
+    /// Imagen de la tarjeta
+    img {
+      width: 100%;
+      border-radius: 0.5rem;
+    }
+    
+    /// Título de la tarjeta
+    h3 {
+      font-size: 1.5rem;
+      margin-top: 0.625rem;
+    }
+    
+    /// Párrafo de la tarjeta
+    p {
+      font-size: $font-size-xlg;
+      margin: 0.5rem 0;
+    }
+    
+    /// Enlace de la tarjeta
+    a {
+      color: $primary-color;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: $font-size-lg;
+      margin-top: 0.625rem;
+      display: inline-block;
+      transition: color 0.3s;
+      
+      /// Estado hover del enlace
+      &amp;:hover {
+        color: $secondary-color;
+      }
+    }
+    
+    /// Estado hover de la tarjeta
+    &amp;:hover {
+      transform: translateY(-0.3125rem);
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    }
+  }
+}</code>" data-collapsed=".cards { ... }"><code>.cards { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Contenedor de tarjetas</p></div></section><section class="main__item container item" id="components-css-#categories"><h3 class="item__heading"><a class="item__name" href="#components-css-#categories">#categories</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>#categories {
+  @include section-header;
+  text-align: center;
+}</code>" data-collapsed="#categories { ... }"><code>#categories { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilos para la sección de categorías</p></div></section><section class="main__item container item" id="components-css-.categories"><h3 class="item__heading"><a class="item__name" href="#components-css-.categories">.categories</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+  padding: 1rem;
+
+  /// Estilos individuales de categoría
+  /// @group Components
+  .category {
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 1.5rem;
+    background: linear-gradient(to bottom, lighten($light-grey, 5%), $light-grey);
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+
+    /// Efecto sutil de borde al pasar el mouse
+    &amp;:before {
+      content: &quot;&quot;;
+      position: absolute;
+      inset: 0;
+      background: rgba($primary-color, 0.05);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    /// Icono de la categoría
+    i {
+      font-size: 3rem;
+      color: $primary-color;
+      margin-bottom: 0.5rem;
+      display: block;
+      transition: color 0.3s ease;
+    }
+
+    /// Título de la categoría
+    h3 {
+      margin-top: 0.5rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    /// Estado hover de la categoría
+    &amp;:hover {
+      transform: translateY(-6px) scale(1.04);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      background: lighten($primary-color, 40%);
+    }
+
+    &amp;:hover:before {
+      opacity: 1;
+    }
+
+    &amp;:hover i {
+      color: darken($primary-color, 10%);
+    }
+
+    &amp;:hover h3 {
+      color: darken($primary-color, 15%);
+    }
+  }
+}</code>" data-collapsed=".categories { ... }"><code>.categories { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Contenedor de categorías</p></div></section><section class="main__item container item" id="components-css-#reviews"><h3 class="item__heading"><a class="item__name" href="#components-css-#reviews">#reviews</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>#reviews {
+  @include section-header;
+}</code>" data-collapsed="#reviews { ... }"><code>#reviews { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilos para la sección de reseñas</p></div></section><section class="main__item container item" id="components-css-.reviews"><h3 class="item__heading"><a class="item__name" href="#components-css-.reviews">.reviews</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>.reviews {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px; 
+  margin: 0.5rem 0.3rem;
+
+  /// Estilos individuales de reseña
+  /// @group Components
+  .review {
+    background-color: $light-grey;
+    padding: 25px;
+    border-radius: 10px;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    border: 1px solid $primary-color;
+
+    /// Estado hover de la reseña
+    &amp;:hover {
+      transform: translateY(-5px);
+    }
+
+    /// Encabezado de la reseña
+    .review-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+
+      /// Avatar del autor de la reseña
+      .review-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 15px;
+      }
+
+      /// Información del autor y calificación
+      .review-info {
+        h4 {
+          margin: 0 0 5px;
+          font-weight: bold;
+        }
+
+        /// Calificación de la reseña
+        .review-rating {
+          color: $primary-color;
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+    /// Contenido de la reseña
+    p {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    /// Fecha de la reseña
+    .review-date {
+      display: block;
+      font-size: 0.8rem;
+      color: $secondary-color;
+      text-align: right;
+      font-style: italic;
+    }
+  }
+}</code>" data-collapsed=".reviews { ... }"><code>.reviews { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Contenedor de reseñas</p></div></section></section></section><section class="main__section"><h1 class="main__heading" id="layout"><div class="container">layout</div></h1><section class="main__sub-section" id="layout-mixin"><h2 class="main__heading--secondary"><div class="container">mixins</div></h2><section class="main__item container item" id="layout-mixin-section-header"><h3 class="item__heading"><a class="item__name" href="#layout-mixin-section-header">section-header</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="@mixin section-header() { 
+    text-align: center;
+  
+    h2 {
+      font-size: xx-large;
+      font-weight: 400;
+      margin-bottom: 0.3rem;
+    }
+ }" data-collapsed="@mixin section-header() { ... }"><code>@mixin section-header() { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Centra y estiliza el encabezado de una sección</p></div><h3 class="item__sub-heading">Parameters</h3><p>None.</p><h3 class="item__sub-heading">Example</h3><div class="item__example example"><pre class="example__code language-scss"><code>.section {
+  @include section-header;
+}</code></pre></div></section><section class="main__item container item" id="layout-mixin-center"><h3 class="item__heading"><a class="item__name" href="#layout-mixin-center">center</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="@mixin center() { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }" data-collapsed="@mixin center() { ... }"><code>@mixin center() { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Centra un elemento usando flexbox</p></div><h3 class="item__sub-heading">Parameters</h3><p>None.</p><h3 class="item__sub-heading">Example</h3><div class="item__example example"><pre class="example__code language-scss"><code>.centered-element {
+  @include center;
+}</code></pre></div></section></section><section class="main__sub-section" id="layout-css"><h2 class="main__heading--secondary"><div class="container">css</div></h2><section class="main__item container item" id="layout-css-footer"><h3 class="item__heading"><a class="item__name" href="#layout-css-footer">footer</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>footer {
+  background-color: $dark-grey;
+  color: $white;
+  text-align: center;
+  padding: 30px 0;
+  
+  /// Estilos para el texto del pie de página
+  p {
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 400;
+  }
+  
+  /// Estilos para los enlaces en el pie de página
+  a {
+    color: $white;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 10px;
+    display: inline-block;
+    transition: color 0.3s;
+    
+    /// Estado hover de los enlaces
+    &amp;:hover {
+      color: $primary-color;
+    }
+  }
+}</code>" data-collapsed="footer { ... }"><code>footer { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilos para el pie de página</p></div></section><section class="main__item container item" id="layout-css-.header"><h3 class="item__heading"><a class="item__name" href="#layout-css-.header">.header</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>.header {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(&#39;../../img/villamar.jpg&#39;) no-repeat center center;
+  background-size: cover;
+  color: $white;
+  text-align: center;
+  padding: 120px 0;
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /// Contenedor del contenido del encabezado
+  .header-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+
+    /// Título principal
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    /// Párrafo descriptivo
+    p {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    
+    /// Botón principal de acción
+    .btn-primary {
+      @include button-style($primary-color, $white);
+      font-size: 1.125rem;
+      padding: 12px 30px;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
+      &amp;:hover {
+        transform: translateY(-2px);
+        background-color: darken($primary-color, 30%);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+
+  /// Estilos responsivos para dispositivos móviles
+  /// @group Responsive
+  @media (max-width: $breakpoint-mobile) {
+    padding: 80px 0;
+    min-height: 75dvh;
+    
+    .header-content {
+      h1 {
+        margin-bottom: 1rem;
+      }
+      
+      p {
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+}</code>" data-collapsed=".header { ... }"><code>.header { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilos para el encabezado principal</p></div></section></section></section><section class="main__section"><h1 class="main__heading" id="navigation"><div class="container">navigation</div></h1><section class="main__sub-section" id="navigation-css"><h2 class="main__heading--secondary"><div class="container">css</div></h2><section class="main__item container item" id="navigation-css-.navbar"><h3 class="item__heading"><a class="item__name" href="#navigation-css-.navbar">.navbar</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>.navbar {
+  background-color: $primary-color;
+  padding: 1.5rem 2vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+
+  /// Estilos para el logo de la barra de navegación
+  /// @example scss
+  ///   .navbar-logo {
+  ///     color: $white;
+  ///     font-size: 1.75rem;
+  ///   }
+  .navbar-logo {
+    color: $white;
+    font-size: 1.75rem;
+    font-weight: 400;
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+
+    // Efecto de escala al pasar el cursor
+    &amp;:hover {
+      transform: scale(1.05);
+      animation: bounce 0.8s ease infinite;
+    }
+  }
+
+  /// Estilos para el botón de menú en dispositivos móviles
+  /// @example scss
+  ///   .menu-toggle {
+  ///     display: none;
+  ///     background: none;
+  ///   }
+  .menu-toggle {
+    display: none; // Oculto por defecto, se mostrará en móviles
+    background: none;
+    border: none;
+    color: $white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  /// Estilos para los enlaces de navegación
+  /// @example scss
+  ///   .navbar-links ul {
+  ///     display: flex;
+  ///     justify-content: flex-end;
+  ///   }
+  .navbar-links {
+    ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      flex-grow: 1;
+      justify-content: flex-end;
+
+      li {
+        margin-left: 2vw;
+        position: relative;
+
+        a {
+          color: $white;
+          font-size: 1.25rem;
+          text-decoration: none;
+          transition: color 0.3s, transform 0.3s;
+          display: inline-block;
+
+          // Efecto de rebote y cambio de color al pasar el cursor
+          &amp;:hover {
+            color: $secondary-color;
+            transform: translateY(-3px);
+            animation: bounce 0.5s ease infinite;
+          }
+
+          // Efecto de ondulación al hacer clic
+          &amp;:active {
+            animation: ripple 0.4s linear;
+          }
+
+          // Línea de subrayado
+          &amp;::after {
+            content: &#39;&#39;;
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: $secondary-color;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+          }
+
+          // Mostrar subrayado al pasar el cursor
+          &amp;:hover::after {
+            transform: scaleX(1);
+          }
+        }
+      }
+    }
+  }
+
+  /// Estilos responsivos para dispositivos móviles
+  /// @example scss
+  ///   @media (max-width: $breakpoint-mobile) {
+  ///     .navbar {
+  ///       flex-wrap: wrap;
+  ///     }
+  ///   }
+  @media (max-width: $breakpoint-mobile) {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 0.8rem 0.5rem;
+
+    .navbar-logo {
+      font-size: 1.5rem;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .menu-toggle {
+      display: block;
+      position: absolute;
+      top: 1rem;
+      right: 2vw;
+      z-index: 2;
+    }
+
+    .navbar-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      width: 50%;
+      background-color: rgba($primary-color, 0.95);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-top: 1px solid rgba(white, 0.2);
+      padding: 1rem 0;
+      border-radius: 0.5rem;
+      animation: slideDown 0.3s ease-out;
+
+      ul {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+
+        li {
+          margin: 0.75rem 0;
+          width: 100%;
+          text-align: center;
+
+          a {
+            font-size: 1.5rem;
+            padding: 0.5rem 0;
+            border-radius: 0.3rem;
+            transition: background-color 0.3s;
+            display: block;
+            width: 100%;
+
+            &amp;:hover {
+              background-color: rgba(white, 0.1);
+            }
+          }
+        }
+      }
+
+      &amp;.active {
+        display: block;
+      }
+    }
+  }
+}</code>" data-collapsed=".navbar { ... }"><code>.navbar { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilos para la barra de navegación principal</p></div><h3 class="item__sub-heading">Example</h3><div class="item__example example"><pre class="example__code language-scss"><code>.navbar {
+  background-color: $primary-color;
+  padding: 1.5rem 2vw;
+}</code></pre></div></section></section></section><section class="main__section"><h1 class="main__heading" id="responsive"><div class="container">responsive</div></h1><section class="main__sub-section" id="responsive-mixin"><h2 class="main__heading--secondary"><div class="container">mixins</div></h2><section class="main__item container item" id="responsive-mixin-responsive"><h3 class="item__heading"><a class="item__name" href="#responsive-mixin-responsive">responsive</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="@mixin responsive($breakpoint) { 
+    @media (max-width: $breakpoint) {
+        @content;
+    }
+ }" data-collapsed="@mixin responsive($breakpoint) { ... }"><code>@mixin responsive($breakpoint) { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Aplica estilos responsivos basados en un punto de quiebre</p></div><h3 class="item__sub-heading">Parameters</h3><table class="item__parameters"><thead><tr><th scope="col"><span class="visually-hidden">parameter </span>Name</th><th scope="col"><span class="visually-hidden">parameter </span>Description</th><th scope="col"><span class="visually-hidden">parameter </span>Type</th><th scope="col"><span class="visually-hidden">parameter </span>Default value</th></tr></thead><tbody><tr class="item__parameter"><th scope="row" data-label="name"><code>$breakpoint</code></th><td data-label="desc"><p>El punto de quiebre para aplicar los estilos</p></td><td data-label="type"><code>Length</code></td><td data-label="default">&mdash;<span class="visually-hidden"> none</span></td></tr></tbody></table><h3 class="item__sub-heading">Example</h3><div class="item__example example"><pre class="example__code language-scss"><code>@include responsive(768px) {
+  .element {
+    font-size: 14px;
+  }
+}</code></pre></div></section></section></section><section class="main__section"><h1 class="main__heading" id="typography"><div class="container">typography</div></h1><section class="main__sub-section" id="typography-mixin"><h2 class="main__heading--secondary"><div class="container">mixins</div></h2><section class="main__item container item" id="typography-mixin-font"><h3 class="item__heading"><a class="item__name" href="#typography-mixin-font">font</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="@mixin font($font-family, $font-size, $font-weight: normal) { 
+    font-family: $font-family;
+    font-size: $font-size;
+    font-weight: $font-weight;
+ }" data-collapsed="@mixin font($font-family, $font-size, $font-weight: normal) { ... }"><code>@mixin font($font-family, $font-size, $font-weight: normal) { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Establece la fuente de un elemento</p></div><h3 class="item__sub-heading">Parameters</h3><table class="item__parameters"><thead><tr><th scope="col"><span class="visually-hidden">parameter </span>Name</th><th scope="col"><span class="visually-hidden">parameter </span>Description</th><th scope="col"><span class="visually-hidden">parameter </span>Type</th><th scope="col"><span class="visually-hidden">parameter </span>Default value</th></tr></thead><tbody><tr class="item__parameter"><th scope="row" data-label="name"><code>$font-family</code></th><td data-label="desc"><p>La familia de fuentes a utilizar</p></td><td data-label="type"><code>String</code></td><td data-label="default">&mdash;<span class="visually-hidden"> none</span></td></tr><tr class="item__parameter"><th scope="row" data-label="name"><code>$font-size</code></th><td data-label="desc"><p>El tamaño de la fuente</p></td><td data-label="type"><code>Length</code></td><td data-label="default">&mdash;<span class="visually-hidden"> none</span></td></tr><tr class="item__parameter"><th scope="row" data-label="name"><code>$font-weight</code></th><td data-label="desc"><p>El peso de la fuente</p></td><td data-label="type"><code>String</code></td><td data-label="default"><code>normal</code></td></tr></tbody></table><h3 class="item__sub-heading">Example</h3><div class="item__example example"><pre class="example__code language-scss"><code>.element {
+  @include font(&#39;Arial&#39;, 16px, bold);
+}</code></pre></div></section></section></section><section class="main__section"><h1 class="main__heading" id="undefined"><div class="container">General</div></h1><section class="main__sub-section" id="undefined-css"><h2 class="main__heading--secondary"><div class="container">css</div></h2><section class="main__item container item" id="undefined-css-body"><h3 class="item__heading"><a class="item__name" href="#undefined-css-body">body</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>body {
+  font-family: $font-primary; // Fuente principal para todo el cuerpo
+    font-size: $font-size-base; // Tamaño base de la fuente
+    color: $text-color; // Color global del texto
+    background-color: $global-background-color; // Fondo global de la página
+    margin: 0; // Elimina márgenes predeterminados del navegador
+    padding: 0; // Elimina rellenos predeterminados del navegador
+}</code>" data-collapsed="body { ... }"><code>body { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilo global para el cuerpo de la página Define la fuente principal, el tamaño base del texto, el color de texto y el color de fondo.</p></div></section><section class="main__item container item" id="undefined-css-h1, h2, h3, h4"><h3 class="item__heading"><a class="item__name" href="#undefined-css-h1, h2, h3, h4">h1, h2, h3, h4</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>h1, h2, h3, h4 {
+  font-family: $font-secondary; // Fuente secundaria específica para encabezados
+}</code>" data-collapsed="h1, h2, h3, h4 { ... }"><code>h1, h2, h3, h4 { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilo global para encabezados (h1, h2, h3, h4) Aplica una fuente secundaria a todos los niveles de encabezados.</p></div></section><section class="main__item container item" id="undefined-css-a"><h3 class="item__heading"><a class="item__name" href="#undefined-css-a">a</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>a {
+  text-decoration: none; // Elimina subrayado predeterminado en los enlaces
+    color: $primary-color; // Color primario por defecto
+
+    transition: color 0.3s; // Transición suave al cambiar el color
+
+    /// Efecto hover para enlaces
+    /// Cambia el color del enlace al color secundario al pasar el cursor.
+    &amp;:hover {
+        color: $secondary-color; // Cambia al color secundario al pasar el cursor sobre un enlace
+    }
+}</code>" data-collapsed="a { ... }"><code>a { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilo global para enlaces (a) Define estilos básicos para los enlaces, incluyendo transiciones suaves y efectos hover.</p></div></section><section class="main__item container item" id="undefined-css-&amp;:hover"><h3 class="item__heading"><a class="item__name" href="#undefined-css-&amp;:hover">&amp;:hover</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>&amp;:hover {
+  color: $secondary-color; // Cambia al color secundario al pasar el cursor sobre un enlace
+}</code>" data-collapsed="&amp;:hover { ... }"><code>&amp;:hover { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Efecto hover para enlaces Cambia el color del enlace al color secundario al pasar el cursor.</p></div></section><section class="main__item container item" id="undefined-css-i"><h3 class="item__heading"><a class="item__name" href="#undefined-css-i">i</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>i {
+  font-size: 3rem;
+    margin-right: 10px;
+}</code>" data-collapsed="i { ... }"><code>i { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilos para los iconos dentro del anuncio @example scss #advertisement i { font-size: 3rem; margin-right: 10px; }</p></div></section><section class="main__item container item" id="undefined-css-p"><h3 class="item__heading"><a class="item__name" href="#undefined-css-p">p</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>p {
+  font-size: 1.2rem;
+    margin-top: 20px;
+}</code>" data-collapsed="p { ... }"><code>p { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilos para los párrafos dentro del anuncio @example scss #advertisement p { font-size: 1.2rem; margin-top: 20px; }</p></div></section><section class="main__item container item" id="undefined-css-.btn-secondary"><h3 class="item__heading"><a class="item__name" href="#undefined-css-.btn-secondary">.btn-secondary</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>.btn-secondary {
+  @include button-style($secondary-color, $white);
+}</code>" data-collapsed=".btn-secondary { ... }"><code>.btn-secondary { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilos para el botón secundario. Se usa para acciones secundarias que complementan la principal.</p></div><h3 class="item__sub-heading">Example</h3><div class="item__example example"><div class="example__description"><p>Uso</p></div><pre class="example__code language-scss"><code>.btn-secondary {
+  @include button-style($secondary-color, $white);
+}</code></pre></div></section><section class="main__item container item" id="undefined-css-.card"><h3 class="item__heading"><a class="item__name" href="#undefined-css-.card">.card</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>.card {
+  border: 1px solid $light-grey;
+    border-radius: 0.625rem;
+    padding: 1rem;
+    background-color: $white;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    
+    /// Imagen de la tarjeta
+    img {
+      width: 100%;
+      border-radius: 0.5rem;
+    }
+    
+    /// Título de la tarjeta
+    h3 {
+      font-size: 1.5rem;
+      margin-top: 0.625rem;
+    }
+    
+    /// Párrafo de la tarjeta
+    p {
+      font-size: $font-size-xlg;
+      margin: 0.5rem 0;
+    }
+    
+    /// Enlace de la tarjeta
+    a {
+      color: $primary-color;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: $font-size-lg;
+      margin-top: 0.625rem;
+      display: inline-block;
+      transition: color 0.3s;
+      
+      /// Estado hover del enlace
+      &amp;:hover {
+        color: $secondary-color;
+      }
+    }
+    
+    /// Estado hover de la tarjeta
+    &amp;:hover {
+      transform: translateY(-0.3125rem);
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    }
+}</code>" data-collapsed=".card { ... }"><code>.card { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilos individuales de tarjeta @group Components</p></div></section><section class="main__item container item" id="undefined-css-img"><h3 class="item__heading"><a class="item__name" href="#undefined-css-img">img</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>img {
+  width: 100%;
+      border-radius: 0.5rem;
+}</code>" data-collapsed="img { ... }"><code>img { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Imagen de la tarjeta</p></div></section><section class="main__item container item" id="undefined-css-h3"><h3 class="item__heading"><a class="item__name" href="#undefined-css-h3">h3</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>h3 {
+  font-size: 1.5rem;
+      margin-top: 0.625rem;
+}</code>" data-collapsed="h3 { ... }"><code>h3 { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Título de la tarjeta</p></div></section><section class="main__item container item" id="undefined-css-p"><h3 class="item__heading"><a class="item__name" href="#undefined-css-p">p</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>p {
+  font-size: $font-size-xlg;
+      margin: 0.5rem 0;
+}</code>" data-collapsed="p { ... }"><code>p { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Párrafo de la tarjeta</p></div></section><section class="main__item container item" id="undefined-css-a"><h3 class="item__heading"><a class="item__name" href="#undefined-css-a">a</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>a {
+  color: $primary-color;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: $font-size-lg;
+      margin-top: 0.625rem;
+      display: inline-block;
+      transition: color 0.3s;
+      
+      /// Estado hover del enlace
+      &amp;:hover {
+        color: $secondary-color;
+      }
+}</code>" data-collapsed="a { ... }"><code>a { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Enlace de la tarjeta</p></div></section><section class="main__item container item" id="undefined-css-&amp;:hover"><h3 class="item__heading"><a class="item__name" href="#undefined-css-&amp;:hover">&amp;:hover</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>&amp;:hover {
+  color: $secondary-color;
+}</code>" data-collapsed="&amp;:hover { ... }"><code>&amp;:hover { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estado hover del enlace</p></div></section><section class="main__item container item" id="undefined-css-&amp;:hover"><h3 class="item__heading"><a class="item__name" href="#undefined-css-&amp;:hover">&amp;:hover</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>&amp;:hover {
+  transform: translateY(-0.3125rem);
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}</code>" data-collapsed="&amp;:hover { ... }"><code>&amp;:hover { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estado hover de la tarjeta</p></div></section><section class="main__item container item" id="undefined-css-.category"><h3 class="item__heading"><a class="item__name" href="#undefined-css-.category">.category</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>.category {
+  text-align: center;
+    font-size: 1.2rem;
+    padding: 1.5rem;
+    background: linear-gradient(to bottom, lighten($light-grey, 5%), $light-grey);
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+
+    /// Efecto sutil de borde al pasar el mouse
+    &amp;:before {
+      content: &quot;&quot;;
+      position: absolute;
+      inset: 0;
+      background: rgba($primary-color, 0.05);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    /// Icono de la categoría
+    i {
+      font-size: 3rem;
+      color: $primary-color;
+      margin-bottom: 0.5rem;
+      display: block;
+      transition: color 0.3s ease;
+    }
+
+    /// Título de la categoría
+    h3 {
+      margin-top: 0.5rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    /// Estado hover de la categoría
+    &amp;:hover {
+      transform: translateY(-6px) scale(1.04);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      background: lighten($primary-color, 40%);
+    }
+
+    &amp;:hover:before {
+      opacity: 1;
+    }
+
+    &amp;:hover i {
+      color: darken($primary-color, 10%);
+    }
+
+    &amp;:hover h3 {
+      color: darken($primary-color, 15%);
+    }
+}</code>" data-collapsed=".category { ... }"><code>.category { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilos individuales de categoría @group Components</p></div></section><section class="main__item container item" id="undefined-css-&amp;:before"><h3 class="item__heading"><a class="item__name" href="#undefined-css-&amp;:before">&amp;:before</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>&amp;:before {
+  content: &quot;&quot;;
+      position: absolute;
+      inset: 0;
+      background: rgba($primary-color, 0.05);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+}</code>" data-collapsed="&amp;:before { ... }"><code>&amp;:before { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Efecto sutil de borde al pasar el mouse</p></div></section><section class="main__item container item" id="undefined-css-i"><h3 class="item__heading"><a class="item__name" href="#undefined-css-i">i</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>i {
+  font-size: 3rem;
+      color: $primary-color;
+      margin-bottom: 0.5rem;
+      display: block;
+      transition: color 0.3s ease;
+}</code>" data-collapsed="i { ... }"><code>i { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Icono de la categoría</p></div></section><section class="main__item container item" id="undefined-css-h3"><h3 class="item__heading"><a class="item__name" href="#undefined-css-h3">h3</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>h3 {
+  margin-top: 0.5rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+}</code>" data-collapsed="h3 { ... }"><code>h3 { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Título de la categoría</p></div></section><section class="main__item container item" id="undefined-css-&amp;:hover"><h3 class="item__heading"><a class="item__name" href="#undefined-css-&amp;:hover">&amp;:hover</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>&amp;:hover {
+  transform: translateY(-6px) scale(1.04);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      background: lighten($primary-color, 40%);
+}</code>" data-collapsed="&amp;:hover { ... }"><code>&amp;:hover { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estado hover de la categoría</p></div></section><section class="main__item container item" id="undefined-css-.navbar-logo"><h3 class="item__heading"><a class="item__name" href="#undefined-css-.navbar-logo">.navbar-logo</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>.navbar-logo {
+  color: $white;
+    font-size: 1.75rem;
+    font-weight: 400;
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+
+    // Efecto de escala al pasar el cursor
+    &amp;:hover {
+      transform: scale(1.05);
+      animation: bounce 0.8s ease infinite;
+    }
+}</code>" data-collapsed=".navbar-logo { ... }"><code>.navbar-logo { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilos para el logo de la barra de navegación @example scss .navbar-logo { color: $white; font-size: 1.75rem; }</p></div></section><section class="main__item container item" id="undefined-css-.menu-toggle"><h3 class="item__heading"><a class="item__name" href="#undefined-css-.menu-toggle">.menu-toggle</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>.menu-toggle {
+  display: none; // Oculto por defecto, se mostrará en móviles
+    background: none;
+    border: none;
+    color: $white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}</code>" data-collapsed=".menu-toggle { ... }"><code>.menu-toggle { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilos para el botón de menú en dispositivos móviles @example scss .menu-toggle { display: none; background: none; }</p></div></section><section class="main__item container item" id="undefined-css-.navbar-links"><h3 class="item__heading"><a class="item__name" href="#undefined-css-.navbar-links">.navbar-links</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>.navbar-links {
+  ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      flex-grow: 1;
+      justify-content: flex-end;
+
+      li {
+        margin-left: 2vw;
+        position: relative;
+
+        a {
+          color: $white;
+          font-size: 1.25rem;
+          text-decoration: none;
+          transition: color 0.3s, transform 0.3s;
+          display: inline-block;
+
+          // Efecto de rebote y cambio de color al pasar el cursor
+          &amp;:hover {
+            color: $secondary-color;
+            transform: translateY(-3px);
+            animation: bounce 0.5s ease infinite;
+          }
+
+          // Efecto de ondulación al hacer clic
+          &amp;:active {
+            animation: ripple 0.4s linear;
+          }
+
+          // Línea de subrayado
+          &amp;::after {
+            content: &#39;&#39;;
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: $secondary-color;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+          }
+
+          // Mostrar subrayado al pasar el cursor
+          &amp;:hover::after {
+            transform: scaleX(1);
+          }
+        }
+      }
+    }
+}</code>" data-collapsed=".navbar-links { ... }"><code>.navbar-links { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilos para los enlaces de navegación @example scss .navbar-links ul { display: flex; justify-content: flex-end; }</p></div></section><section class="main__item container item" id="undefined-css-.review"><h3 class="item__heading"><a class="item__name" href="#undefined-css-.review">.review</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>.review {
+  background-color: $light-grey;
+    padding: 25px;
+    border-radius: 10px;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    border: 1px solid $primary-color;
+
+    /// Estado hover de la reseña
+    &amp;:hover {
+      transform: translateY(-5px);
+    }
+
+    /// Encabezado de la reseña
+    .review-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+
+      /// Avatar del autor de la reseña
+      .review-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 15px;
+      }
+
+      /// Información del autor y calificación
+      .review-info {
+        h4 {
+          margin: 0 0 5px;
+          font-weight: bold;
+        }
+
+        /// Calificación de la reseña
+        .review-rating {
+          color: $primary-color;
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+    /// Contenido de la reseña
+    p {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    /// Fecha de la reseña
+    .review-date {
+      display: block;
+      font-size: 0.8rem;
+      color: $secondary-color;
+      text-align: right;
+      font-style: italic;
+    }
+}</code>" data-collapsed=".review { ... }"><code>.review { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilos individuales de reseña @group Components</p></div></section><section class="main__item container item" id="undefined-css-&amp;:hover"><h3 class="item__heading"><a class="item__name" href="#undefined-css-&amp;:hover">&amp;:hover</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>&amp;:hover {
+  transform: translateY(-5px);
+}</code>" data-collapsed="&amp;:hover { ... }"><code>&amp;:hover { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estado hover de la reseña</p></div></section><section class="main__item container item" id="undefined-css-.review-header"><h3 class="item__heading"><a class="item__name" href="#undefined-css-.review-header">.review-header</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>.review-header {
+  display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+
+      /// Avatar del autor de la reseña
+      .review-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 15px;
+      }
+
+      /// Información del autor y calificación
+      .review-info {
+        h4 {
+          margin: 0 0 5px;
+          font-weight: bold;
+        }
+
+        /// Calificación de la reseña
+        .review-rating {
+          color: $primary-color;
+          font-size: 0.9rem;
+        }
+      }
+}</code>" data-collapsed=".review-header { ... }"><code>.review-header { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Encabezado de la reseña</p></div></section><section class="main__item container item" id="undefined-css-.review-avatar"><h3 class="item__heading"><a class="item__name" href="#undefined-css-.review-avatar">.review-avatar</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>.review-avatar {
+  width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 15px;
+}</code>" data-collapsed=".review-avatar { ... }"><code>.review-avatar { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Avatar del autor de la reseña</p></div></section><section class="main__item container item" id="undefined-css-.review-info"><h3 class="item__heading"><a class="item__name" href="#undefined-css-.review-info">.review-info</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>.review-info {
+  h4 {
+          margin: 0 0 5px;
+          font-weight: bold;
+        }
+
+        /// Calificación de la reseña
+        .review-rating {
+          color: $primary-color;
+          font-size: 0.9rem;
+        }
+}</code>" data-collapsed=".review-info { ... }"><code>.review-info { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Información del autor y calificación</p></div></section><section class="main__item container item" id="undefined-css-.review-rating"><h3 class="item__heading"><a class="item__name" href="#undefined-css-.review-rating">.review-rating</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>.review-rating {
+  color: $primary-color;
+          font-size: 0.9rem;
+}</code>" data-collapsed=".review-rating { ... }"><code>.review-rating { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Calificación de la reseña</p></div></section><section class="main__item container item" id="undefined-css-p"><h3 class="item__heading"><a class="item__name" href="#undefined-css-p">p</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>p {
+  margin-bottom: 10px;
+      line-height: 1.6;
+}</code>" data-collapsed="p { ... }"><code>p { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Contenido de la reseña</p></div></section><section class="main__item container item" id="undefined-css-.review-date"><h3 class="item__heading"><a class="item__name" href="#undefined-css-.review-date">.review-date</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>.review-date {
+  display: block;
+      font-size: 0.8rem;
+      color: $secondary-color;
+      text-align: right;
+      font-style: italic;
+}</code>" data-collapsed=".review-date { ... }"><code>.review-date { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Fecha de la reseña</p></div></section><section class="main__item container item" id="undefined-css-p"><h3 class="item__heading"><a class="item__name" href="#undefined-css-p">p</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>p {
+  font-size: 1rem;
+    margin: 0;
+    font-weight: 400;
+}</code>" data-collapsed="p { ... }"><code>p { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilos para el texto del pie de página</p></div></section><section class="main__item container item" id="undefined-css-a"><h3 class="item__heading"><a class="item__name" href="#undefined-css-a">a</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>a {
+  color: $white;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 10px;
+    display: inline-block;
+    transition: color 0.3s;
+    
+    /// Estado hover de los enlaces
+    &amp;:hover {
+      color: $primary-color;
+    }
+}</code>" data-collapsed="a { ... }"><code>a { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estilos para los enlaces en el pie de página</p></div></section><section class="main__item container item" id="undefined-css-&amp;:hover"><h3 class="item__heading"><a class="item__name" href="#undefined-css-&amp;:hover">&amp;:hover</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>&amp;:hover {
+  color: $primary-color;
+}</code>" data-collapsed="&amp;:hover { ... }"><code>&amp;:hover { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Estado hover de los enlaces</p></div></section><section class="main__item container item" id="undefined-css-.header-content"><h3 class="item__heading"><a class="item__name" href="#undefined-css-.header-content">.header-content</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>.header-content {
+  max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+
+    /// Título principal
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    /// Párrafo descriptivo
+    p {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    
+    /// Botón principal de acción
+    .btn-primary {
+      @include button-style($primary-color, $white);
+      font-size: 1.125rem;
+      padding: 12px 30px;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
+      &amp;:hover {
+        transform: translateY(-2px);
+        background-color: darken($primary-color, 30%);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+      }
+    }
+}</code>" data-collapsed=".header-content { ... }"><code>.header-content { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Contenedor del contenido del encabezado</p></div></section><section class="main__item container item" id="undefined-css-h1"><h3 class="item__heading"><a class="item__name" href="#undefined-css-h1">h1</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}</code>" data-collapsed="h1 { ... }"><code>h1 { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Título principal</p></div></section><section class="main__item container item" id="undefined-css-p"><h3 class="item__heading"><a class="item__name" href="#undefined-css-p">p</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>p {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}</code>" data-collapsed="p { ... }"><code>p { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Párrafo descriptivo</p></div></section><section class="main__item container item" id="undefined-css-.btn-primary"><h3 class="item__heading"><a class="item__name" href="#undefined-css-.btn-primary">.btn-primary</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="<code>.btn-primary {
+  @include button-style($primary-color, $white);
+      font-size: 1.125rem;
+      padding: 12px 30px;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
+      &amp;:hover {
+        transform: translateY(-2px);
+        background-color: darken($primary-color, 30%);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+      }
+}</code>" data-collapsed=".btn-primary { ... }"><code>.btn-primary { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Botón principal de acción</p></div></section></section><section class="main__sub-section" id="undefined-variable"><h2 class="main__heading--secondary"><div class="container">variables</div></h2><section class="main__item container item" id="undefined-variable-primary-color"><h3 class="item__heading"><a class="item__name" href="#undefined-variable-primary-color">primary-color</a></h3><div class="item__code-wrapper"><pre class="item__code language-scss"><code>$primary-color: #2a9d8f;</code></pre><span class="color-preview--block" style="background: #2a9d8f;"></span></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Color primario (Verde)</p></div><h3 class="item__sub-heading">Type</h3><p><code>Color</code></p></section><section class="main__item container item" id="undefined-variable-secondary-color"><h3 class="item__heading"><a class="item__name" href="#undefined-variable-secondary-color">secondary-color</a></h3><div class="item__code-wrapper"><pre class="item__code language-scss"><code>$secondary-color: #9c8038;</code></pre><span class="color-preview--block" style="background: #9c8038;"></span></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Color secundario (Amarillo)</p></div><h3 class="item__sub-heading">Type</h3><p><code>Color</code></p></section><section class="main__item container item" id="undefined-variable-dark-grey"><h3 class="item__heading"><a class="item__name" href="#undefined-variable-dark-grey">dark-grey</a></h3><div class="item__code-wrapper"><pre class="item__code language-scss"><code>$dark-grey: #333333;</code></pre><span class="color-preview--block" style="background: #333333;"></span></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Gris oscuro</p></div><h3 class="item__sub-heading">Type</h3><p><code>Color</code></p></section><section class="main__item container item" id="undefined-variable-light-grey"><h3 class="item__heading"><a class="item__name" href="#undefined-variable-light-grey">light-grey</a></h3><div class="item__code-wrapper"><pre class="item__code language-scss"><code>$light-grey: #f4f4f4;</code></pre><span class="color-preview--block" style="background: #f4f4f4;"></span></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Gris claro</p></div><h3 class="item__sub-heading">Type</h3><p><code>Color</code></p></section><section class="main__item container item" id="undefined-variable-white"><h3 class="item__heading"><a class="item__name" href="#undefined-variable-white">white</a></h3><div class="item__code-wrapper"><pre class="item__code language-scss"><code>$white: #fff;</code></pre><span class="color-preview--block" style="background: #fff;"></span></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Blanco</p></div><h3 class="item__sub-heading">Type</h3><p><code>Color</code></p></section><section class="main__item container item" id="undefined-variable-text-color"><h3 class="item__heading"><a class="item__name" href="#undefined-variable-text-color">text-color</a></h3><div class="item__code-wrapper"><pre class="item__code language-scss"><code>$text-color: #333;</code></pre><span class="color-preview--block" style="background: #333;"></span></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Color de texto principal (Gris oscuro)</p></div><h3 class="item__sub-heading">Type</h3><p><code>Color</code></p></section><section class="main__item container item" id="undefined-variable-global-background-color"><h3 class="item__heading"><a class="item__name" href="#undefined-variable-global-background-color">global-background-color</a></h3><div class="item__code-wrapper"><pre class="item__code language-scss"><code>$global-background-color: #f4f4f4;</code></pre><span class="color-preview--block" style="background: #f4f4f4;"></span></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Color de fondo global (Gris claro)</p></div><h3 class="item__sub-heading">Type</h3><p><code>Color</code></p><h3 class="item__sub-heading">Used by</h3><ul class="list-unstyled"><li><span class="item__cross-type">[mixin]</span> <a href="#components-mixin-button-style"><code>button-style</code></a></li></ul></section><section class="main__item container item" id="undefined-variable-font-primary"><h3 class="item__heading"><a class="item__name" href="#undefined-variable-font-primary">font-primary</a></h3><div class="item__code-wrapper"><pre class="item__code language-scss"><code>$font-primary: &#39;Roboto&#39;, sans-serif;</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Fuente principal</p></div><h3 class="item__sub-heading">Type</h3><p><code>String</code></p></section><section class="main__item container item" id="undefined-variable-font-secondary"><h3 class="item__heading"><a class="item__name" href="#undefined-variable-font-secondary">font-secondary</a></h3><div class="item__code-wrapper"><pre class="item__code language-scss"><code>$font-secondary: &#39;Poppins&#39;, sans-serif;</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Fuente secundaria</p></div><h3 class="item__sub-heading">Type</h3><p><code>String</code></p></section><section class="main__item container item" id="undefined-variable-font-size-base"><h3 class="item__heading"><a class="item__name" href="#undefined-variable-font-size-base">font-size-base</a></h3><div class="item__code-wrapper"><pre class="item__code language-scss"><code>$font-size-base: 16px;</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Tamaño de fuente base</p></div><h3 class="item__sub-heading">Type</h3><p><code>Length</code></p></section><section class="main__item container item" id="undefined-variable-font-size-xlg"><h3 class="item__heading"><a class="item__name" href="#undefined-variable-font-size-xlg">font-size-xlg</a></h3><div class="item__code-wrapper"><pre class="item__code language-scss"><code>$font-size-xlg: 1.5rem;</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Tamaño de fuente grande</p></div><h3 class="item__sub-heading">Type</h3><p><code>Length</code></p></section><section class="main__item container item" id="undefined-variable-font-size-lg"><h3 class="item__heading"><a class="item__name" href="#undefined-variable-font-size-lg">font-size-lg</a></h3><div class="item__code-wrapper"><pre class="item__code language-scss"><code>$font-size-lg: 1.25rem;</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Tamaño de fuente mediana</p></div><h3 class="item__sub-heading">Type</h3><p><code>Length</code></p></section><section class="main__item container item" id="undefined-variable-font-size-sm"><h3 class="item__heading"><a class="item__name" href="#undefined-variable-font-size-sm">font-size-sm</a></h3><div class="item__code-wrapper"><pre class="item__code language-scss"><code>$font-size-sm: 0.875rem;</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Tamaño de fuente pequeño</p></div><h3 class="item__sub-heading">Type</h3><p><code>Length</code></p></section><section class="main__item container item" id="undefined-variable-breakpoint-mobile"><h3 class="item__heading"><a class="item__name" href="#undefined-variable-breakpoint-mobile">breakpoint-mobile</a></h3><div class="item__code-wrapper"><pre class="item__code language-scss"><code>$breakpoint-mobile: 576px;</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Breakpoint para dispositivos móviles</p></div><h3 class="item__sub-heading">Type</h3><p><code>Length</code></p></section><section class="main__item container item" id="undefined-variable-breakpoint-tablet"><h3 class="item__heading"><a class="item__name" href="#undefined-variable-breakpoint-tablet">breakpoint-tablet</a></h3><div class="item__code-wrapper"><pre class="item__code language-scss"><code>$breakpoint-tablet: 768px;</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Breakpoint para tablets</p></div><h3 class="item__sub-heading">Type</h3><p><code>Length</code></p></section><section class="main__item container item" id="undefined-variable-breakpoint-desktop"><h3 class="item__heading"><a class="item__name" href="#undefined-variable-breakpoint-desktop">breakpoint-desktop</a></h3><div class="item__code-wrapper"><pre class="item__code language-scss"><code>$breakpoint-desktop: 1024px;</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Breakpoint para escritorio</p></div><h3 class="item__sub-heading">Type</h3><p><code>Length</code></p></section></section></section><footer class="footer" role="contentinfo"><div class="container"><div class="footer__project-info project-info"><!-- Name and URL --> <span class="project-info__name">Proyectosass</span><!-- Version --> <span class="project-info__version">- v1.0.0</span><!-- License --> <span class="project-info__license">, under ISC</span></div><a class="footer__watermark" href="http://sassdoc.com"><img src="assets/images/logo_light_inline.svg" alt="SassDoc Logo"></a></div></footer></article><script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script><script src="assets/js/main.min.js"></script></body></html>

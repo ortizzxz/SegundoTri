@@ -1,9 +1,23 @@
-// _buttons.scss
-
+/// Estilos para el botón primario.
+/// @group Components
+/// Se utiliza para acciones principales dentro de la interfaz.
+///
+/// @example scss - Uso
+///   .btn-primary {
+///     @include button-style($primary-color, $white);
+///   }
 .btn-primary {
     @include button-style($primary-color, $white);
 }
 
+
+/// Estilos para el botón secundario.
+/// Se usa para acciones secundarias que complementan la principal.
+///
+/// @example scss - Uso
+///   .btn-secondary {
+///     @include button-style($secondary-color, $white);
+///   }
 .btn-secondary {
     @include button-style($secondary-color, $white);
 }

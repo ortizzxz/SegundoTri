@@ -1,4 +1,10 @@
-// Barra de navegación
+/// Estilos para la barra de navegación principal
+/// @group Navigation
+/// @example scss
+///   .navbar {
+///     background-color: $primary-color;
+///     padding: 1.5rem 2vw;
+///   }
 .navbar {
   background-color: $primary-color;
   padding: 1.5rem 2vw;
@@ -9,11 +15,16 @@
   box-sizing: border-box;
   position: relative;
 
-  // Logo de la barra de navegación
+  /// Estilos para el logo de la barra de navegación
+  /// @example scss
+  ///   .navbar-logo {
+  ///     color: $white;
+  ///     font-size: 1.75rem;
+  ///   }
   .navbar-logo {
     color: $white;
     font-size: 1.75rem;
-    font-weight: bold;
+    font-weight: 400;
     text-decoration: none;
     flex-shrink: 0;
     transition: transform 0.3s ease;
@@ -21,10 +32,16 @@
     // Efecto de escala al pasar el cursor
     &:hover {
       transform: scale(1.05);
+      animation: bounce 0.8s ease infinite;
     }
   }
 
-  // Botón de menú para dispositivos móviles
+  /// Estilos para el botón de menú en dispositivos móviles
+  /// @example scss
+  ///   .menu-toggle {
+  ///     display: none;
+  ///     background: none;
+  ///   }
   .menu-toggle {
     display: none; // Oculto por defecto, se mostrará en móviles
     background: none;
@@ -35,7 +52,12 @@
     transition: transform 0.3s ease;
   }
 
-  // Enlaces de navegación
+  /// Estilos para los enlaces de navegación
+  /// @example scss
+  ///   .navbar-links ul {
+  ///     display: flex;
+  ///     justify-content: flex-end;
+  ///   }
   .navbar-links {
     ul {
       list-style: none;
@@ -90,7 +112,13 @@
     }
   }
 
-  // Estilos para dispositivos móviles
+  /// Estilos responsivos para dispositivos móviles
+  /// @example scss
+  ///   @media (max-width: $breakpoint-mobile) {
+  ///     .navbar {
+  ///       flex-wrap: wrap;
+  ///     }
+  ///   }
   @media (max-width: $breakpoint-mobile) {
     flex-wrap: wrap;
     align-items: flex-start;
@@ -156,19 +184,37 @@
   }
 }
 
-// Animación de rebote para los enlaces
+/// Animación de rebote para los enlaces de navegación
+/// @group Animations
+/// @example scss
+///   @keyframes bounce {
+///     0%, 100% { transform: translateY(-3px); }
+///     50% { transform: translateY(0); }
+///   }
 @keyframes bounce {
   0%, 100% { transform: translateY(-3px); }
   50% { transform: translateY(0); }
 }
 
-// Animación de ondulación para el efecto de clic
+/// Animación de ondulación para el efecto de clic
+/// @group Animations
+/// @example scss
+///   @keyframes ripple {
+///     0% { box-shadow: 0 0 0 0 rgba($secondary-color, 0.1), /* ... */; }
+///     100% { box-shadow: 0 0 0 20px rgba($secondary-color, 0.1), /* ... */; }
+///   }
 @keyframes ripple {
   0% { box-shadow: 0 0 0 0 rgba($secondary-color, 0.1), 0 0 0 20px rgba($secondary-color, 0.1), 0 0 0 40px rgba($secondary-color, 0.1), 0 0 0 60px rgba($secondary-color, 0.1); }
   100% { box-shadow: 0 0 0 20px rgba($secondary-color, 0.1), 0 0 0 40px rgba($secondary-color, 0.1), 0 0 0 60px rgba($secondary-color, 0.1), 0 0 0 80px rgba($secondary-color, 0); }
 }
 
-// Animación para desplegar el menú en dispositivos móviles
+/// Animación para desplegar el menú en dispositivos móviles
+/// @group Animations
+/// @example scss
+///   @keyframes slideDown {
+///     from { opacity: 0; }
+///     to { opacity: 1; }
+///   }
 @keyframes slideDown {
   from { opacity: 0; }
   to { opacity: 1; }

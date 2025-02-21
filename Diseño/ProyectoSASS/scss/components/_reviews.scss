@@ -1,13 +1,19 @@
+/// Estilos para la sección de reseñas
+/// @group Components
 #reviews {
   @include section-header;
 }
 
+/// Contenedor de reseñas
+/// @group Components
 .reviews {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px; 
   margin: 0.5rem 0.3rem;
 
+  /// Estilos individuales de reseña
+  /// @group Components
   .review {
     background-color: $light-grey;
     padding: 25px;
@@ -16,15 +22,19 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     border: 1px solid $primary-color;
+
+    /// Estado hover de la reseña
     &:hover {
       transform: translateY(-5px);
     }
 
+    /// Encabezado de la reseña
     .review-header {
       display: flex;
       align-items: center;
       margin-bottom: 15px;
 
+      /// Avatar del autor de la reseña
       .review-avatar {
         width: 60px;
         height: 60px;
@@ -33,12 +43,14 @@
         margin-right: 15px;
       }
 
+      /// Información del autor y calificación
       .review-info {
         h4 {
           margin: 0 0 5px;
           font-weight: bold;
         }
 
+        /// Calificación de la reseña
         .review-rating {
           color: $primary-color;
           font-size: 0.9rem;
@@ -46,11 +58,13 @@
       }
     }
 
+    /// Contenido de la reseña
     p {
       margin-bottom: 10px;
       line-height: 1.6;
     }
 
+    /// Fecha de la reseña
     .review-date {
       display: block;
       font-size: 0.8rem;

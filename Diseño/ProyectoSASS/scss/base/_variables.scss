@@ -1,24 +1,75 @@
-// Variables
-// Colores
-$primary-color: #2a9d8f;  // Verde
-$secondary-color: #9c8038;  // Amarillo
-$dark-grey: #333333;  // Gris oscuro
-$light-grey: #f4f4f4;  // Gris claro
-$white: #fff;
-$text-color: #333; // Gris oscuro para texto
-$global-background-color: #f4f4f4; // Gris claro
+/// Colores principales de la aplicación
+/// @group Colors
 
-// Fuentesa
+/// Color primario (Verde)
+/// @type Color
+$primary-color: #2a9d8f;
+
+/// Color secundario (Amarillo)
+/// @type Color
+$secondary-color: #9c8038;
+
+/// Gris oscuro
+/// @type Color
+$dark-grey: #333333;
+
+/// Gris claro
+/// @type Color
+$light-grey: #f4f4f4;
+
+/// Blanco
+/// @type Color
+$white: #fff;
+
+/// Color de texto principal (Gris oscuro)
+/// @type Color
+$text-color: #333;
+
+/// Color de fondo global (Gris claro)
+/// @type Color
+$global-background-color: #eaeaea;
+
+/// Fuentes de la aplicación
+/// @group Typography
+
+/// Fuente principal
+/// @type String
 $font-primary: 'Roboto', sans-serif;
+
+/// Fuente secundaria
+/// @type String
 $font-secondary: 'Poppins', sans-serif;
 
+/// Tamaños de fuente
+/// @group Typography
 
-// Tamaños
-$font-size-base: 16px; // Tamaño base
-$font-size-lg: 1.25rem; // Grande
-$font-size-sm: 0.875rem; // Pequeño
+/// Tamaño de fuente base
+/// @type Length
+$font-size-base: 16px;
 
-// Breakpoints para diseño responsive
+/// Tamaño de fuente grande
+/// @type Length
+$font-size-xlg: 1.5rem;
+
+/// Tamaño de fuente mediana
+/// @type Length
+$font-size-lg: 1.25rem;
+
+/// Tamaño de fuente pequeño
+/// @type Length
+$font-size-sm: 0.875rem;
+
+/// Breakpoints para diseño responsive
+/// @group Layout
+
+/// Breakpoint para dispositivos móviles
+/// @type Length
 $breakpoint-mobile: 576px;
+
+/// Breakpoint para tablets
+/// @type Length
 $breakpoint-tablet: 768px;
+
+/// Breakpoint para escritorio
+/// @type Length
 $breakpoint-desktop: 1024px;

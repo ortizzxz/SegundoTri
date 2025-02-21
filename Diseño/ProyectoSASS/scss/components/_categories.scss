@@ -1,48 +1,98 @@
-// _categories.scss
+/// Estilos para la sección de categorías
+/// @group Components
 #categories {
   @include section-header;
+  text-align: center;
 }
 
+/// Contenedor de categorías
+/// @group Components
 .categories {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
   margin-top: 3rem;
-  
+  padding: 1rem;
+
+  /// Estilos individuales de categoría
+  /// @group Components
   .category {
     text-align: center;
     font-size: 1.2rem;
-    padding: 1.25rem;
-    background-color: $light-grey;
-    border-radius: 0.625rem;
-    transition: transform 0.3s, box-shadow 0.3s;
-    
+    padding: 1.5rem;
+    background: linear-gradient(to bottom, lighten($light-grey, 5%), $light-grey);
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+
+    /// Efecto sutil de borde al pasar el mouse
+    &:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba($primary-color, 0.05);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    /// Icono de la categoría
     i {
       font-size: 3rem;
       color: $primary-color;
       margin-bottom: 0.5rem;
       display: block;
+      transition: color 0.3s ease;
     }
-    
+
+    /// Título de la categoría
     h3 {
       margin-top: 0.5rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
     }
-    
+
+    /// Estado hover de la categoría
     &:hover {
-      transform: translateY(-0.3125rem);
-      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+      transform: translateY(-6px) scale(1.04);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      background: lighten($primary-color, 40%);
+    }
+
+    &:hover:before {
+      opacity: 1;
+    }
+
+    &:hover i {
+      color: darken($primary-color, 10%);
+    }
+
+    &:hover h3 {
+      color: darken($primary-color, 15%);
     }
   }
 }
 
+/// Estilos responsivos para tablets
+/// @group Responsive
 @media (max-width: 48rem) {
   .categories {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 }
 
+/// Estilos responsivos para dispositivos móviles
+/// @group Responsive
 @media (max-width: 30rem) {
   .categories {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .category {
+    padding: 1rem;
   }
 }
